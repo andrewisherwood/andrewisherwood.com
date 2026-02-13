@@ -1,67 +1,81 @@
-# Security Review — Phase 1: Core Site — Static HTML & Styling
+# Security Review — Phase 2: Interactive Terminal & API Proxy
 
-**Date:** 2026-02-13T01:25:00Z
-**Branch:** phase-1-core-site
-**PR:** #1
+**Date:** 2026-02-13T01:35:00Z
+**Updated:** 2026-02-13T02:10:00Z (Round 2)
+**Branch:** phase-2-api-proxy
+**PR:** #2
 **Reviewer:** Security Agent
-**Result:** ISSUES FOUND (3 findings)
+**Result:** CLEAN (0 open findings)
 
-## Findings
+## Phase 1 Finding Remediation
 
-### SEC-001: Client sends system prompt and model selection to proxy
+| Finding | Status | Verification |
+|---------|--------|-------------|
+| SEC-001: Client sends system prompt/model to proxy | **RESOLVED** | System prompt, model (`claude-sonnet-4-20250514`), and max_tokens (`300`) are now hardcoded in `netlify/edge-functions/chat.js`. Client JS only sends `{ messages: [...] }`. `SYSTEM_PROMPT` const removed from `index.html`. |
+| SEC-002: No CSP headers | **RESOLVED** | CSP added in `netlify.toml`: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; script-src 'self' 'unsafe-inline'`. Also includes `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`. |
+| SEC-003: No rate limiting | **RESOLVED** | In-memory rate limiter added in edge function: 10 requests per minute per IP, returns 429 when exceeded. Best-effort (resets on cold start) — acceptable for portfolio site. |
 
-**Severity:** Medium
-**Category:** API
-**File:** index.html:1458–1464 (script block, `sendMessage()` function)
-**Description:** The client-side JavaScript sends the full `SYSTEM_PROMPT`, `model`, and `max_tokens` values in the POST body to `/api/chat`. A user can open browser devtools and modify the fetch request to change the system prompt (prompt injection), switch to a more expensive model, or increase `max_tokens` — all of which the proxy would forward to the Anthropic API.
-**Risk:** A malicious user could override the system prompt to make the AI say anything, select a more expensive model to increase costs, or set a high `max_tokens` value for cost amplification. This also exposes the full system prompt in the client JS source.
-**Recommendation:** The edge function (Phase 2) should hardcode `model`, `max_tokens`, and `system` server-side. The client should only send `messages`. The system prompt should be moved entirely to the edge function. This is an architecture change that requires Dev Agent work.
-**Fix Applied:** No (requires Dev Agent — changes application logic and edge function architecture)
+## Phase 2 Finding Remediation (Round 2)
 
-### SEC-002: No Content Security Policy (CSP)
+| Finding | Status | Verification |
+|---------|--------|-------------|
+| SEC-004: Anthropic API error responses passed through unfiltered | **RESOLVED** | `chat.js:162–167` now checks `if (!anthropicResponse.ok)` and returns a generic `{ error: "AI service unavailable" }` with status 502. The upstream Anthropic error body is never forwarded to the client. Matches the exact recommendation from Round 1. |
+| SEC-005: Message content length validation bypassed by array-format content | **RESOLVED** | `chat.js:111–119` now checks `typeof msg.content !== "string"` first, rejecting any non-string content with `{ error: "Invalid message format" }` (400). This adopts the more defensive recommendation — array-format content blocks are rejected outright. The length check on line 120 only runs on confirmed strings. No bypass possible. |
 
-**Severity:** Low
-**Category:** Frontend
-**File:** index.html (entire file — no CSP meta tag)
-**Description:** The page does not set a Content-Security-Policy header or meta tag. While the current code does not have XSS vulnerabilities (the `escapeHtml()` implementation is correct and all user input is properly escaped), a CSP would provide defence-in-depth against any future XSS vectors.
-**Risk:** Without CSP, if an XSS vulnerability were introduced in a future change, there would be no browser-level mitigation to limit the damage. Low risk for the current codebase since no XSS vectors exist.
-**Recommendation:** Add a CSP meta tag or configure CSP headers in `netlify.toml` (Phase 2). A suitable policy for this site would be: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; script-src 'self' 'unsafe-inline'`. Note: `unsafe-inline` is required for both script and style since all JS/CSS is inline in the HTML.
-**Fix Applied:** No (requires Dev Agent — CSP headers should be set in netlify.toml, Phase 2)
+## Round 2 Regression Check
 
-### SEC-003: No client-side rate limiting on terminal input
+Reviewed the fix commit (`90ec245`) for new issues:
 
-**Severity:** Low
-**Category:** API
-**File:** index.html:1510–1520 (script block, `input.addEventListener` and `sendMessage()`)
-**Description:** The `isProcessing` flag prevents concurrent requests but does not rate-limit sequential requests. A user could send dozens of messages per minute once each response returns, with no throttle or cooldown.
-**Risk:** API credit exhaustion through rapid sequential requests. The damage is bounded by the `max_tokens: 300` limit per request, but sustained abuse could accumulate costs.
-**Recommendation:** Add server-side rate limiting in the edge function (Phase 2) — e.g., limit to 10 requests per minute per IP. Optionally add a client-side cooldown (e.g., 2-second delay between sends) as a soft measure. Server-side enforcement is the priority.
-**Fix Applied:** No (server-side rate limiting belongs in the edge function, Phase 2; client-side throttle is a Dev Agent change)
+| Check | Result | Notes |
+|-------|--------|-------|
+| SEC-004 fix introduces new leak | **CLEAN** | Generic 502 response only. No upstream body forwarded. |
+| SEC-005 fix breaks valid input | **CLEAN** | Client only sends string content (plain text). Rejecting non-string is correct for this use case. |
+| Fix changes application logic | **CLEAN** | Both fixes are additive guards — they reject bad input earlier. Normal request flow unchanged. |
+| New error response info leak | **CLEAN** | Error messages are generic: "AI service unavailable", "Invalid message format". No internal details. |
+| Fix introduces type coercion issue | **CLEAN** | `typeof msg.content !== "string"` is a strict type check. No coercion risk. |
+| Successful response still works | **CLEAN** | `anthropicResponse.ok` (2xx) falls through to `anthropicResponse.json()` → `JSON.stringify(data)` → 200 response. Unchanged. |
 
 ## Items Verified Clean
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| API key exposure | **CLEAN** | No API keys, tokens, or secrets in client code |
-| Fetch URL | **CLEAN** | Uses `/api/chat` proxy, not direct Anthropic API |
-| XSS prevention | **CLEAN** | `escapeHtml()` uses safe `textContent`→`innerHTML` DOM pattern; all user input and AI responses go through it |
+| API key exposure | **CLEAN** | Key accessed only via `Deno.env.get('ANTHROPIC_API_KEY')` — never in client code, never logged |
+| System prompt location | **CLEAN** | Hardcoded server-side in `chat.js`. Removed from `index.html`. Content matches original. |
+| Model/max_tokens hardcoded | **CLEAN** | `claude-sonnet-4-20250514` and `300` hardcoded in edge function — client cannot override |
+| Client fetch body | **CLEAN** | `index.html:1429–1431` sends only `{ messages: conversationHistory.slice(-10) }` |
+| CORS configuration | **CLEAN** | `Access-Control-Allow-Origin: "*"` is acceptable — this is a public portfolio site with no authentication, no cookies, no session state. The endpoint returns only public chat responses. |
+| XSS prevention | **CLEAN** | `escapeHtml()` pattern unchanged — uses safe `textContent`→`innerHTML` DOM approach |
 | `innerHTML` usage | **CLEAN** | `addHTMLLine()` only receives escaped content or hardcoded HTML strings |
-| `addLine()` safety | **CLEAN** | Uses `textContent` — inherently safe against XSS |
-| eval() / dangerous JS | **CLEAN** | No `eval()`, `Function()`, `document.write()`, or string-based `setTimeout`/`setInterval` |
-| External link safety | **CLEAN** | GitHub link uses `target="_blank" rel="noopener"` |
-| Google Fonts preconnect | **CLEAN** | `preconnect` with `crossorigin` on `fonts.gstatic.com` |
-| Hardcoded credentials | **CLEAN** | No passwords, API keys, or secrets anywhere in the file |
-| Conversation history bounds | **CLEAN** | `conversationHistory.slice(-10)` limits context window |
-| Smooth scroll selector injection | **CLEAN** | Anchor `href` values are from static HTML, not user input |
-| External dependencies | **CLEAN** | Only Google Fonts — no JS libraries, no npm packages |
+| CSP headers | **CLEAN** | Correct for this site. `unsafe-inline` required for inline JS/CSS. All external resources (Google Fonts) whitelisted by domain. |
+| X-Frame-Options | **CLEAN** | Set to `DENY` — prevents clickjacking |
+| X-Content-Type-Options | **CLEAN** | Set to `nosniff` — prevents MIME type sniffing |
+| Referrer-Policy | **CLEAN** | Set to `strict-origin-when-cross-origin` — appropriate |
+| Rate limiting | **CLEAN** | 10 req/min/IP with sliding window. Uses `context.ip` with `x-forwarded-for` fallback. |
+| Method enforcement | **CLEAN** | Non-POST returns 405, OPTIONS returns 204 with CORS headers |
+| JSON parsing | **CLEAN** | Wrapped in try/catch, returns 400 on invalid JSON |
+| Messages array validation | **CLEAN** | Checks `Array.isArray()`, length ≤ 20 |
+| Content type validation | **CLEAN** | Non-string content rejected at line 111. String content length capped at 1000 chars. |
+| Error handling | **CLEAN** | No stack traces in custom error responses. Generic messages for 400/405/429/500/502 |
+| Edge function config | **CLEAN** | `export const config = { path: "/api/chat" }` matches `netlify.toml` mapping |
+| Message role validation | **NOTE** | Not validated, but Anthropic API rejects invalid roles — low risk, no finding warranted |
+| Rate limit memory | **NOTE** | Map never prunes expired entries, but edge functions are short-lived — no finding warranted |
+| `eval()` / dangerous JS | **CLEAN** | No `eval()`, `Function()`, `document.write()` in any changed file |
+| Hardcoded credentials | **CLEAN** | No secrets in source files |
+| Dependencies | **CLEAN** | No new dependencies added — no `package.json`, no imports |
+
+## Automated Findings Triage
+
+`SECURITY.md` contains no automated findings to triage. The post-commit hook categories (secrets, dangerous functions, env leaks) were checked — no matches in the PR diff.
 
 ## Summary
 
 - Critical: 0
 - High: 0
-- Medium: 1
-- Low: 2
-- Total: 3
+- Medium: 0
+- Low: 0
+- Total: 0 open findings
+- Previously found: 5 (SEC-001 through SEC-005)
+- All resolved: 5
 - Fixed by Security Agent: 0
 
-All three findings are deferred to Phase 2 (edge function implementation). The current client-side code is well-constructed with proper XSS escaping and no exposed secrets. The primary concern is that the client controls the system prompt and model selection, which the edge function must enforce server-side.
+All five security findings across Phase 1 and Phase 2 have been resolved. SEC-001, SEC-002, and SEC-003 were addressed in the initial Phase 2 implementation. SEC-004 and SEC-005 were identified in Round 1 and fixed by the Dev Agent in commit `90ec245`. No new issues introduced by the fixes. The PR is clean for merge.
