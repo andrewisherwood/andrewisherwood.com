@@ -7,7 +7,7 @@
 
 | Phase | Name | Status | Priority | Duration | Notes |
 |-------|------|--------|----------|----------|-------|
-| 1 | Core Site — Static HTML & Styling | ⏳ Pending | High | — | All sections, CSS, scroll animations |
+| 1 | Core Site — Static HTML & Styling | ✅ Complete | High | ~15 min | All sections, CSS, scroll animations |
 | 2 | Interactive Terminal & API Proxy | ⏳ Pending | High | — | Edge function, netlify.toml, chat proxy |
 | 3 | Build Log & Deployment Readiness | ⏳ Pending | Medium | — | BUILD_LOG.md, final verification |
 
@@ -33,4 +33,4 @@ Create `BUILD_LOG.md` documenting the MAI V3 build process. Verify all files pre
 - Created phase plan, STATUS.md, ROADMAP.md
 - Infrastructure provisioned (worktrees, memory system, security templates)
 
-**Next Priority:** Plan and execute Phase 1 — Core Site
+**Next Priority:** Plan and execute Phase 2 — Interactive Terminal & API Proxy
