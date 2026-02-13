@@ -1,5 +1,2 @@
-{"ts":"2026-02-13T00:56:59Z","event":"onboard_started","prerequisites":"validated"}
-{"ts":"2026-02-13T00:58:23Z","event":"infrastructure_provisioned","worktrees":["andrewisherwood.com-dev","andrewisherwood.com-qa","andrewisherwood.com-audit"]}
-{"ts":"2026-02-13T01:00:03Z","event":"phase_plan_created","total_phases":3}
-{"ts":"2026-02-13T01:19:53Z","event":"phase_merged","phase":1,"pr_number":"1"}
-{"ts":"2026-02-13T01:37:44Z","event":"phase_merged","phase":2,"pr_number":"2"}
+{"ts":"2026-02-13T01:56:37Z","event":"project_completed","project":"andrewisherwood.com","total_phases":2,"archive":"stream-andrewisherwood.com-20260213015637.jsonl"}
+{"ts":"2026-02-13T01:57:00Z","event":"project_complete","total_phases":3,"total_prs":3,"security_findings_resolved":5}
