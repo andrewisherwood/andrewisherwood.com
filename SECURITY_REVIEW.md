@@ -1,10 +1,11 @@
 # Security Review — Phase 2: Interactive Terminal & API Proxy
 
 **Date:** 2026-02-13T01:35:00Z
+**Updated:** 2026-02-13T02:10:00Z (Round 2)
 **Branch:** phase-2-api-proxy
 **PR:** #2
 **Reviewer:** Security Agent
-**Result:** ISSUES FOUND (2 findings)
+**Result:** CLEAN (0 open findings)
 
 ## Phase 1 Finding Remediation
 
@@ -14,49 +15,25 @@
 | SEC-002: No CSP headers | **RESOLVED** | CSP added in `netlify.toml`: `default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; script-src 'self' 'unsafe-inline'`. Also includes `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`. |
 | SEC-003: No rate limiting | **RESOLVED** | In-memory rate limiter added in edge function: 10 requests per minute per IP, returns 429 when exceeded. Best-effort (resets on cold start) — acceptable for portfolio site. |
 
-## New Findings
+## Phase 2 Finding Remediation (Round 2)
 
-### SEC-004: Anthropic API error responses passed through unfiltered
+| Finding | Status | Verification |
+|---------|--------|-------------|
+| SEC-004: Anthropic API error responses passed through unfiltered | **RESOLVED** | `chat.js:162–167` now checks `if (!anthropicResponse.ok)` and returns a generic `{ error: "AI service unavailable" }` with status 502. The upstream Anthropic error body is never forwarded to the client. Matches the exact recommendation from Round 1. |
+| SEC-005: Message content length validation bypassed by array-format content | **RESOLVED** | `chat.js:111–119` now checks `typeof msg.content !== "string"` first, rejecting any non-string content with `{ error: "Invalid message format" }` (400). This adopts the more defensive recommendation — array-format content blocks are rejected outright. The length check on line 120 only runs on confirmed strings. No bypass possible. |
 
-**Severity:** Medium
-**Category:** API
-**File:** netlify/edge-functions/chat.js:147–151
-**Description:** The edge function returns the full Anthropic API response body to the client: `return new Response(JSON.stringify(data), { status: anthropicResponse.status, ... })`. When the Anthropic API returns an error (e.g., 401 auth failure, 400 validation error, 429 rate limit), the error body is forwarded verbatim to the client. Anthropic error responses can include internal error types, request IDs, and details about why the request failed.
-**Risk:** Information disclosure. An attacker probing the endpoint could learn the API version, error structure, and potentially infer details about the server-side configuration from error messages. While no secrets are leaked (the API key is not in error responses), this violates the principle of not exposing internal details.
-**Recommendation:** Filter the Anthropic response: on non-2xx status codes, return a generic error message to the client rather than forwarding the upstream response body. Example:
-```js
-if (!anthropicResponse.ok) {
-  return new Response(
-    JSON.stringify({ error: "AI service unavailable" }),
-    { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } }
-  );
-}
-```
-**Fix Applied:** No (requires Dev Agent — changes response handling logic)
+## Round 2 Regression Check
 
-### SEC-005: Message content length validation bypassed by array-format content
+Reviewed the fix commit (`90ec245`) for new issues:
 
-**Severity:** Medium
-**Category:** API
-**File:** netlify/edge-functions/chat.js:100–112
-**Description:** The input validation checks `typeof msg.content === "string" && msg.content.length > 1000` but the Anthropic Messages API also accepts content as an array of content blocks (e.g., `[{type: "text", text: "very long string..."}]`). When content is an array, the string length check is skipped entirely, allowing arbitrarily long messages to be forwarded to the Anthropic API.
-**Risk:** A malicious client could send oversized messages via array-format content blocks, bypassing the 1000-character limit. This could increase API costs (larger input tokens) and potentially be used for prompt injection with large payloads. The impact is bounded by Anthropic's own limits, but the local validation is ineffective for this format.
-**Recommendation:** Validate both content formats:
-```js
-for (const msg of messages) {
-  if (typeof msg.content === "string" && msg.content.length > 1000) {
-    // reject
-  } else if (Array.isArray(msg.content)) {
-    for (const block of msg.content) {
-      if (typeof block.text === "string" && block.text.length > 1000) {
-        // reject
-      }
-    }
-  }
-}
-```
-Or, more defensively, reject any message where `content` is not a string (since the client should only send plain text strings).
-**Fix Applied:** No (requires Dev Agent — changes validation logic)
+| Check | Result | Notes |
+|-------|--------|-------|
+| SEC-004 fix introduces new leak | **CLEAN** | Generic 502 response only. No upstream body forwarded. |
+| SEC-005 fix breaks valid input | **CLEAN** | Client only sends string content (plain text). Rejecting non-string is correct for this use case. |
+| Fix changes application logic | **CLEAN** | Both fixes are additive guards — they reject bad input earlier. Normal request flow unchanged. |
+| New error response info leak | **CLEAN** | Error messages are generic: "AI service unavailable", "Invalid message format". No internal details. |
+| Fix introduces type coercion issue | **CLEAN** | `typeof msg.content !== "string"` is a strict type check. No coercion risk. |
+| Successful response still works | **CLEAN** | `anthropicResponse.ok` (2xx) falls through to `anthropicResponse.json()` → `JSON.stringify(data)` → 200 response. Unchanged. |
 
 ## Items Verified Clean
 
@@ -77,6 +54,7 @@ Or, more defensively, reject any message where `content` is not a string (since 
 | Method enforcement | **CLEAN** | Non-POST returns 405, OPTIONS returns 204 with CORS headers |
 | JSON parsing | **CLEAN** | Wrapped in try/catch, returns 400 on invalid JSON |
 | Messages array validation | **CLEAN** | Checks `Array.isArray()`, length ≤ 20 |
+| Content type validation | **CLEAN** | Non-string content rejected at line 111. String content length capped at 1000 chars. |
 | Error handling | **CLEAN** | No stack traces in custom error responses. Generic messages for 400/405/429/500/502 |
 | Edge function config | **CLEAN** | `export const config = { path: "/api/chat" }` matches `netlify.toml` mapping |
 | Message role validation | **NOTE** | Not validated, but Anthropic API rejects invalid roles — low risk, no finding warranted |
@@ -93,9 +71,11 @@ Or, more defensively, reject any message where `content` is not a string (since 
 
 - Critical: 0
 - High: 0
-- Medium: 2
+- Medium: 0
 - Low: 0
-- Total: 2
+- Total: 0 open findings
+- Previously found: 5 (SEC-001 through SEC-005)
+- All resolved: 5
 - Fixed by Security Agent: 0
 
-All three Phase 1 findings (SEC-001, SEC-002, SEC-003) have been properly addressed. Two new medium-severity findings identified: SEC-004 (unfiltered API error passthrough) and SEC-005 (content validation bypass via array format). Both require Dev Agent changes to resolve. Neither is blocking — the site is safe to deploy with these findings as informational improvements for a future iteration.
+All five security findings across Phase 1 and Phase 2 have been resolved. SEC-001, SEC-002, and SEC-003 were addressed in the initial Phase 2 implementation. SEC-004 and SEC-005 were identified in Round 1 and fixed by the Dev Agent in commit `90ec245`. No new issues introduced by the fixes. The PR is clean for merge.
