@@ -108,10 +108,16 @@ export default async function handler(request, context) {
   }
 
   for (const msg of messages) {
-    if (
-      typeof msg.content === "string" &&
-      msg.content.length > 1000
-    ) {
+    if (typeof msg.content !== "string") {
+      return new Response(
+        JSON.stringify({ error: "Invalid message format" }),
+        {
+          status: 400,
+          headers: { ...CORS_HEADERS, "Content-Type": "application/json" },
+        }
+      );
+    }
+    if (msg.content.length > 1000) {
       return new Response(
         JSON.stringify({ error: "Message content too long (max 1000 chars)" }),
         {
@@ -152,6 +158,13 @@ export default async function handler(request, context) {
         }),
       }
     );
+
+    if (!anthropicResponse.ok) {
+      return new Response(
+        JSON.stringify({ error: "AI service unavailable" }),
+        { status: 502, headers: { ...CORS_HEADERS, "Content-Type": "application/json" } }
+      );
+    }
 
     const data = await anthropicResponse.json();
 
