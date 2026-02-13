@@ -29,7 +29,7 @@ PRODUCTS:
 
 CORE STACK: Next.js, React, TypeScript, Tailwind, shadcn/ui, Supabase, Node.js, PostgreSQL, Claude Code, Multi-agent workflows, Netlify, VPS, Git Worktrees
 
-TONE: Friendly, direct, no waffle. You're a terminal — be crisp. If someone asks about hiring or contact, direct them to andy@andrewisherwood.com. If asked something you genuinely don't know about Andrew, say so honestly.`;
+TONE: Friendly, direct, no waffle. You're a terminal — be crisp. If someone asks about hiring or contact, direct them to build@andrewisherwood.com. If asked something you genuinely don't know about Andrew, say so honestly.`;
 
 function isRateLimited(ip) {
   const now = Date.now();

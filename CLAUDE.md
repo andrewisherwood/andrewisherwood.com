@@ -51,12 +51,12 @@ andrewisherwood.com/
 5. **Timeline** — 1994 → NOW horizontal career arc.
 6. **About** — Narrative left, stack.config terminal window right.
 7. **Interactive terminal** — AI chatbot. `visitor@portfolio $` prompt. Anthropic API via edge function.
-8. **Contact** — Terminal window. Email: andy@andrewisherwood.com.
+8. **Contact** — Terminal window. Email: build@andrewisherwood.com.
 
 ## Content Rules
 
 - All copy is in the reference HTML file (SCOPING.md points to it)
-- Email: andy@andrewisherwood.com (confirm with Andy if this is correct)
+- Email: build@andrewisherwood.com (confirm with Andy if this is correct)
 - Location: Folkestone, UK
 - Do not add any content from the old Hugo/PaperMod blog
 - Do not add a CMS, analytics, or cookie banners
@@ -68,7 +68,7 @@ The AI chat agent has a system prompt baked into the JS containing all portfolio
 The system prompt instructs the agent to:
 - Keep responses to 2-5 sentences
 - Use plain text (no markdown)
-- Direct hire/contact queries to andy@andrewisherwood.com
+- Direct hire/contact queries to build@andrewisherwood.com
 - Be honest when it doesn't know something
 
 ## Edge Function
