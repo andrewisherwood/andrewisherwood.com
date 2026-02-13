@@ -1,0 +1,5 @@
+# Ignore in Git
+
+.env
+.env.local
+.env.*
