@@ -2,3 +2,4 @@
 {"ts":"2026-02-13T00:58:23Z","event":"infrastructure_provisioned","worktrees":["andrewisherwood.com-dev","andrewisherwood.com-qa","andrewisherwood.com-audit"]}
 {"ts":"2026-02-13T01:00:03Z","event":"phase_plan_created","total_phases":3}
 {"ts":"2026-02-13T01:19:53Z","event":"phase_merged","phase":1,"pr_number":"1"}
+{"ts":"2026-02-13T01:37:44Z","event":"phase_merged","phase":2,"pr_number":"2"}

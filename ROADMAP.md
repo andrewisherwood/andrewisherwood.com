@@ -8,7 +8,7 @@
 | Phase | Name | Status | Priority | Duration | Notes |
 |-------|------|--------|----------|----------|-------|
 | 1 | Core Site — Static HTML & Styling | ✅ Complete | High | ~15 min | All sections, CSS, scroll animations |
-| 2 | Interactive Terminal & API Proxy | ⏳ Pending | High | — | Edge function, netlify.toml, chat proxy |
+| 2 | Interactive Terminal & API Proxy | ✅ Complete | High | ~24 min | Edge function, netlify.toml, chat proxy, security hardening |
 | 3 | Build Log & Deployment Readiness | ⏳ Pending | Medium | — | BUILD_LOG.md, final verification |
 
 ## Detailed Phases
