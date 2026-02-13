@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrew Isherwood — Solutions Architect & Product Engineer</title>
+<meta name="description" content="I design systems that work and ship products that matter. 32 years building for the web. Solutions architecture, product engineering, and AI-augmented development.">
+<link rel="icon" type="image/svg+xml" href="favicon-c64.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-screen: #0d0e0f;
+    --bg-elevated: #111213;
+    --bg-card: #141516;
+    --bg-bezel: #1a1b1c;
+    --text: #e8e4df;
+    --text-muted: #8a8580;
+    --text-dim: #4a4540;
+    --phosphor: #e8643a;
+    --phosphor-bright: #ff7a4e;
+    --phosphor-glow: rgba(232, 100, 58, 0.12);
+    --phosphor-faint: rgba(232, 100, 58, 0.05);
+    --green: #3ae87a;
+    --green-glow: rgba(58, 232, 122, 0.1);
+    --blue: #6aadff;
+    --amber: #ffbd2e;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --sans: 'Space Grotesk', -apple-system, sans-serif;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--phosphor);
+    color: var(--bg);
+  }
+
+  /* --- SCANLINE + NOISE OVERLAY --- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  /* --- LAYOUT --- */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  section { padding: 6rem 0; }
+
+  /* --- TERMINAL WINDOW COMPONENT --- */
+  .terminal-window {
+    background: var(--bg-screen);
+    border: 1px solid rgba(232, 100, 58, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+      0 0 30px rgba(232, 100, 58, 0.04),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+
+  .terminal-chrome {
+    height: 36px;
+    background: var(--bg-bezel);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 0.4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .terminal-chrome .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .terminal-chrome .dot.r { background: #ff5f56; }
+  .terminal-chrome .dot.y { background: #ffbd2e; }
+  .terminal-chrome .dot.g { background: #27c93f; }
+
+  .terminal-chrome .title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-right: 40px;
+  }
+
+  .terminal-body {
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    line-height: 1.9;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(232, 100, 58, 0.08);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--phosphor);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-logo .cursor-block {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: var(--phosphor);
+    animation: blink 1.2s step-end infinite;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--phosphor); }
+
+  .nav-links a::before {
+    content: '> ';
+    color: var(--text-dim);
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover::before { color: var(--phosphor); }
+
+  .nav-cta {
+    background: var(--phosphor) !important;
+    color: var(--bg) !important;
+    padding: 0.45rem 1.1rem !important;
+    border-radius: 3px;
+    font-weight: 500 !important;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta::before { display: none !important; }
+  .nav-cta:hover { opacity: 0.85; color: var(--bg) !important; }
+
+  /* --- HERO --- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 4rem;
+  }
+
+  .hero-terminal {
+    width: 100%;
+  }
+
+  .hero-terminal .terminal-body {
+    padding: 3rem;
+  }
+
+  .hero-prompt {
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-prompt .path { color: var(--blue); }
+  .hero-prompt .branch { color: var(--phosphor); }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 1.5rem 0;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.3s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--phosphor);
+    text-shadow: 0 0 40px var(--phosphor-glow);
+  }
+
+  .hero-output {
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin: 1.5rem 0 2.5rem;
+    max-width: 600px;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.5s forwards;
+  }
+
+  .hero-output .label {
+    color: var(--green);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s var(--ease-out) 0.65s forwards;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--phosphor);
+    color: var(--bg);
+    padding: 0.8rem 1.8rem;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: all 0.3s var(--ease);
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 30px var(--phosphor-glow), 0 8px 30px rgba(0,0,0,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-muted);
+    padding: 0.8rem 1.8rem;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 0.85rem;
+    border: 1px solid rgba(232, 100, 58, 0.2);
+    transition: all 0.3s var(--ease);
+  }
+
+  .btn-secondary:hover {
+    color: var(--phosphor);
+    border-color: rgba(232, 100, 58, 0.4);
+    box-shadow: 0 0 20px var(--phosphor-faint);
+  }
+
+  /* Background grid */
+  .hero-grid {
+    position: absolute;
+    right: -5%;
+    top: 10%;
+    width: 600px;
+    height: 600px;
+    opacity: 0.025;
+    background-image:
+      linear-gradient(var(--phosphor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--phosphor) 1px, transparent 1px);
+    background-size: 32px 32px;
+    transform: rotate(15deg);
+    pointer-events: none;
+  }
+
+  /* --- SIGNAL BAR --- */
+  .signal-bar {
+    border-top: 1px solid rgba(232, 100, 58, 0.08);
+    border-bottom: 1px solid rgba(232, 100, 58, 0.08);
+    padding: 2.5rem 0;
+    background: var(--bg-elevated);
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .signal-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .signal-number {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--phosphor);
+    text-shadow: 0 0 30px var(--phosphor-glow);
+  }
+
+  .signal-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* --- SECTION HEADERS --- */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--phosphor);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '// ';
+    color: var(--text-dim);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+  }
+
+  /* --- CASE STUDIES --- */
+  .case-study {
+    background: var(--bg-card);
+    border: 1px solid rgba(232, 100, 58, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    transition: all 0.4s var(--ease);
+    position: relative;
+  }
+
+  .case-study::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    box-shadow: 0 0 40px var(--phosphor-faint);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+
+  .case-study:hover::before { opacity: 1; }
+
+  .case-study:hover {
+    border-color: rgba(232, 100, 58, 0.25);
+  }
+
+  .case-study-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 440px;
+  }
+
+  .case-study-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .case-study-tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--phosphor);
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+
+  .case-study-tag::before {
+    content: '> ';
+    color: var(--text-dim);
+  }
+
+  .case-study h3 {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .case-study p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  .case-study-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stack-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--phosphor-faint);
+    border: 1px solid rgba(232, 100, 58, 0.12);
+    border-radius: 3px;
+    color: var(--text-muted);
+  }
+
+  .case-study-metrics {
+    display: flex;
+    gap: 2rem;
+    margin-top: auto;
+  }
+
+  .metric { display: flex; flex-direction: column; gap: 0.15rem; }
+
+  .metric-value {
+    font-family: var(--mono);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--green);
+    text-shadow: 0 0 20px var(--green-glow);
+  }
+
+  .metric-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* --- CASE STUDY VISUALS --- */
+  .case-study-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .visual-suppertime { background: linear-gradient(135deg, #12100e 0%, #1a1510 100%); }
+  .visual-mai { background: linear-gradient(135deg, #0e1014 0%, #12161e 100%); }
+  .visual-adaptive { background: linear-gradient(135deg, #0e120f 0%, #101c14 100%); }
+
+  .visual-mockup {
+    width: 80%;
+    max-width: 320px;
+    aspect-ratio: 9/16;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 40px var(--phosphor-faint);
+    transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+    border: 1px solid rgba(232, 100, 58, 0.1);
+  }
+
+  .visual-mockup img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .visual-terminal {
+    width: 85%;
+    max-width: 360px;
+    background: #0a0a0a;
+    border-radius: 8px;
+    border: 1px solid rgba(232, 100, 58, 0.15);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px var(--phosphor-faint);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    transform: perspective(1000px) rotateY(4deg) rotateX(2deg);
+  }
+
+  .visual-terminal .t-bar {
+    height: 30px;
+    background: var(--bg-bezel);
+    display: flex;
+    align-items: center;
+    padding: 0 0.8rem;
+    gap: 0.35rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .visual-terminal .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .visual-terminal .dot.r { background: #ff5f56; }
+  .visual-terminal .dot.y { background: #ffbd2e; }
+  .visual-terminal .dot.g { background: #27c93f; }
+
+  .visual-terminal .t-body {
+    padding: 1rem;
+    line-height: 1.9;
+    color: var(--text-dim);
+  }
+
+  .visual-terminal .cmd { color: var(--green); }
+  .visual-terminal .flag { color: var(--blue); }
+  .visual-terminal .output { color: var(--text-muted); }
+  .visual-terminal .agent { color: var(--phosphor); }
+
+  .visual-desktop {
+    width: 92%;
+    max-width: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.6), 0 0 30px var(--phosphor-faint);
+    transform: perspective(1000px) rotateY(4deg) rotateX(2deg);
+    border: 1px solid rgba(232, 100, 58, 0.1);
+  }
+
+  .visual-desktop .desktop-bar {
+    height: 28px;
+    background: var(--bg-bezel);
+    display: flex;
+    align-items: center;
+    padding: 0 0.6rem;
+    gap: 0.3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .visual-desktop img {
+    width: 100%;
+    display: block;
+  }
+
+  /* --- ABOUT --- */
+  .about-section { background: var(--bg-elevated); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .about-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-aside {
+    background: var(--bg-screen);
+    border: 1px solid rgba(232, 100, 58, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .about-aside-chrome {
+    height: 32px;
+    background: var(--bg-bezel);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 0.35rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .about-aside-chrome .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .about-aside-chrome .dot.r { background: #ff5f56; }
+  .about-aside-chrome .dot.y { background: #ffbd2e; }
+  .about-aside-chrome .dot.g { background: #27c93f; }
+
+  .about-aside-chrome .title {
+    flex: 1;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    margin-right: 40px;
+  }
+
+  .about-aside-body {
+    padding: 2rem;
+  }
+
+  .stack-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    list-style: none;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+
+  .stack-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(232, 100, 58, 0.06);
+  }
+
+  .stack-list li:last-child { border-bottom: none; }
+
+  .stack-list .stack-name {
+    color: var(--phosphor);
+    font-weight: 400;
+  }
+
+  .stack-list .stack-name::before {
+    content: '├─ ';
+    color: var(--text-dim);
+  }
+
+  .stack-list li:last-child .stack-name::before {
+    content: '└─ ';
+  }
+
+  .stack-list .stack-detail {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+  }
+
+  /* --- TIMELINE RIBBON --- */
+  .timeline-section {
+    padding: 4rem 0;
+    border-top: 1px solid rgba(232, 100, 58, 0.06);
+  }
+
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--phosphor) 0%, var(--text-dim) 50%, var(--phosphor) 100%);
+    opacity: 0.3;
+  }
+
+  .timeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--phosphor);
+    box-shadow: 0 0 15px var(--phosphor-glow);
+  }
+
+  .timeline-dot.dim {
+    background: var(--text-dim);
+    box-shadow: none;
+  }
+
+  .timeline-year {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--phosphor);
+    font-weight: 500;
+  }
+
+  .timeline-year.dim { color: var(--text-dim); }
+
+  .timeline-event {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.4;
+  }
+
+  /* --- CONTACT --- */
+  .contact-section {
+    padding: 8rem 0;
+    text-align: center;
+  }
+
+  .contact-terminal {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-terminal .terminal-body {
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .contact-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title em {
+    font-style: italic;
+    color: var(--phosphor);
+    text-shadow: 0 0 40px var(--phosphor-glow);
+  }
+
+  .contact-text {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 460px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .contact-prompt {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--phosphor);
+    text-decoration: none;
+    padding: 1rem 2.5rem;
+    border: 1px solid rgba(232, 100, 58, 0.3);
+    border-radius: 3px;
+    transition: all 0.3s var(--ease);
+    background: var(--phosphor-faint);
+  }
+
+  .contact-email:hover {
+    background: var(--phosphor);
+    color: var(--bg);
+    border-color: var(--phosphor);
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px var(--phosphor-glow), 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .contact-email svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid rgba(232, 100, 58, 0.06);
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  footer a:hover { color: var(--phosphor); }
+
+  footer .footer-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  /* --- INTERACTIVE TERMINAL --- */
+  .interactive-terminal {
+    box-shadow:
+      0 0 60px rgba(232, 100, 58, 0.06),
+      0 30px 80px rgba(0,0,0,0.4);
+  }
+
+  .terminal-input-row {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    border-top: 1px solid rgba(232, 100, 58, 0.08);
+    background: rgba(0,0,0,0.3);
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+
+  .input-prompt {
+    color: var(--text-dim);
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+
+  #terminal-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    caret-color: var(--phosphor);
+  }
+
+  #terminal-input::placeholder {
+    color: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  .t-line {
+    line-height: 1.8;
+    font-size: 0.8rem;
+  }
+
+  .t-line.user-msg {
+    color: var(--text);
+  }
+
+  .t-line.user-msg::before {
+    content: '> ';
+    color: var(--phosphor);
+  }
+
+  .t-line.ai-msg {
+    color: var(--text-muted);
+    padding-left: 0;
+  }
+
+  .t-line.ai-thinking {
+    color: var(--text-dim);
+  }
+
+  .t-line.ai-thinking .dots::after {
+    content: '...';
+    animation: ellipsis 1.5s steps(4, end) infinite;
+  }
+
+  @keyframes ellipsis {
+    0% { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+  }
+
+  #terminal-output::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #terminal-output::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #terminal-output::-webkit-scrollbar-thumb {
+    background: rgba(232, 100, 58, 0.2);
+    border-radius: 3px;
+  }
+
+  /* --- ANIMATIONS --- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes typeIn {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    .case-study-inner { grid-template-columns: 1fr; }
+    .case-study-visual { min-height: 300px; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .signal-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .timeline { flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+    .timeline::before { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 4rem 0; }
+    .container { padding: 0 1.25rem; }
+    nav { padding: 0.8rem 1.25rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.65rem; }
+    .hero { min-height: 90vh; }
+    .hero-terminal .terminal-body { padding: 1.5rem; }
+    .case-study-content { padding: 2rem; }
+    .case-study-metrics { flex-direction: column; gap: 1rem; }
+    .hero-grid { display: none; }
+    .signal-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="#work">work</a></li>
+    <li><a href="#about">about</a></li>
+    <li><a href="#contact" class="nav-cta">get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-terminal terminal-window">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">andrew@isherwood ~ </div>
+      </div>
+      <div class="terminal-body">
+        <div class="hero-prompt" style="opacity:0; animation: fadeUp 0.6s var(--ease-out) 0.1s forwards;">
+          <span class="path">~/portfolio</span> <span class="branch">(main)</span> $
+        </div>
+        <h1>I design systems that work and ship products that <em>matter</em></h1>
+        <div class="hero-output">
+          <span class="label">ROLE</span>&nbsp;&nbsp;&nbsp;Solutions Architect · Product Engineer<br>
+          <span class="label">STACK</span>&nbsp;&nbsp;Next.js · TypeScript · Supabase · AI Agents<br>
+          <span class="label">SINCE</span>&nbsp;&nbsp;1994
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg>
+            Let's talk
+          </a>
+          <a href="#work" class="btn-secondary">See the work ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-grid"></div>
+</section>
+
+<!-- SIGNAL BAR -->
+<div class="signal-bar">
+  <div class="container">
+    <div class="signal-grid">
+      <div class="signal-item reveal">
+        <span class="signal-number">32</span>
+        <span class="signal-label">years building for the web</span>
+      </div>
+      <div class="signal-item reveal">
+        <span class="signal-number">100</span>
+        <span class="signal-label">beta users on first product</span>
+      </div>
+      <div class="signal-item reveal">
+        <span class="signal-number">4</span>
+        <span class="signal-label">products in the pipeline</span>
+      </div>
+      <div class="signal-item reveal">
+        <span class="signal-number">AI</span>
+        <span class="signal-label">augmented dev workflows</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="container">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Products I've designed,<br>built, and shipped</h2>
+    <p class="section-subtitle">Every project here went from concept through architecture to production. Real users, real problems, real solutions.</p>
+
+    <!-- SUPPERTIME -->
+    <div class="case-study reveal">
+      <div class="case-study-inner">
+        <div class="case-study-content">
+          <div class="case-study-tag">Product · Full-Stack · Shipped</div>
+          <h3>Suppertime</h3>
+          <p>A family meal planning app that closes the daily "what's for dinner" decision. Weekly planning, smart shopping lists, calendar sync, and leftover tracking — built for parents who need one less thing to think about.</p>
+          <div class="case-study-stack">
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">Supabase</span>
+            <span class="stack-tag">Tailwind</span>
+            <span class="stack-tag">shadcn/ui</span>
+            <span class="stack-tag">Netlify</span>
+          </div>
+          <div class="case-study-metrics">
+            <div class="metric">
+              <span class="metric-value">100</span>
+              <span class="metric-label">Beta users via TestFlight</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">V1</span>
+              <span class="metric-label">Shipped & iterated</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-study-visual visual-suppertime">
+          <div class="visual-mockup">
+            <img src="suppertime-screenshot.png" alt="Suppertime app showing weekly meal plan with breakfast, lunch and dinner cards" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAI -->
+    <div class="case-study reveal">
+      <div class="case-study-inner">
+        <div class="case-study-content">
+          <div class="case-study-tag">AI Engineering · Architecture · Automation</div>
+          <h3>Multi-Agent Infrastructure</h3>
+          <p>A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents — development, QA, security audit, documentation — working in parallel across git worktrees with built-in gates, timeout controls, and automated security review.</p>
+          <div class="case-study-stack">
+            <span class="stack-tag">Claude Code</span>
+            <span class="stack-tag">Multi-Agent</span>
+            <span class="stack-tag">Git Worktrees</span>
+            <span class="stack-tag">Bash</span>
+            <span class="stack-tag">Node.js</span>
+          </div>
+          <div class="case-study-metrics">
+            <div class="metric">
+              <span class="metric-value">9</span>
+              <span class="metric-label">Specialised agents</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">73.7%</span>
+              <span class="metric-label">Token reduction</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-study-visual visual-mai">
+          <div class="visual-terminal">
+            <div class="t-bar">
+              <div class="dot r"></div>
+              <div class="dot y"></div>
+              <div class="dot g"></div>
+            </div>
+            <div class="t-body">
+              <span class="cmd">$</span> mai <span class="flag">--orchestrate</span><br>
+              <span class="agent">▸ Coordinator</span> <span class="output">initialising agents...</span><br>
+              <span class="agent">▸ Dev Agent</span> <span class="output">worktree: feature/auth</span><br>
+              <span class="agent">▸ QA Agent</span> <span class="output">watching for commits...</span><br>
+              <span class="agent">▸ Security</span> <span class="output">audit hook active</span><br>
+              <span class="output">──────────────────────</span><br>
+              <span class="cmd">✓</span> <span class="output">All agents nominal</span><br>
+              <span class="cmd">✓</span> <span class="output">SECURITY.md updated</span><br>
+              <span class="agent">▸ Deploy</span> <span class="output">staging ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADAPTIVE COACH -->
+    <div class="case-study reveal">
+      <div class="case-study-inner">
+        <div class="case-study-content">
+          <div class="case-study-tag">Product · AI · Sports Tech</div>
+          <h3>Adaptive Coach</h3>
+          <p>An AI-powered personal cycling coach that generates periodised training plans adapted to individual physiology, race goals, and recovery patterns. Built to solve the problem of generic training plans that don't account for real life.</p>
+          <div class="case-study-stack">
+            <span class="stack-tag">Next.js</span>
+            <span class="stack-tag">Supabase</span>
+            <span class="stack-tag">AI/ML</span>
+            <span class="stack-tag">Sports Science</span>
+          </div>
+          <div class="case-study-metrics">
+            <div class="metric">
+              <span class="metric-value">86</span>
+              <span class="metric-label">Activities tracked</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">2383km</span>
+              <span class="metric-label">Distance logged</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-study-visual visual-adaptive">
+          <div class="visual-desktop">
+            <div class="desktop-bar">
+              <div class="dot r"></div>
+              <div class="dot y"></div>
+              <div class="dot g"></div>
+            </div>
+            <img src="adaptive-coach-screenshot.png" alt="AdaptiveCoach dashboard showing training snapshot, power zones, and race countdown" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<div class="timeline-section">
+  <div class="container">
+    <div class="section-label">The Long Game</div>
+    <div class="timeline reveal">
+      <div class="timeline-node">
+        <div class="timeline-event">First website</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1994</div>
+      </div>
+      <div class="timeline-node">
+        <div class="timeline-event">Professional kitchens</div>
+        <div class="timeline-dot dim"></div>
+        <div class="timeline-year dim">2000</div>
+      </div>
+      <div class="timeline-node">
+        <div class="timeline-event">Web agency</div>
+        <div class="timeline-dot dim"></div>
+        <div class="timeline-year dim">2010</div>
+      </div>
+      <div class="timeline-node">
+        <div class="timeline-event">Full-stack dev</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2018</div>
+      </div>
+      <div class="timeline-node">
+        <div class="timeline-event">AI-augmented</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2024</div>
+      </div>
+      <div class="timeline-node">
+        <div class="timeline-event">Shipping products</div>
+        <div class="timeline-dot" style="box-shadow: 0 0 20px var(--phosphor-glow), 0 0 40px var(--phosphor-faint);"></div>
+        <div class="timeline-year" style="font-weight:600;">NOW</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="section-label">About</div>
+    <h2 class="section-title" style="margin-bottom: 3rem;">The unusual path</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p><strong>I spent 18 years as a classically trained chef</strong> before moving into tech full-time. But I've been building for the web for 32 years — since before CSS existed. That dual background gave me something most developers don't have: an obsessive eye for process, an understanding of systems under pressure, and the ability to think about how things actually get used — not just how they get built.</p>
+        <p>I ran a web agency. I've shipped products, managed infrastructure, and designed architectures from database schema to deployment pipeline.</p>
+        <p>Now I work at the intersection of <strong>product thinking, systems architecture, and AI-augmented engineering</strong>. I use tools like Claude Code not as a novelty but as a core part of my development workflow — building multi-agent systems, automating security reviews, and shipping faster than teams three times my size.</p>
+        <p>I think in systems. I build things that work. And I care deeply about the craft.</p>
+      </div>
+
+      <div class="about-aside reveal">
+        <div class="about-aside-chrome">
+          <div class="dot r"></div>
+          <div class="dot y"></div>
+          <div class="dot g"></div>
+          <div class="title">stack.config</div>
+        </div>
+        <div class="about-aside-body">
+          <ul class="stack-list">
+            <li>
+              <span class="stack-name">Frontend</span>
+              <span class="stack-detail">Next.js · React · TypeScript</span>
+            </li>
+            <li>
+              <span class="stack-name">Styling</span>
+              <span class="stack-detail">Tailwind · shadcn/ui</span>
+            </li>
+            <li>
+              <span class="stack-name">Backend</span>
+              <span class="stack-detail">Supabase · Node.js · PostgreSQL</span>
+            </li>
+            <li>
+              <span class="stack-name">AI / Agents</span>
+              <span class="stack-detail">Claude Code · Multi-agent</span>
+            </li>
+            <li>
+              <span class="stack-name">Infra</span>
+              <span class="stack-detail">Netlify · VPS · Git Worktrees</span>
+            </li>
+            <li>
+              <span class="stack-name">Process</span>
+              <span class="stack-detail">Phased roadmaps · CI/CD</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE TERMINAL -->
+<section id="terminal" style="padding: 5rem 0;">
+  <div class="container">
+    <div class="section-label">Ask Me Anything</div>
+    <h2 class="section-title" style="margin-bottom:0.8rem;">Talk to the work</h2>
+    <p class="section-subtitle">An AI that knows my products, my stack, and my process. Go on, ask it something.</p>
+
+    <div class="terminal-window interactive-terminal" style="max-width:750px;">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">ai@isherwood — portfolio-agent</div>
+      </div>
+      <div id="terminal-output" class="terminal-body" style="min-height:300px; max-height:500px; overflow-y:auto; padding:1.5rem 2rem;">
+        <div class="t-line"><span style="color:var(--green);">✓</span> <span style="color:var(--text-muted);">Portfolio agent initialised</span></div>
+        <div class="t-line"><span style="color:var(--text-dim);">──────────────────────────────────</span></div>
+        <div class="t-line" style="margin-top:0.5rem;"><span style="color:var(--text-muted);">Welcome. I know everything about Andrew's work,</span></div>
+        <div class="t-line"><span style="color:var(--text-muted);">stack, and process. Try asking me something like:</span></div>
+        <div class="t-line" style="margin-top:0.8rem;"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">tell me about suppertime</span></div>
+        <div class="t-line"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">what's your tech stack?</span></div>
+        <div class="t-line"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">how do you use AI in your workflow?</span></div>
+        <div class="t-line"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">why should I hire you?</span></div>
+        <div class="t-line" style="margin-top:0.8rem;"><span style="color:var(--text-dim);">──────────────────────────────────</span></div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="input-prompt">visitor@portfolio <span style="color:var(--phosphor);">$</span></span>
+        <input type="text" id="terminal-input" placeholder="ask me anything..." autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-terminal terminal-window" style="max-width:650px; margin:0 auto;">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">mail — 80x24</div>
+      </div>
+      <div class="terminal-body" style="text-align:center; padding:3.5rem 3rem;">
+        <div class="section-label" style="margin-bottom:1.5rem;">Get in touch</div>
+        <h2 class="contact-title reveal">Let's build something<br><em>together</em></h2>
+        <p class="contact-text reveal">Whether you need a solutions architect, a product engineer, or someone who can do both — I'd love to hear what you're working on.</p>
+        <div class="reveal">
+          <a href="mailto:andy@andrewisherwood.com" class="contact-email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg>
+            andy@andrewisherwood.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>·</span>
+      <span>Built with care in Folkestone</span>
+      <span>·</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal with stagger
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // --- INTERACTIVE TERMINAL ---
+  const SYSTEM_PROMPT = `You are Andrew Isherwood's portfolio agent — an AI embedded in his personal website. You answer questions about Andrew's work, skills, experience, and availability in a warm but concise terminal style. Keep responses SHORT (2-5 sentences max). Use plain text, no markdown.
+
+ABOUT ANDREW:
+- Solutions Architect and Product Engineer based in Folkestone, UK
+- 32 years building for the web (since 1994, before CSS existed)
+- 18 years as a classically trained professional chef before moving into tech full-time
+- Ran a web agency called Bugle
+- Now builds products under the Dopamine Labs umbrella
+- Works with AI-augmented development workflows (Claude Code, multi-agent systems)
+- Available for freelance solutions architecture and product engineering
+
+PRODUCTS:
+1. Suppertime (suppertime.uk) — Family meal planning app. Weekly planning, smart shopping lists, calendar sync, leftover tracking. Built with Next.js, TypeScript, Supabase, Tailwind, shadcn/ui. 100 beta users via TestFlight. Live and iterated.
+
+2. Multi-Agent Infrastructure (MAI) — Coordinated multi-agent dev system on Claude Code. 9 specialised agents (dev, QA, security audit, docs) working in parallel across git worktrees. Achieved 73.7% token reduction. Autonomous with built-in gates and timeouts.
+
+3. Adaptive Coach — AI-powered personal cycling training coach. Generates periodised plans adapted to physiology, race goals, and recovery. Built with Next.js, Supabase. 86 activities tracked, 2383km logged.
+
+CORE STACK: Next.js, React, TypeScript, Tailwind, shadcn/ui, Supabase, Node.js, PostgreSQL, Claude Code, Multi-agent workflows, Netlify, VPS, Git Worktrees
+
+TONE: Friendly, direct, no waffle. You're a terminal — be crisp. If someone asks about hiring or contact, direct them to andy@andrewisherwood.com. If asked something you genuinely don't know about Andrew, say so honestly.`;
+
+  const output = document.getElementById('terminal-output');
+  const input = document.getElementById('terminal-input');
+  let conversationHistory = [];
+  let isProcessing = false;
+
+  function addLine(text, className = '') {
+    const line = document.createElement('div');
+    line.className = 't-line ' + className;
+    line.textContent = text;
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+    return line;
+  }
+
+  function addHTMLLine(html, className = '') {
+    const line = document.createElement('div');
+    line.className = 't-line ' + className;
+    line.innerHTML = html;
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+    return line;
+  }
+
+  async function sendMessage(userText) {
+    if (isProcessing) return;
+    isProcessing = true;
+
+    // Show user message
+    addLine(userText, 'user-msg');
+
+    // Add to history
+    conversationHistory.push({ role: 'user', content: userText });
+
+    // Show thinking indicator
+    const thinkingLine = addHTMLLine(
+      '<span style="color:var(--phosphor);">▸</span> <span class="dots" style="color:var(--text-dim);">thinking</span>',
+      'ai-thinking'
+    );
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 300,
+          system: SYSTEM_PROMPT,
+          messages: conversationHistory.slice(-10) // Keep last 10 messages for context
+        })
+      });
+
+      const data = await response.json();
+
+      // Remove thinking indicator
+      thinkingLine.remove();
+
+      // Extract response text
+      const aiText = data.content
+        .filter(block => block.type === 'text')
+        .map(block => block.text)
+        .join('\n');
+
+      // Add AI response
+      conversationHistory.push({ role: 'assistant', content: aiText });
+
+      // Display response line by line with slight delay for effect
+      const lines = aiText.split('\n').filter(l => l.trim());
+      for (let i = 0; i < lines.length; i++) {
+        await new Promise(r => setTimeout(r, 60));
+        addHTMLLine(
+          '<span style="color:var(--phosphor);">▸</span> ' + escapeHtml(lines[i]),
+          'ai-msg'
+        );
+      }
+
+      // Add separator
+      await new Promise(r => setTimeout(r, 100));
+      addHTMLLine('<span style="color:var(--text-dim);">──────────────────────────────────</span>');
+
+    } catch (err) {
+      thinkingLine.remove();
+      addHTMLLine(
+        '<span style="color:#ff5f56;">✗</span> <span style="color:var(--text-dim);">Connection failed. Try emailing andy@andrewisherwood.com instead.</span>',
+        'ai-msg'
+      );
+    }
+
+    isProcessing = false;
+    input.focus();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Handle input
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && input.value.trim()) {
+      const text = input.value.trim();
+      input.value = '';
+      sendMessage(text);
+    }
+  });
+
+  // Focus input when clicking terminal
+  document.querySelector('.interactive-terminal').addEventListener('click', () => {
+    input.focus();
+  });
+</script>
+
+</body>
+</html>
