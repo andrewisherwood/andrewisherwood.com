@@ -1,1 +1,9 @@
-{"state":"complete","phase":2,"branch":"phase-2-api-proxy","pr_number":"2","detail":"QA review complete — 13/13 PASS","errors":[],"last_updated":"2026-02-13T01:45:00Z"}
+{
+  "state": "reviewing",
+  "phase": 2,
+  "branch": "phase-2-api-proxy",
+  "pr_number": "2",
+  "detail": "QA round 2 — re-verifying SEC-004/SEC-005 fixes + all 13 ACs",
+  "errors": [],
+  "last_updated": "2026-02-13T01:36:00Z"
+}
