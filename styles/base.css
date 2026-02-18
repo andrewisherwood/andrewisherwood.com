@@ -60,6 +60,7 @@ body::before {
   pointer-events: none;
   z-index: 9999;
   opacity: 0.3;
+  will-change: transform;
 }
 
 body::after {
@@ -70,6 +71,7 @@ body::after {
   opacity: 0.03;
   pointer-events: none;
   z-index: 9998;
+  will-change: transform;
 }
 
 /* --- LAYOUT --- */

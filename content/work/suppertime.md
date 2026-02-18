@@ -33,19 +33,19 @@ That's the pitch. Here's what it actually looks like in practice.
 
 <div class="screenshot-grid">
   <figure>
-    <img src="plan.png" alt="Weekly meal plan">
+    <img src="plan.png" alt="Weekly meal plan" loading="lazy">
     <figcaption>The plan</figcaption>
   </figure>
   <figure>
-    <img src="recipes.png" alt="Recipe browser with 86 recipes">
+    <img src="recipes.png" alt="Recipe browser with 86 recipes" loading="lazy">
     <figcaption>Recipes</figcaption>
   </figure>
   <figure>
-    <img src="recipe.png" alt="Recipe detail for chunky vegetable soup">
+    <img src="recipe.png" alt="Recipe detail for chunky vegetable soup" loading="lazy">
     <figcaption>Recipe detail</figcaption>
   </figure>
   <figure>
-    <img src="shopping.png" alt="Shopping list grouped by aisle">
+    <img src="shopping.png" alt="Shopping list grouped by aisle" loading="lazy">
     <figcaption>Shopping list</figcaption>
   </figure>
 </div>

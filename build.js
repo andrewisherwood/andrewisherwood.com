@@ -204,8 +204,9 @@ for (const file of workFiles) {
   ensureDir(outDir);
 
   let htmlContent = marked(body);
-  // Rewrite image refs from .png/.jpg to .webp
+  // Rewrite image refs from .png/.jpg to .webp and add lazy loading
   htmlContent = htmlContent.replace(/src="([^"]+)\.(png|jpe?g|gif)"/gi, 'src="$1.webp"');
+  htmlContent = htmlContent.replace(/<img(?![^>]*loading=)/gi, '<img loading="lazy"');
 
   const nav = render(navTemplate, { navActiveWriting: '', navActiveWork: 'nav-active' });
 
