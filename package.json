@@ -4,6 +4,7 @@
     "build": "node build.js"
   },
   "dependencies": {
-    "marked": "^15.0.0"
+    "marked": "^15.0.0",
+    "sharp": "^0.34.5"
   }
 }

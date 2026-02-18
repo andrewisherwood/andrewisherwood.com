@@ -92,17 +92,17 @@
 <p>The options are bad. Squarespace means wrestling with a drag-and-drop editor that still requires design decisions. Hiring a developer costs thousands. Doing nothing means relying on Instagram and word of mouth. None of these serve someone who&#39;s good at supporting families through birth but has no interest in web development.</p>
 <h2>The solution</h2>
 <p>BirthBuild eliminates the blank page entirely. A guided AI chatbot has a conversation with the birth worker — asking about their business name, services, philosophy, testimonials, and design preferences. That conversation produces a structured site specification. That specification feeds an LLM that generates a polished, deployed website on a custom subdomain. No code. No design decisions. Just a conversation.</p>
-<p><img src="landing.png" alt="BirthBuild landing page"></p>
+<p><img src="landing.webp" alt="BirthBuild landing page"></p>
 <p>The chatbot onboarding is the key innovation. It&#39;s not a form. It&#39;s a conversation that <em>elicits specificity</em>. A doula who says &quot;I specialise in home births for second-time parents in South Bristol&quot; gets a dramatically more personal site than one who says &quot;I&#39;m a doula in Bristol.&quot; The chatbot&#39;s job is to draw out those details.</p>
-<p><img src="chatbot.png" alt="Chatbot onboarding flow"></p>
+<p><img src="chatbot.webp" alt="Chatbot onboarding flow"></p>
 <h2>The architecture</h2>
 <p><strong>Frontend:</strong> React 18 with Vite, Tailwind CSS. Single-page app with protected routing and magic link auth via Supabase.</p>
 <p><strong>Backend:</strong> Supabase Postgres with row-level security on every table. Four Edge Functions handle the Claude API proxy, site generation, Netlify deployment, and instructor invites. API keys never touch the client.</p>
 <p><strong>Build pipeline:</strong> Two paths. A template build for instant previews (deterministic, client-side HTML generation) and an LLM build for production sites (AI-generated pages via Edge Functions). The LLM path runs: generate design system → generate pages in parallel → save checkpoint → deploy to Netlify.</p>
 <p><strong>Multi-tenancy:</strong> Instructors create workshop sessions and invite students via magic link. Each student builds their own site. The instructor dashboard shows progress, previews specs, and tracks usage. Every database query is scoped by tenant ID. RLS enforces isolation.</p>
-<p><img src="features.png" alt="Features overview"></p>
+<p><img src="features.webp" alt="Features overview"></p>
 <p><strong>Checkpoint system:</strong> Versioned HTML snapshots stored in the database. Section markers (<code>&lt;!-- bb-section:name --&gt;</code>) enable deterministic editing without re-running the LLM. A retention trigger prunes to the last 10 per site.</p>
-<p><img src="palettes.png" alt="Curated colour palettes for birth workers"></p>
+<p><img src="palettes.webp" alt="Curated colour palettes for birth workers"></p>
 <h2>What shipped</h2>
 <ul>
 <li>Magic link authentication (no passwords)</li>

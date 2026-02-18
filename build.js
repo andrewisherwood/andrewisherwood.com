@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
+const sharp = require('sharp');
 
 const start = Date.now();
 
@@ -110,18 +111,30 @@ function parseFrontmatter(content) {
   return { data, body };
 }
 
-function copyImages(srcDir, destDir) {
+async function optimizeImages(srcDir, destDir) {
   if (!fs.existsSync(srcDir)) return;
   ensureDir(destDir);
   const files = fs.readdirSync(srcDir);
+  const tasks = [];
   for (const file of files) {
     const ext = path.extname(file).toLowerCase();
-    if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'].includes(ext)) {
+    if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) {
+      const outName = file.replace(/\.(png|jpe?g|gif)$/i, '.webp');
+      tasks.push(
+        sharp(path.join(srcDir, file))
+          .resize({ width: 1200, withoutEnlargement: true })
+          .webp({ quality: 80 })
+          .toFile(path.join(destDir, outName))
+          .then(info => console.log(`    ${file} → ${outName} (${Math.round(info.size / 1024)}KB)`))
+      );
+    } else if (ext === '.svg') {
       fs.copyFileSync(path.join(srcDir, file), path.join(destDir, file));
     }
   }
+  await Promise.all(tasks);
 }
 
+(async () => {
 // --- Load templates ---
 
 const navTemplate = fs.readFileSync('templates/partials/nav.html', 'utf8');
@@ -181,6 +194,7 @@ for (let i = 0; i < blogPosts.length; i++) {
 const workDir = 'content/work';
 const workFiles = fs.existsSync(workDir) ? fs.readdirSync(workDir).filter(f => f.endsWith('.md')) : [];
 let caseStudyCount = 0;
+const imageJobs = [];
 
 for (const file of workFiles) {
   const raw = fs.readFileSync(path.join(workDir, file), 'utf8');
@@ -189,7 +203,10 @@ for (const file of workFiles) {
   const outDir = path.join('work', slug);
   ensureDir(outDir);
 
-  const htmlContent = marked(body);
+  let htmlContent = marked(body);
+  // Rewrite image refs from .png/.jpg to .webp
+  htmlContent = htmlContent.replace(/src="([^"]+)\.(png|jpe?g|gif)"/gi, 'src="$1.webp"');
+
   const nav = render(navTemplate, { navActiveWriting: '', navActiveWork: 'nav-active' });
 
   // Stack tags HTML
@@ -219,10 +236,10 @@ for (const file of workFiles) {
 
   fs.writeFileSync(path.join(outDir, 'index.html'), html);
 
-  // Copy images
+  // Optimize and copy images
   const imgSrcDir = path.join('content/work/images', slug);
   if (fs.existsSync(imgSrcDir)) {
-    copyImages(imgSrcDir, outDir);
+    imageJobs.push(optimizeImages(imgSrcDir, outDir));
   }
 
   console.log(`  work/${slug}/index.html`);
@@ -327,7 +344,12 @@ ${writingItems}
   console.log('  index.html (writing section injected)');
 }
 
+// --- Optimize images ---
+
+await Promise.all(imageJobs);
+
 // --- Summary ---
 
 const elapsed = Date.now() - start;
 console.log(`\nBuild complete: ${blogPosts.length} blog posts, ${caseStudyCount} case studies, ${elapsed}ms`);
+})();
