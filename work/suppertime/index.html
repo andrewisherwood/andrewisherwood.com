@@ -94,13 +94,28 @@
 <h2>What it does</h2>
 <p>Suppertime is a meal planning app for families. Drag meals onto the week. Everyone in the household sees the same plan. The shopping list writes itself.</p>
 <p>That&#39;s the pitch. Here&#39;s what it actually looks like in practice.</p>
-<p><img src="plan.webp" alt="Weekly meal plan"></p>
+<div class="screenshot-grid">
+  <figure>
+    <img src="plan.webp" alt="Weekly meal plan">
+    <figcaption>The plan</figcaption>
+  </figure>
+  <figure>
+    <img src="recipes.webp" alt="Recipe browser with 86 recipes">
+    <figcaption>Recipes</figcaption>
+  </figure>
+  <figure>
+    <img src="recipe.webp" alt="Recipe detail for chunky vegetable soup">
+    <figcaption>Recipe detail</figcaption>
+  </figure>
+  <figure>
+    <img src="shopping.webp" alt="Shopping list grouped by aisle">
+    <figcaption>Shopping list</figcaption>
+  </figure>
+</div>
+
 <p><strong>The plan.</strong> A week at a glance. Breakfast, lunch, dinner, snacks. Each meal slot is colour-coded so you can scan the day instantly. Tap the day pills to jump between days. Hit the + button to add a meal from your recipe library. The whole thing is designed to feel like organising sticky notes on a fridge, not filling in a spreadsheet.</p>
-<p><img src="recipes.webp" alt="Recipe browser with 86 recipes"></p>
 <p><strong>Recipes.</strong> 86 recipes and growing. Filter by meal type, dietary needs, time available. Every recipe card shows the hero image, cook time, servings, and tags at a glance. Breakfast, Lunch, Dinner, Snack, Quick. Tap to see the full detail.</p>
-<p><img src="recipe.webp" alt="Recipe detail for chunky vegetable soup"></p>
 <p><strong>Recipe detail.</strong> Full ingredients, method, prep time. Tagged by everything that matters for family cooking. Vegetarian. Vegan. Batch cook. Freezer friendly. Kid friendly. The hero images are AI-generated but they look good and they help you remember which recipe is which when you&#39;re scrolling at speed.</p>
-<p><img src="shopping.webp" alt="Shopping list grouped by aisle"></p>
 <p><strong>Shopping list.</strong> This is the screen that gets used in the supermarket. Auto-generated from the week&#39;s plan. Grouped by aisle. Bakery. Dairy. Produce. Meat. So you&#39;re not zigzagging back across the shop because you forgot the yoghurt.</p>
 <p>The key detail: every item shows which recipe it&#39;s for. &quot;28 slice bread&quot; sounds mad until you see it&#39;s covering Beans on toast, Cheese toastie, PBJ sandwich, and Scrambled eggs on toast across the week. &quot;Crusty bread to serve&quot; is for the Chunky vegetable soup. You always know why something is on the list.</p>
 <p>73 items for a week. Tick them off as you go. Export to iOS Reminders if you want it on your wrist.</p>
@@ -160,5 +175,23 @@
   </div>
 </footer>
 
+<script>
+document.addEventListener('click', function(e) {
+  var img = e.target.closest('.screenshot-grid img');
+  if (!img) return;
+  var overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  var fullImg = document.createElement('img');
+  fullImg.src = img.src;
+  fullImg.alt = img.alt;
+  overlay.appendChild(fullImg);
+  document.body.appendChild(overlay);
+  requestAnimationFrame(function() { overlay.classList.add('active'); });
+  overlay.addEventListener('click', function() {
+    overlay.classList.remove('active');
+    setTimeout(function() { overlay.remove(); }, 300);
+  });
+});
+</script>
 </body>
 </html>

@@ -31,19 +31,30 @@ Suppertime is a meal planning app for families. Drag meals onto the week. Everyo
 
 That's the pitch. Here's what it actually looks like in practice.
 
-![Weekly meal plan](plan.png)
+<div class="screenshot-grid">
+  <figure>
+    <img src="plan.png" alt="Weekly meal plan">
+    <figcaption>The plan</figcaption>
+  </figure>
+  <figure>
+    <img src="recipes.png" alt="Recipe browser with 86 recipes">
+    <figcaption>Recipes</figcaption>
+  </figure>
+  <figure>
+    <img src="recipe.png" alt="Recipe detail for chunky vegetable soup">
+    <figcaption>Recipe detail</figcaption>
+  </figure>
+  <figure>
+    <img src="shopping.png" alt="Shopping list grouped by aisle">
+    <figcaption>Shopping list</figcaption>
+  </figure>
+</div>
 
 **The plan.** A week at a glance. Breakfast, lunch, dinner, snacks. Each meal slot is colour-coded so you can scan the day instantly. Tap the day pills to jump between days. Hit the + button to add a meal from your recipe library. The whole thing is designed to feel like organising sticky notes on a fridge, not filling in a spreadsheet.
 
-![Recipe browser with 86 recipes](recipes.png)
-
 **Recipes.** 86 recipes and growing. Filter by meal type, dietary needs, time available. Every recipe card shows the hero image, cook time, servings, and tags at a glance. Breakfast, Lunch, Dinner, Snack, Quick. Tap to see the full detail.
 
-![Recipe detail for chunky vegetable soup](recipe.png)
-
 **Recipe detail.** Full ingredients, method, prep time. Tagged by everything that matters for family cooking. Vegetarian. Vegan. Batch cook. Freezer friendly. Kid friendly. The hero images are AI-generated but they look good and they help you remember which recipe is which when you're scrolling at speed.
-
-![Shopping list grouped by aisle](shopping.png)
 
 **Shopping list.** This is the screen that gets used in the supermarket. Auto-generated from the week's plan. Grouped by aisle. Bakery. Dairy. Produce. Meat. So you're not zigzagging back across the shop because you forgot the yoghurt.
 
