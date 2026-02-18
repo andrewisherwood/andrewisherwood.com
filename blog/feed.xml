@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Andrew Isherwood — Writing</title>
+    <link>https://andrewisherwood.com/blog/</link>
+    <description>Writing about product engineering, AI-augmented development, and building things that matter.</description>
+    <language>en-gb</language>
+    <atom:link href="https://andrewisherwood.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>The Spec Is the Prompt</title>
+      <link>https://andrewisherwood.com/blog/the-spec-is-the-prompt/</link>
+      <guid>https://andrewisherwood.com/blog/the-spec-is-the-prompt/</guid>
+      <pubDate>Wed, 18 Feb 2026 00:00:00 GMT</pubDate>
+      <description>I built a landing page in one prompt. It looked like a £1,000 design job. Here's why specification density matters more than prompt engineering.</description>
+    </item>
+    <item>
+      <title>Beyond 10x: How I Built a SaaS Product in 5 Hours</title>
+      <link>https://andrewisherwood.com/blog/birthbuild-build-log/</link>
+      <guid>https://andrewisherwood.com/blog/birthbuild-build-log/</guid>
+      <pubDate>Mon, 16 Feb 2026 00:00:00 GMT</pubDate>
+      <description>I founded BirthBuild and shipped a fully deployed SaaS with 22,096 lines of code in a single working day. Here's the build log.</description>
+    </item>
+  </channel>
+</rss>

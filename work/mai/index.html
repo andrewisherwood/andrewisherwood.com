@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Agent Infrastructure — Andrew Isherwood</title>
+<meta name="description" content="A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents working in parallel across git worktrees.">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/work/mai/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/work/mai/">
+<meta property="og:title" content="Multi-Agent Infrastructure — Andrew Isherwood">
+<meta property="og:description" content="A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents working in parallel across git worktrees.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Multi-Agent Infrastructure — Andrew Isherwood">
+<meta name="twitter:description" content="A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents working in parallel across git worktrees.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Multi-Agent Infrastructure",
+  "description": "A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents working in parallel across git worktrees.",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/work/mai/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#work" class="nav-active">work</a></li>
+    <li><a href="/blog/" class="">writing</a></li>
+    <li><a href="/#about">about</a></li>
+    <li><a href="/#contact" class="nav-cta">get in touch</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/#work" class="back-link">All work</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/work/mai.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <div class="cs-tagline">AI Engineering &middot; Architecture &middot; Automation</div>
+          <h1>Multi-Agent Infrastructure</h1>
+          <p class="cs-description">A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents working in parallel across git worktrees.</p>
+          <div class="cs-stack">
+            <span class="stack-tag">Claude Code</span>
+            <span class="stack-tag">Multi-Agent</span>
+            <span class="stack-tag">Git Worktrees</span>
+            <span class="stack-tag">Bash</span>
+            <span class="stack-tag">Node.js</span>
+          </div>
+          <div class="cs-metrics">
+            <div class="metric"><span class="metric-value">9</span><span class="metric-label">Specialised agents</span></div>
+            <div class="metric"><span class="metric-value">73.7%</span><span class="metric-label">Token reduction</span></div>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <h2>What it is</h2>
+<p>MAI is a coordinated multi-agent development system built on Claude Code. Instead of a single AI assistant working sequentially, MAI runs specialised agents in parallel across isolated git worktrees — development, QA, security audit, documentation — each with their own context, tools, and responsibilities.</p>
+<p>A coordinator agent on the main branch plans phases, writes implementation briefs, and reviews pull requests. Dev agents on feature branches write code. Security agents on audit branches review every commit automatically via post-commit hooks and write findings to SECURITY.md. The agents specialise so each one operates within a focused context window, which is how the system achieves a 73.7% token reduction compared to a monolithic single-agent approach.</p>
+<h2>How it works</h2>
+<p>The system uses a three-layer memory architecture: working memory (conversation context), session memory (status files per agent), and project memory (CLAUDE.md files that persist across sessions). This lets agents pick up where they left off without losing context, and lets the coordinator track progress across all workstreams.</p>
+<p>Each phase follows a strict gate sequence: plan → implement → QA review → security audit → PR → merge. No phase ships without passing all gates. The adversarial review layer can optionally pit Claude, GPT, and Gemini against each other to challenge assumptions and catch blind spots.</p>
+<h2>Current state</h2>
+<p>MAI V3 is the current iteration. It built this portfolio site, BirthBuild, and Suppertime&#39;s iOS app. The immediate focus is on eliminating silent failures (the biggest weakness surfaced during the BirthBuild build) and improving the pre-flight check system so all tool integrations are verified before the first phase kicks off.</p>
+
+        </div>
+
+        <div class="post-nav">
+          <a href="/#work">← Back to work</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

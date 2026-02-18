@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suppertime — Andrew Isherwood</title>
+<meta name="description" content="A family meal planning app that closes the daily 'what's for dinner?' decision. Built from personal need, tested with 100 parents.">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/work/suppertime/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/work/suppertime/">
+<meta property="og:title" content="Suppertime — Andrew Isherwood">
+<meta property="og:description" content="A family meal planning app that closes the daily 'what's for dinner?' decision. Built from personal need, tested with 100 parents.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Suppertime — Andrew Isherwood">
+<meta name="twitter:description" content="A family meal planning app that closes the daily 'what's for dinner?' decision. Built from personal need, tested with 100 parents.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Suppertime",
+  "description": "A family meal planning app that closes the daily 'what's for dinner?' decision. Built from personal need, tested with 100 parents.",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/work/suppertime/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#work" class="nav-active">work</a></li>
+    <li><a href="/blog/" class="">writing</a></li>
+    <li><a href="/#about">about</a></li>
+    <li><a href="/#contact" class="nav-cta">get in touch</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/#work" class="back-link">All work</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/work/suppertime.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <div class="cs-tagline">Product &middot; Full-Stack &middot; Shipped</div>
+          <h1>Suppertime</h1>
+          <p class="cs-description">A family meal planning app that closes the daily 'what's for dinner?' decision. Built from personal need, tested with 100 parents.</p>
+          <div class="cs-stack">
+            <span class="stack-tag">SwiftUI</span>
+            <span class="stack-tag">Core Data</span>
+            <span class="stack-tag">Supabase</span>
+            <span class="stack-tag">Claude API</span>
+            <span class="stack-tag">Resend</span>
+            <span class="stack-tag">Netlify</span>
+          </div>
+          <div class="cs-metrics">
+            <div class="metric"><span class="metric-value">100</span><span class="metric-label">Beta users</span></div>
+            <div class="metric"><span class="metric-value">86+</span><span class="metric-label">Recipes</span></div>
+            <div class="metric"><span class="metric-value">12</span><span class="metric-label">Core Data entities</span></div>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <h2>The 4pm question</h2>
+<p>Every parent knows it. You&#39;re in the middle of something. Maybe work. Maybe school pickup. Maybe just trying to keep a small person alive. And the thought arrives like clockwork.</p>
+<p>What&#39;s for dinner tonight?</p>
+<p>Not a hard question. But when you&#39;re already running on fumes it feels impossible. You open the fridge. Stare at it. Close it. Open it again as if the contents might have changed. Check a recipe app that wants you to cook something with ingredients you don&#39;t have. Give up. Order takeaway. Feel bad about it.</p>
+<p>I built Suppertime because I was tired of that loop. I&#39;m a stay-at-home dad. I spent 18 years as a professional chef. I can cook anything. But the decision of what to cook, every single day, for a family that includes a toddler with strong opinions? That&#39;s the bit that breaks you.</p>
+<h2>What it does</h2>
+<p>Suppertime is a meal planning app for families. Drag meals onto the week. Everyone in the household sees the same plan. The shopping list writes itself.</p>
+<p>That&#39;s the pitch. Here&#39;s what it actually looks like in practice.</p>
+<p><img src="plan.png" alt="Weekly meal plan"></p>
+<p><strong>The plan.</strong> A week at a glance. Breakfast, lunch, dinner, snacks. Each meal slot is colour-coded so you can scan the day instantly. Tap the day pills to jump between days. Hit the + button to add a meal from your recipe library. The whole thing is designed to feel like organising sticky notes on a fridge, not filling in a spreadsheet.</p>
+<p><img src="recipes.png" alt="Recipe browser with 86 recipes"></p>
+<p><strong>Recipes.</strong> 86 recipes and growing. Filter by meal type, dietary needs, time available. Every recipe card shows the hero image, cook time, servings, and tags at a glance. Breakfast, Lunch, Dinner, Snack, Quick. Tap to see the full detail.</p>
+<p><img src="recipe.png" alt="Recipe detail for chunky vegetable soup"></p>
+<p><strong>Recipe detail.</strong> Full ingredients, method, prep time. Tagged by everything that matters for family cooking. Vegetarian. Vegan. Batch cook. Freezer friendly. Kid friendly. The hero images are AI-generated but they look good and they help you remember which recipe is which when you&#39;re scrolling at speed.</p>
+<p><img src="shopping.png" alt="Shopping list grouped by aisle"></p>
+<p><strong>Shopping list.</strong> This is the screen that gets used in the supermarket. Auto-generated from the week&#39;s plan. Grouped by aisle. Bakery. Dairy. Produce. Meat. So you&#39;re not zigzagging back across the shop because you forgot the yoghurt.</p>
+<p>The key detail: every item shows which recipe it&#39;s for. &quot;28 slice bread&quot; sounds mad until you see it&#39;s covering Beans on toast, Cheese toastie, PBJ sandwich, and Scrambled eggs on toast across the week. &quot;Crusty bread to serve&quot; is for the Chunky vegetable soup. You always know why something is on the list.</p>
+<p>73 items for a week. Tick them off as you go. Export to iOS Reminders if you want it on your wrist.</p>
+<p><strong>Voice recipes.</strong> Tell it what you want. &quot;Roast leg of lamb with apricots.&quot; It generates a full recipe. Ingredients, method, timings. Structured so everything flows straight into the plan and the shopping list. No copy-pasting from ChatGPT. The recipe is part of the system.</p>
+<p><strong>Everyone ate.</strong> The only success metric that matters. At the end of the meal, tap &quot;Done cooking?&quot; and you get a choice. Everyone ate. Not tonight. If everyone ate, you get confetti. Leftovers get auto-added to tomorrow&#39;s lunch. Tomorrow&#39;s a new day.</p>
+<h2>The closed loop</h2>
+<p>Most recipe apps solve the wrong problem. They give you recipes. You already have recipes. You have too many recipes. What you don&#39;t have is a system that connects the plan to the shop to the kitchen to the table and back again.</p>
+<p>Suppertime is that system. Pick recipes. Build the week. Generate the list. Go shopping. Cook. Eat. Mark it done. Leftovers carry forward. Start again.</p>
+<p>I tested this loop properly before launching. Lived with it for a full week. Followed the shopping list verbatim. Cooked from the generated recipes. Checked if the AI recipes held up to someone with 18 years of professional kitchen experience.</p>
+<p>They did. The timings were right. The technique was sound. The seasoning was there. Most recipe apps fail that test immediately with anyone who actually knows how to cook.</p>
+<h2>How it&#39;s built</h2>
+<p>Suppertime started as a PWA. Next.js, TypeScript, Supabase, Tailwind. It proved the concept but the PWA friction was real. Saving to home screen. Agreeing to download Shortcuts for iOS Reminders integration. Losing connectivity in the supermarket and not being able to check why the list says three packs of butter.</p>
+<p>So I rebuilt it as a native iOS app. SwiftUI, offline-first with Core Data, background sync. Same Supabase backend. Same user accounts. Same data. A completely separate codebase, not a conversion.</p>
+<p>The architecture decisions that mattered:</p>
+<p><strong>Offline-first.</strong> The app reads and writes to a local Core Data store. Never waits for network. Standing in Tesco with no signal? Everything&#39;s there. Recipes, menus, shopping list, the lot. Twelve Core Data entities mirror the Supabase schema exactly. Every mutable entity carries sync metadata: status, last modified, server timestamp. Local changes get queued as sync operations and push when connectivity returns.</p>
+<p>A dedicated SyncEngine orchestrates the whole thing. NetworkMonitor watches connectivity via NWPathMonitor. When the app comes back online or becomes active, it pulls from Supabase and pushes queued local changes. Background refresh via BGAppRefreshTask keeps things current even when the app isn&#39;t open. The conflict resolution strategy is last-write-wins. For a family meal planning app where you&#39;re not editing the same recipe simultaneously, that&#39;s fine.</p>
+<p><strong>Household sharing.</strong> Multiple family members on the same plan. My daughter helps choose meals for the week. She drags them onto the days herself. It syncs across devices. The family sees the same plan. Row-level security in Supabase means each household only ever sees their own data. New members join via an invite code shared from Settings.</p>
+<p><strong>AI meal planner.</strong> Not just recipe generation. A conversational chatbot that plans your entire week from your household&#39;s recipe catalogue. It runs via a Supabase Edge Function calling the Claude API. The prompt knows your existing recipes, your family&#39;s preferences, what&#39;s quick enough for a weeknight. Input sanitisation server-side: 500 character limit per message, 20 message conversation cap, 30 second timeout. It generates structured meal plans that save directly to your calendar. No copy-pasting.</p>
+<p>Voice recipe creation works too. Tell it what you want. &quot;Roast leg of lamb with apricots.&quot; It creates a full recipe, structured into the data model. Ingredients flow to the shopping list automatically.</p>
+<p><strong>Magic link auth.</strong> No passwords. Enter your email, tap the link, you&#39;re in. Supabase handles the OTP. Deep links with the <code>suppertime://</code> scheme bring you straight back to the app. Custom SMTP via Resend so the emails come from <a href="mailto:hello@suppertime.uk">hello@suppertime.uk</a>, not a Supabase default.</p>
+<p><strong>How I built it.</strong> I use a multi-agent development system I built called MAI. Three Claude Code sessions running in parallel via git worktrees. A coordinator agent on main plans phases and reviews PRs. A dev agent on a feature branch writes code and builds. A security agent on an audit branch reviews every commit automatically via a post-commit hook and writes findings to SECURITY.md. The whole thing ships faster than a traditional solo dev workflow because the agents specialise. The dev agent never has to think about security. The security agent never has to think about features. The coordinator keeps them in sync.</p>
+<h2>Getting to 100 users</h2>
+<p>I launched to a parenting WhatsApp group. Founding members at £2.50/month. Half the regular £5. Lifetime rate as a thank you for being early.</p>
+<p>100 parents signed up for the TestFlight beta.</p>
+<p>The feedback loop has been tight. Real families using it every week. Real bugs surfacing from actual kitchen situations, not product manager hypotheticals.</p>
+<p>The things that mattered most to users weren&#39;t what I expected. The shopping list got the daily use. The meal plan got the weekly habit. The &quot;everyone ate&quot; confetti got the emotional response.</p>
+<p>But the thing that kept people coming back was simpler than any feature.</p>
+<p>They didn&#39;t have to think about dinner anymore. The plan was there. The list was there. The decision was already made.</p>
+<h2>What I learned</h2>
+<p><strong>The decision is the product, not the recipe.</strong> Every competitor focuses on recipes. Better recipes. More recipes. AI recipes. But the pain point was never &quot;I don&#39;t know how to cook chicken.&quot; It was &quot;I can&#39;t face deciding what to cook.&quot; Suppertime&#39;s value is eliminating that decision, not providing that recipe.</p>
+<p><strong>PWA friction is real for daily-use apps.</strong> For something you check once a week, a PWA is fine. For something you use in the supermarket with wet hands, in the kitchen covered in flour, at bedtime when planning tomorrow, the native experience matters. Home screen icon. Offline reliability. OS integration. Going native was the right call.</p>
+<p><strong>AI recipes are commoditised. Integration is the moat.</strong> Any LLM can generate a recipe. The value isn&#39;t the recipe itself. It&#39;s what happens after. Ingredients flow to the shopping list. Meals slot into the calendar. The recipe becomes part of a system, not a standalone document you screenshot and forget.</p>
+<p><strong>Show where the ingredients come from.</strong> The single most useful detail on the shopping list is the small text under each item showing which recipes need it. &quot;28 slice bread&quot; makes sense when you can see it covers four different meals. Without that context, you&#39;d second-guess the list. With it, you trust the system and buy what it says.</p>
+<p><strong>Build for your own family first.</strong> I built Suppertime because I needed it. I&#39;m the user. I cook the meals. I do the shop. I know exactly where the friction is because I feel it every day. Every feature decision was tested against one question: does this make my week easier?</p>
+<p>It did. Then it made 100 other families&#39; weeks easier too.</p>
+
+        </div>
+
+        <div class="post-nav">
+          <a href="/#work">← Back to work</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

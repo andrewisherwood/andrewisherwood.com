@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Spec Is the Prompt — Andrew Isherwood</title>
+<meta name="description" content="I built a landing page in one prompt. It looked like a £1,000 design job. Here's why specification density matters more than prompt engineering.">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/blog/the-spec-is-the-prompt/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/blog/the-spec-is-the-prompt/">
+<meta property="og:title" content="The Spec Is the Prompt">
+<meta property="og:description" content="I built a landing page in one prompt. It looked like a £1,000 design job. Here's why specification density matters more than prompt engineering.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Spec Is the Prompt">
+<meta name="twitter:description" content="I built a landing page in one prompt. It looked like a £1,000 design job. Here's why specification density matters more than prompt engineering.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="article:published_time" content="2026-02-18">
+<meta property="article:author" content="Andrew Isherwood">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "The Spec Is the Prompt",
+  "description": "I built a landing page in one prompt. It looked like a £1,000 design job. Here's why specification density matters more than prompt engineering.",
+  "datePublished": "2026-02-18",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Andrew Isherwood"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/blog/the-spec-is-the-prompt/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#work" class="">work</a></li>
+    <li><a href="/blog/" class="nav-active">writing</a></li>
+    <li><a href="/#about">about</a></li>
+    <li><a href="/#contact" class="nav-cta">get in touch</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/blog/" class="back-link">All writing</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/writing/the-spec-is-the-prompt.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <h1>The Spec Is the Prompt</h1>
+          <div class="post-meta">
+            <span>18 Feb 2026</span>
+            <span>6 min read</span>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <p>So I built a landing page for <a href="https://birthbuild.com">BirthBuild</a> last week. One prompt. One shot. And it came back looking like something I&#39;d have paid a designer serious money for. I know this because I <em>have</em> paid designers serious money for exactly this kind of work.</p>
+<p>And I kept asking myself why it was so good. Because I didn&#39;t do anything clever. No prompt engineering. No &quot;act as a senior designer with 15 years of experience.&quot; No chain-of-thought wizardry. I just pasted in my rebuild spec and said build me a landing page.</p>
+<p>That&#39;s when it clicked.</p>
+<h2>The spec did the work</h2>
+<p>The thing I gave the model wasn&#39;t a brief. It was a 4,000-word technical specification I&#39;d written to guide a ground-up rebuild of the BirthBuild codebase. It had everything in it. The full user journey from magic link auth through chatbot onboarding to Netlify deployment. Four colour palettes with actual hex values. Typography presets with specific Google Font pairings. The instructor dashboard features. The chatbot&#39;s 7-step flow. Who the users are. What they care about.</p>
+<p>And when the landing page came back, every section mapped to something real. The animated chat demo uses the actual onboarding steps. The palette showcase uses the actual hex values. The instructor dashboard mockup has real status badges and progress bars. The pricing tiers match the actual feature split.</p>
+<p>Nothing was invented. Nothing was generic. The model didn&#39;t have to guess what the product does because I&#39;d already told it in obsessive detail.</p>
+<p>Same thing happened with <a href="https://andrewisherwood.com">andrewisherwood.com</a>. The model had access to the projects I was actually building. The architecture docs, the product specs, the user journeys. So instead of writing portfolio copy for a generic &quot;tech founder,&quot; it wrote about real things with real texture. Because the context was real.</p>
+<h2>Why most AI output feels mid</h2>
+<p>When you ask an LLM to &quot;build me a landing page for my SaaS product,&quot; it has to fill every gap with assumptions. What does it do? Who uses it? What&#39;s the pricing? What colours? What tone? The model will answer all of those questions for you. But it&#39;ll answer them generically, because you gave it nothing specific to work with.</p>
+<p>And that&#39;s how you end up with output that looks... fine. Technically correct. Emotionally flat. The kind of thing where you go &quot;yeah that&#39;s okay I guess&quot; and then spend three hours trying to fix it into something that actually feels like your product.</p>
+<p>The gap between &quot;fine&quot; and &quot;this is exactly right&quot; is almost never about the model. It&#39;s about what you fed it.</p>
+<h2>Specification density</h2>
+<p>I&#39;ve started calling this <em>specification density</em>. It&#39;s the ratio of specific, concrete, true information to total context.</p>
+<p>High density looks like: &quot;The primary colour is sage (#5f7161) on a sand background (#f5f0e8). Typography pairs Cormorant Garamond for display headings with Outfit for body. The CTA uses the same sage green.&quot;</p>
+<p>Low density looks like: &quot;Make it professional and calming. Earth tones.&quot;</p>
+<p>Both are valid instructions. But the first one gives the model almost nothing to improvise on. The second gives it almost nothing to work with. And the distance between those two inputs is the distance between a £1,000 landing page and a template.</p>
+<p>This isn&#39;t about writing longer prompts either. A 10,000-word doc full of &quot;we want to disrupt the industry&quot; and &quot;our mission is to empower&quot; has terrible specification density. A 500-word doc with exact colours, real user quotes, and a concrete feature list has great specification density. What matters is how much of it is specific and true.</p>
+<h2>The bit that surprised me</h2>
+<p>The spec I wrote for BirthBuild wasn&#39;t written for marketing. It was a technical document for rebuilding a codebase. But because it captured the product truthfully and in detail, it turned out to be the best creative brief I could have written for the landing page.</p>
+<p>And then the same spec produced an LLM generation architecture plan. Database migrations, Edge Function specs, cost modelling, four-phase implementation timeline. Different output, same quality driver.</p>
+<p>One document, multiple uses, each one elevated by the density of the input.</p>
+<p>That&#39;s the compounding return on good documentation that nobody talks about. Every hour you spend making a spec more precise pays dividends across every task that touches it. The landing page. The architecture plan. The investor pitch. The onboarding flow. They all inherit from the same source of truth.</p>
+<h2>Where it gets meta</h2>
+<p>Here&#39;s where my brain goes because it always goes here. This insight maps directly to what BirthBuild itself does.</p>
+<p>The product&#39;s core loop is a chatbot that guides birth workers through a structured conversation. Business name, services, philosophy, testimonials, design preferences. That conversation populates a site specification. That specification feeds an LLM that generates their website.</p>
+<p>The chatbot onboarding <em>is</em> specification writing. The birth worker doesn&#39;t know they&#39;re writing a brief. They think they&#39;re having a conversation. But by the end of it they&#39;ve produced a dense, structured document with everything the generation model needs to build something personal and specific.</p>
+<p>A doula who says &quot;I specialise in home births for second-time parents in South Bristol, and my philosophy centres on informed choice and physiological birth&quot; is going to get a dramatically better site than one who says &quot;I&#39;m a doula in Bristol.&quot;</p>
+<p>So the product&#39;s real job isn&#39;t just data collection. It&#39;s eliciting specificity. Asking the right follow-ups. Drawing out details the user wouldn&#39;t think to mention. The better the conversation, the denser the spec, the better the site.</p>
+<p>Which means I accidentally built a product that proves its own thesis.</p>
+<h2>The short version</h2>
+<p>If your LLM output feels generic, the problem probably isn&#39;t the model. It&#39;s the input.</p>
+<p>Write a better spec. Not a better prompt. A better spec. Real details. Exact values. Actual features. The more specific and true the context you provide, the less the model has to make up. And making stuff up is where things go generic.</p>
+<p>The moat in LLM-powered products isn&#39;t the model. It&#39;s the structured context you feed it.</p>
+
+        </div>
+
+        <div class="post-nav">
+          <a href="/blog/birthbuild-build-log/">&larr; Beyond 10x: How I Built a SaaS Product in 5 Hours</a>
+          <span></span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

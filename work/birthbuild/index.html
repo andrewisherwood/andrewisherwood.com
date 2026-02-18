@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BirthBuild — Andrew Isherwood</title>
+<meta name="description" content="An AI-powered website builder for birth workers. Chatbot onboarding, dashboard editor, build pipeline, and instructor admin — shipped in 5 hours.">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/work/birthbuild/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/work/birthbuild/">
+<meta property="og:title" content="BirthBuild — Andrew Isherwood">
+<meta property="og:description" content="An AI-powered website builder for birth workers. Chatbot onboarding, dashboard editor, build pipeline, and instructor admin — shipped in 5 hours.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BirthBuild — Andrew Isherwood">
+<meta name="twitter:description" content="An AI-powered website builder for birth workers. Chatbot onboarding, dashboard editor, build pipeline, and instructor admin — shipped in 5 hours.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "BirthBuild",
+  "description": "An AI-powered website builder for birth workers. Chatbot onboarding, dashboard editor, build pipeline, and instructor admin — shipped in 5 hours.",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/work/birthbuild/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#work" class="nav-active">work</a></li>
+    <li><a href="/blog/" class="">writing</a></li>
+    <li><a href="/#about">about</a></li>
+    <li><a href="/#contact" class="nav-cta">get in touch</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/#work" class="back-link">All work</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/work/birthbuild.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <div class="cs-tagline">Product &middot; AI &middot; SaaS</div>
+          <h1>BirthBuild</h1>
+          <p class="cs-description">An AI-powered website builder for birth workers. Chatbot onboarding, dashboard editor, build pipeline, and instructor admin — shipped in 5 hours.</p>
+          <div class="cs-stack">
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Vite</span>
+            <span class="stack-tag">TypeScript</span>
+            <span class="stack-tag">Supabase</span>
+            <span class="stack-tag">Claude API</span>
+            <span class="stack-tag">Tailwind</span>
+            <span class="stack-tag">Netlify</span>
+          </div>
+          <div class="cs-metrics">
+            <div class="metric"><span class="metric-value">22,096</span><span class="metric-label">Lines of code</span></div>
+            <div class="metric"><span class="metric-value">5 hours</span><span class="metric-label">Build time</span></div>
+            <div class="metric"><span class="metric-value">4</span><span class="metric-label">Edge Functions</span></div>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <h2>The problem</h2>
+<p>Birth workers — doulas, hypnobirthing practitioners, antenatal educators — need professional websites but typically aren&#39;t technical. They graduate from training courses and immediately face the blank-page problem: how do I present myself online?</p>
+<p>The options are bad. Squarespace means wrestling with a drag-and-drop editor that still requires design decisions. Hiring a developer costs thousands. Doing nothing means relying on Instagram and word of mouth. None of these serve someone who&#39;s good at supporting families through birth but has no interest in web development.</p>
+<h2>The solution</h2>
+<p>BirthBuild eliminates the blank page entirely. A guided AI chatbot has a conversation with the birth worker — asking about their business name, services, philosophy, testimonials, and design preferences. That conversation produces a structured site specification. That specification feeds an LLM that generates a polished, deployed website on a custom subdomain. No code. No design decisions. Just a conversation.</p>
+<p><img src="landing.png" alt="BirthBuild landing page"></p>
+<p>The chatbot onboarding is the key innovation. It&#39;s not a form. It&#39;s a conversation that <em>elicits specificity</em>. A doula who says &quot;I specialise in home births for second-time parents in South Bristol&quot; gets a dramatically more personal site than one who says &quot;I&#39;m a doula in Bristol.&quot; The chatbot&#39;s job is to draw out those details.</p>
+<p><img src="chatbot.png" alt="Chatbot onboarding flow"></p>
+<h2>The architecture</h2>
+<p><strong>Frontend:</strong> React 18 with Vite, Tailwind CSS. Single-page app with protected routing and magic link auth via Supabase.</p>
+<p><strong>Backend:</strong> Supabase Postgres with row-level security on every table. Four Edge Functions handle the Claude API proxy, site generation, Netlify deployment, and instructor invites. API keys never touch the client.</p>
+<p><strong>Build pipeline:</strong> Two paths. A template build for instant previews (deterministic, client-side HTML generation) and an LLM build for production sites (AI-generated pages via Edge Functions). The LLM path runs: generate design system → generate pages in parallel → save checkpoint → deploy to Netlify.</p>
+<p><strong>Multi-tenancy:</strong> Instructors create workshop sessions and invite students via magic link. Each student builds their own site. The instructor dashboard shows progress, previews specs, and tracks usage. Every database query is scoped by tenant ID. RLS enforces isolation.</p>
+<p><img src="features.png" alt="Features overview"></p>
+<p><strong>Checkpoint system:</strong> Versioned HTML snapshots stored in the database. Section markers (<code>&lt;!-- bb-section:name --&gt;</code>) enable deterministic editing without re-running the LLM. A retention trigger prunes to the last 10 per site.</p>
+<p><img src="palettes.png" alt="Curated colour palettes for birth workers"></p>
+<h2>What shipped</h2>
+<ul>
+<li>Magic link authentication (no passwords)</li>
+<li>7-step AI chatbot onboarding with tool calling</li>
+<li>Full dashboard form editor (7 tabs, 22 components)</li>
+<li>AI content generation (bios, taglines, FAQs)</li>
+<li>4 curated colour palettes designed for birth work</li>
+<li>Photo upload to Supabase Storage</li>
+<li>Static site build pipeline with Netlify Deploy API</li>
+<li>Subdomain provisioning</li>
+<li>Instructor admin with session CRUD and bulk invites</li>
+<li>WCAG accessibility compliance</li>
+<li>20 security findings identified and fixed</li>
+</ul>
+<h2>What went wrong</h2>
+<p>Three infrastructure issues hit during the build. The Supabase MCP integration failed silently — MAI was writing schema and RLS policies without being able to verify them against the actual database. Puppeteer failed silently too, eliminating automated browser testing. And the tri-model adversarial review never ran because the OpenAI key wasn&#39;t configured.</p>
+<p>The result: the database layer was a mess. Ninety minutes of debugging traced frontend issues back to schema and RLS problems that the adversarial review would have caught. The lesson for the next MAI iteration is clear: silent failures need to become loud failures. A pre-flight check would have saved those ninety minutes.</p>
+<h2>What&#39;s next</h2>
+<p>The horizontal platform beneath BirthBuild is the real product. The same engine can power physiotherapistbuild.com, therapistbuild.com, or any practitioner vertical. Swap the prompts, adjust the onboarding flow, and you have a new product. The instructor licensing model turns training providers into distribution channels — every graduating cohort needs a website, and the tool is already familiar.</p>
+
+        </div>
+
+        <div class="post-nav">
+          <a href="/#work">← Back to work</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

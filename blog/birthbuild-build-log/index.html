@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond 10x: How I Built a SaaS Product in 5 Hours — Andrew Isherwood</title>
+<meta name="description" content="I founded BirthBuild and shipped a fully deployed SaaS with 22,096 lines of code in a single working day. Here's the build log.">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/blog/birthbuild-build-log/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/blog/birthbuild-build-log/">
+<meta property="og:title" content="Beyond 10x: How I Built a SaaS Product in 5 Hours">
+<meta property="og:description" content="I founded BirthBuild and shipped a fully deployed SaaS with 22,096 lines of code in a single working day. Here's the build log.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Beyond 10x: How I Built a SaaS Product in 5 Hours">
+<meta name="twitter:description" content="I founded BirthBuild and shipped a fully deployed SaaS with 22,096 lines of code in a single working day. Here's the build log.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="article:published_time" content="2026-02-16">
+<meta property="article:author" content="Andrew Isherwood">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Beyond 10x: How I Built a SaaS Product in 5 Hours",
+  "description": "I founded BirthBuild and shipped a fully deployed SaaS with 22,096 lines of code in a single working day. Here's the build log.",
+  "datePublished": "2026-02-16",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Andrew Isherwood"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/blog/birthbuild-build-log/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#work" class="">work</a></li>
+    <li><a href="/blog/" class="nav-active">writing</a></li>
+    <li><a href="/#about">about</a></li>
+    <li><a href="/#contact" class="nav-cta">get in touch</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/blog/" class="back-link">All writing</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/writing/birthbuild-build-log.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <h1>Beyond 10x: How I Built a SaaS Product in 5 Hours</h1>
+          <div class="post-meta">
+            <span>16 Feb 2026</span>
+            <span>6 min read</span>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <p>There&#39;s a persistent claim in tech circles that AI makes senior engineers 10x more productive. I think that dramatically underestimates what&#39;s actually happening. Yesterday I founded BirthBuild — an AI-powered website builder for birth workers — and by the evening I had a fully deployed SaaS with its first live customer site on a custom subdomain. The entire build took roughly five hours of active work.</p>
+<p>This wasn&#39;t a landing page or a prototype. It was 22,096 lines of code across 130 files, with authentication, an AI chatbot onboarding flow, a full dashboard editor, a static site build-and-deploy pipeline, multi-tenant instructor administration, and accessibility compliance. As a solo developer with 32 years of experience, I can tell you with confidence: this would have been three months of work without AI. That&#39;s not 10x. That&#39;s closer to 250x.</p>
+<h2>What We Built</h2>
+<p>BirthBuild solves a real problem. Birth workers — doulas, hypnobirthing practitioners, antenatal educators — need professional websites but typically aren&#39;t technical. They graduate from training courses and immediately face the blank-page problem: how do I present myself online? BirthBuild eliminates that entirely. A guided AI chatbot asks the right questions, generates tailored content (bio, tagline, service descriptions, FAQ), and produces a polished, deployed website without the practitioner ever touching code.</p>
+<p>The underlying platform is horizontally scalable. The same engine powers physiotherapistbuild.com, therapistbuild.com, or any practitioner vertical — swap the prompts, adjust the onboarding flow, and you have a new product. The IP is licensable to training instructors, turning course providers into distribution channels: every graduating cohort needs a website, and the tool is already familiar.</p>
+<h2>The Build: 5 Hours, 6 Phases</h2>
+<p>I used MAI, a multi-agent development infrastructure I&#39;ve built over the past year. MAI coordinates specialised AI agents for development, QA review, and security auditing, running them as parallel workstreams rather than sequential steps.</p>
+<p>The MVP was built in a single three-hour session across six phases, each with dev, QA review, and security audit:</p>
+<p><strong>Phase 1 — Foundation &amp; Auth.</strong> Supabase schema with six tables and row-level security, magic link authentication (no passwords — critical for a non-technical audience), React/Vite/Tailwind PWA shell, and protected routing.</p>
+<p><strong>Phase 2 — Chatbot Onboarding.</strong> Claude API proxy via Supabase Edge Function, a seven-step guided chat flow, AI content generation for bios, taglines, and FAQs, and a markdown renderer for the conversational interface.</p>
+<p><strong>Phase 3 — Dashboard Form Editor.</strong> Seven-tab form with 22 components, colour palette and typography selectors, photo upload to Supabase Storage, and debounced saves to prevent data loss.</p>
+<p><strong>Phase 4 — Build Pipeline &amp; Deploy.</strong> Six page generators producing static HTML/CSS, ZIP creation in pure TypeScript, Netlify Deploy API integration, subdomain provisioning, and realtime build status feedback.</p>
+<p><strong>Phase 5 — Instructor Admin.</strong> Session CRUD, bulk student invites via Edge Function, student progress tracking, read-only spec viewer, and usage metrics.</p>
+<p><strong>Phase 6 — Polish.</strong> Error boundaries, mobile responsive layouts, WCAG accessibility fixes, build validation, and stale rebuild detection.</p>
+<p>Twenty security findings were identified and fixed across twelve review rounds. Zero regressions.</p>
+<p>A second two-hour session handled live deployment and hotfixes: auth error handling, database migration (triggers, indexes, search path fixes), Edge Function deployment, a server-side tool-use loop for multi-step Claude API calls, a temporary workaround for a Resend email outage, test tenant setup, and the first live site deployment to a custom subdomain.</p>
+<h2>By the Numbers</h2>
+<ul>
+<li>130 files, 22,096 lines of code</li>
+<li>46 commits, 6 merged pull requests</li>
+<li>4 Supabase Edge Functions deployed</li>
+<li>20 security findings fixed across 12 review rounds</li>
+<li>1 live generated website on a custom subdomain</li>
+<li>~5 hours total active development time</li>
+</ul>
+<h2>What Actually Went Wrong</h2>
+<p>I&#39;m including this because the failures are as instructive as the successes.</p>
+<p>Three significant infrastructure issues hit during the build. The Supabase MCP (Model Context Protocol) integration failed silently, which meant MAI was writing schema and row-level security policies without being able to verify them against the actual database state. Puppeteer also failed silently, eliminating automated browser testing. And I forgot to add the OpenAI API key, which meant the tri-model adversarial review — where Claude, GPT, and Gemini challenge each other&#39;s work — never ran.</p>
+<p>The result was predictable: the database layer was a mess. I spent ninety minutes debugging the frontend, tracing issues back to schema and RLS problems that the adversarial review would have caught if it had been running. The Supabase MCP failure was the single point of failure that cascaded into the biggest debugging session of the day.</p>
+<p>This is actually a useful validation. When the safety nets work, they catch real problems. When they silently fail, real defects get through. The lesson for the next MAI iteration is clear: silent failures need to become loud failures. A pre-flight check that confirms all model endpoints are reachable and all tool integrations are healthy before the first phase kicks off would have saved those ninety minutes.</p>
+<h2>Why 10x Is the Wrong Frame</h2>
+<p>The &quot;AI makes you 10x faster&quot; framing comes from thinking about AI as a faster typist — autocomplete on steroids. That misses what&#39;s actually changed.</p>
+<p>A solo developer spending three months on this scope isn&#39;t writing code for three months. They&#39;re writing code for maybe three to four weeks and spending the rest on planning, context-switching, waiting for review, rebuilding context after interruptions, researching approaches, and all the overhead that surrounds actual implementation. AI doesn&#39;t just accelerate the coding — it eliminates the dead time.</p>
+<p>With MAI, I&#39;m running parallel workstreams with specialised agents. That&#39;s not 10x one engineer — it&#39;s closer to having a small team that doesn&#39;t need standups, doesn&#39;t context-switch, and doesn&#39;t go home. The bottleneck has shifted. The limiting factor yesterday wasn&#39;t code generation speed. It was infrastructure failures and debugging — the human-in-the-loop work is now almost entirely architectural decision-making and fault diagnosis, not implementation.</p>
+<p>This is a qualitative shift, not just a quantitative one. The role of the senior engineer isn&#39;t to write code faster. It&#39;s to make the right architectural decisions, recognise when something has gone wrong at a systems level, and maintain the judgement to know what to build and why. Those thirty-two years of experience aren&#39;t being replaced — they&#39;re being leveraged differently.</p>
+<h2>What&#39;s Next</h2>
+<p>BirthBuild is the first vertical. The horizontal platform beneath it is the real product — a licensable engine for building practitioner website builders across any service profession. The instructor licensing model means each training provider becomes a distribution channel, with every graduating cohort as a captive audience who need exactly this tool.</p>
+<p>The immediate priority is hardening the database layer (the MCP failures made that urgent), fixing MAI&#39;s silent failure handling, and proving the horizontal thesis by spinning up a second vertical quickly.</p>
+<p>But the core point stands: I went from zero to a live, deployed, revenue-ready SaaS product in a single working day. The 10x discourse isn&#39;t wrong — it&#39;s just not thinking big enough.</p>
+
+        </div>
+
+        <div class="post-nav">
+          <span></span>
+          <a href="/blog/the-spec-is-the-prompt/"> The Spec Is the Prompt &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

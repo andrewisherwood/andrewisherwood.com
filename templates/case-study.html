@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{title}} — Andrew Isherwood</title>
+<meta name="description" content="{{description}}">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/work/{{slug}}/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/work/{{slug}}/">
+<meta property="og:title" content="{{title}} — Andrew Isherwood">
+<meta property="og:description" content="{{description}}">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{title}} — Andrew Isherwood">
+<meta name="twitter:description" content="{{description}}">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "{{title}}",
+  "description": "{{description}}",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/work/{{slug}}/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+{{nav}}
+
+<main class="content-page">
+  <div class="container">
+    <a href="/#work" class="back-link">All work</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/work/{{slug}}.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <div class="cs-tagline">{{tags}}</div>
+          <h1>{{title}}</h1>
+          <p class="cs-description">{{description}}</p>
+          <div class="cs-stack">
+            {{stackTags}}
+          </div>
+          <div class="cs-metrics">
+            {{metricsHtml}}
+          </div>
+        </div>
+
+        <div class="post-content">
+          {{content}}
+        </div>
+
+        <div class="post-nav">
+          <a href="/#work">← Back to work</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+{{footer}}
+
+</body>
+</html>
