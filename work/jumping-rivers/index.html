@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jumping Rivers — Andrew Isherwood</title>
+<meta name="description" content="A data science consultancy moved off WordPress onto a fast Hugo site that their team edits from GitLab, the tool they already use every day.">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/work/jumping-rivers/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/work/jumping-rivers/">
+<meta property="og:title" content="Jumping Rivers — Andrew Isherwood">
+<meta property="og:description" content="A data science consultancy moved off WordPress onto a fast Hugo site that their team edits from GitLab, the tool they already use every day.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jumping Rivers — Andrew Isherwood">
+<meta name="twitter:description" content="A data science consultancy moved off WordPress onto a fast Hugo site that their team edits from GitLab, the tool they already use every day.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "Jumping Rivers",
+  "description": "A data science consultancy moved off WordPress onto a fast Hugo site that their team edits from GitLab, the tool they already use every day.",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/work/jumping-rivers/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-serif-display-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#services">services</a></li>
+    <li><a href="/#work" class="nav-active">work</a></li>
+    <li class="nav-hide-sm"><a href="/#about">about</a></li>
+    <li class="nav-hide-sm"><a href="/blog/" class="">writing</a></li>
+    <li><a href="/#contact" class="nav-cta">start a project</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/#work" class="back-link">Client work</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/work/jumping-rivers.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <div class="cs-tagline">Client &middot; WordPress to static &middot; BugleLab</div>
+          <h1>Jumping Rivers</h1>
+          <p class="cs-description">A data science consultancy moved off WordPress onto a fast Hugo site that their team edits from GitLab, the tool they already use every day.</p>
+          <div class="cs-stack">
+            <span class="stack-tag">Hugo</span>
+            <span class="stack-tag">GitLab</span>
+            <span class="stack-tag">Netlify Forms</span>
+            <span class="stack-tag">JavaScript</span>
+          </div>
+          <div class="cs-metrics">
+            <div class="metric"><span class="metric-value">Passed</span><span class="metric-label">Core Web Vitals</span></div>
+            <div class="metric"><span class="metric-value">GitLab</span><span class="metric-label">Content edited in</span></div>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <!-- Source: BugleLab case study (buglelab.io/our-work). Built at BugleLab, Andy's agency. -->
+<!-- TODO(andy): the year of this project. The date in the front matter is a placeholder and isn't shown on the page. -->
+
+<h2>The client</h2>
+<p>Jumping Rivers is a data science consultancy. It runs training courses and helps organisations get value from their data.</p>
+<p>Colin Gillespie first asked us to rebuild just the homepage in Hugo as a proof of concept, with the code kept in GitLab. It worked well, so we rebuilt the whole site, redesigning some sections along the way. This was a BugleLab project, the web agency I ran at the time.</p>
+<h2>The problem</h2>
+<p>The Jumping Rivers team was tired of running their site on WordPress. They wanted to change pages, courses and blog posts in GitLab, which most of the team already use every day.</p>
+<p>They also wanted what a static site gives you for free: very fast pages, almost nothing to attack, and a full version history of every change.</p>
+<h2>The build</h2>
+<ul>
+<li><strong>Static site:</strong> built with Hugo, which is fast and suits content-heavy sites with lots of blog posts. We built a custom theme as plain HTML first, then connected it to the content.</li>
+<li><strong>Content migration:</strong> posts and pages were exported from WordPress with a migration plugin, so nothing was retyped by hand.</li>
+<li><strong>Basket:</strong> the site didn&#39;t need card payments, so instead of a full e-commerce backend we built a lightweight basket in plain JavaScript that sends orders through Netlify Forms.</li>
+</ul>
+<div class="screenshot-grid single">
+  <figure><img loading="lazy" src="pages.webp" alt="Pages from the Jumping Rivers site: the homepage hero, a Scottish Government case study, a contact form and a pricing table"><figcaption>Homepage, case study, contact and pricing designs</figcaption></figure>
+</div>
+
+<h2>The results</h2>
+<p>The site passed Google&#39;s Core Web Vitals assessment, based on how fast it is for real visitors over 28 days. The team now publish courses and posts from GitLab, without logging into WordPress.</p>
+<p>Building a basket from scratch was harder than it looked. It had to do most of what WooCommerce does, and the edge cases took real work. But it became a reusable module we used on later projects.</p>
+<h2>What they said</h2>
+<blockquote>
+<p>Excellent job. It&#39;s now much easier for us to create courses and posts from within GitLab. Thanks!</p>
+<p>— Colin Gillespie, Jumping Rivers</p>
+</blockquote>
+
+        </div>
+
+        <div class="post-nav">
+          <a href="/#work">← Back to client work</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+      <span>&middot;</span>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('click', function(e) {
+  var img = e.target.closest('.screenshot-grid img');
+  if (!img) return;
+  var overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  var fullImg = document.createElement('img');
+  fullImg.src = img.src;
+  fullImg.alt = img.alt;
+  overlay.appendChild(fullImg);
+  document.body.appendChild(overlay);
+  requestAnimationFrame(function() { overlay.classList.add('active'); });
+  overlay.addEventListener('click', function() {
+    overlay.classList.remove('active');
+    setTimeout(function() { overlay.remove(); }, 300);
+  });
+});
+</script>
+</body>
+</html>

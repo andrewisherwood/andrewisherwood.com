@@ -52,7 +52,7 @@ Generated output (`blog/`, `work/`, `privacy/`, `thanks/`) is committed. Run `no
 2. **Hero** — "Websites built properly, by someone who's been doing it since 1994". WHAT/FOR/BASED key-values.
 3. **Signal bar** — client-facing stats
 4. **Services** (`#services`) — new site, WordPress → static migration, care plan; hourly line
-5. **Client work** (`#work`) — Nasaco International lead case study, slots for more, testimonial
+5. **Client work** (`#work`) — Nasaco International lead case study, then Eflow, Oasis Clinics and Jumping Rivers (BugleLab-era agency work, credited as such), Oasis testimonial
 6. **How it works** (`#process`) — call → fixed quote → build with previews → launch & care
 7. **Things I've built** (`#built`) — Suppertime, MAI, Adaptive Coach, BirthBuild
 8. **Timeline**, **About** (`#about`), **Writing**
