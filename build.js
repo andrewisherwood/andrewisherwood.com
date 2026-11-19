@@ -233,6 +233,10 @@ for (const file of workFiles) {
     content: htmlContent,
     nav,
     footer: footerTemplate,
+    // Client case studies link back to Client work; products to Things I've built.
+    backHref: data.category === 'client' ? '/#work' : '/#built',
+    backLabel: data.category === 'client' ? 'Client work' : "Things I've built",
+    backLabelLower: data.category === 'client' ? 'client work' : "things I've built",
   });
 
   fs.writeFileSync(path.join(outDir, 'index.html'), html);
