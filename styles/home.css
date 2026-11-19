@@ -722,7 +722,7 @@
 /* --- SERVICES --- */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -1099,3 +1099,45 @@
   .stack-list .stack-detail { padding-left: 1.9rem; }
   .about-aside-body { padding: 1.25rem 1.5rem; }
 }
+
+
+/* --- SERVICE TIERS --- */
+.tier-list { list-style: none; margin-bottom: 2rem; }
+
+.tier-list li {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(232, 100, 58, 0.08);
+}
+
+.tier-list li:first-child { padding-top: 0; }
+.tier-list li:last-child { border-bottom: none; }
+
+.tier-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.3rem;
+  font-family: var(--mono);
+}
+
+.tier-name { font-size: 0.85rem; color: var(--phosphor); }
+.tier-name::before { content: '├─ '; color: var(--text-dim); }
+.tier-list li:last-child .tier-name::before { content: '└─ '; }
+
+.tier-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--green);
+  text-shadow: 0 0 20px var(--green-glow);
+  white-space: nowrap;
+}
+
+.tier-list p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  padding-left: 1.9rem;
+}
+
+.service-meta dd { font-size: 0.8rem; color: var(--text-muted); }

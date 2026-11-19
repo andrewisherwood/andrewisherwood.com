@@ -158,6 +158,8 @@
   margin: 2rem 0;
 }
 
+.screenshot-grid.single { grid-template-columns: 1fr; }
+
 .screenshot-grid figure {
   margin: 0;
   text-align: center;

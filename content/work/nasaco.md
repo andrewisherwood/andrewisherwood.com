@@ -12,7 +12,7 @@ metrics:
   - label: Lower hosting cost
     value: '<span class="todo">TODO</span>'
   - label: Years as a client
-    value: '<span class="todo">TODO</span>'
+    value: "24"
 status: Live
 ---
 
@@ -20,11 +20,15 @@ status: Live
 
 ## The story
 
-I built Nasaco International's first website when I was 18. They're still a client today.
+Nasaco International designs, formulates, produces and markets chemicals for froth flotation and other mineral processing applications.
 
-<span class="todo">TODO</span> A line or two on what Nasaco does and who their customers are.
+I built their first website in 2002, when I was 18. Twenty-four years later, they're still a client.
 
-<span class="todo">TODO</span> The year that first site went live, and how the relationship has carried on since.
+<div class="screenshot-grid single">
+  <figure><img src="first-site-2002.png" alt="Nasaco International's first website from 2002: a dark blue page with the company name in grey script, a photo of a tank container, and a bubble graphic describing the business"><figcaption>Where it started: Nasaco's first site in February 2002, credited "Site design by Andrew Isherwood". (Internet Archive)</figcaption></figure>
+</div>
+
+<span class="todo">TODO</span> How the relationship has carried on between 2002 and now.
 
 ## The brief
 
