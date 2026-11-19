@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Andrew Isherwood — Solutions Architect & Product Engineer</title>
 <meta name="description" content="I design systems that work and ship products that matter. 32 years building for the web. Solutions architecture, product engineering, and AI-augmented development.">
-<link rel="icon" type="image/svg+xml" href="favicon-c64.svg">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="author" content="Andrew Isherwood">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://andrewisherwood.com/">
@@ -25,21 +30,51 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Andrew Isherwood",
-  "url": "https://andrewisherwood.com",
-  "jobTitle": "Solutions Architect & Product Engineer",
-  "description": "Solutions architecture, product engineering, and AI-augmented development. 32 years building for the web.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Wimbledon",
-    "addressCountry": "GB"
-  },
-  "sameAs": [
-    "https://github.com/andrewisherwood"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://andrewisherwood.com/#person",
+      "name": "Andrew Isherwood",
+      "url": "https://andrewisherwood.com/",
+      "jobTitle": "Web Designer & Developer",
+      "description": "Websites, product engineering, and AI-augmented development. 32 years building for the web.",
+      "email": "mailto:build@andrewisherwood.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wimbledon",
+        "addressRegion": "London",
+        "addressCountry": "GB"
+      },
+      "worksFor": { "@id": "https://andrewisherwood.com/#business" },
+      "sameAs": [
+        "https://github.com/andrewisherwood"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://andrewisherwood.com/#business",
+      "name": "Andrew Isherwood",
+      "url": "https://andrewisherwood.com/",
+      "image": "https://andrewisherwood.com/og-image.png",
+      "logo": "https://andrewisherwood.com/icon-512.png",
+      "description": "Website design and build, WordPress to static migrations, and ongoing site care.",
+      "email": "build@andrewisherwood.com",
+      "founder": { "@id": "https://andrewisherwood.com/#person" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wimbledon",
+        "addressRegion": "London",
+        "addressCountry": "GB"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "London" },
+        { "@type": "Country", "name": "United Kingdom" }
+      ]
+    }
   ]
 }
 </script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
