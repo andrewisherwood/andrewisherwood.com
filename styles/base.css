@@ -8,7 +8,7 @@
   --bg-bezel: #1a1b1c;
   --text: #e8e4df;
   --text-muted: #b0aaa4;
-  --text-dim: #7a746e;
+  --text-dim: #89837d; /* min 4.6:1 on --bg-bezel (WCAG AA) */
   --phosphor: #e8643a;
   --phosphor-bright: #ff7a4e;
   --phosphor-glow: rgba(232, 100, 58, 0.12);
