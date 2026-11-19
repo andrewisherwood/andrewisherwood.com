@@ -142,6 +142,7 @@ const footerTemplate = fs.readFileSync('templates/partials/footer.html', 'utf8')
 const blogPostTemplate = fs.readFileSync('templates/blog-post.html', 'utf8');
 const caseStudyTemplate = fs.readFileSync('templates/case-study.html', 'utf8');
 const blogIndexTemplate = fs.readFileSync('templates/blog-index.html', 'utf8');
+const pageTemplate = fs.readFileSync('templates/page.html', 'utf8');
 
 // --- Generate blog posts ---
 
@@ -251,6 +252,29 @@ for (const file of workFiles) {
   caseStudyCount++;
 }
 
+// --- Generate standalone pages (content/pages/*.md -> /<slug>/index.html) ---
+
+const pagesDir = 'content/pages';
+const pageFiles = fs.existsSync(pagesDir) ? fs.readdirSync(pagesDir).filter(f => f.endsWith('.md')) : [];
+
+for (const file of pageFiles) {
+  const raw = fs.readFileSync(path.join(pagesDir, file), 'utf8');
+  const { data, body } = parseFrontmatter(raw);
+  const slug = data.slug || file.replace('.md', '');
+  ensureDir(slug);
+  const html = render(pageTemplate, {
+    title: data.title || '',
+    description: data.description || '',
+    robots: data.noindex === 'true' ? 'noindex, follow' : 'index, follow',
+    slug,
+    content: marked(body),
+    nav: render(navTemplate, { navActiveWriting: '', navActiveWork: '' }),
+    footer: footerTemplate,
+  });
+  fs.writeFileSync(path.join(slug, 'index.html'), html);
+  console.log(`  ${slug}/index.html`);
+}
+
 // --- Generate blog index ---
 
 const postListItems = blogPosts.map(post => {
@@ -347,6 +371,26 @@ ${writingItems}
   indexHtml = indexHtml.slice(0, startIdx) + writingSection + indexHtml.slice(endIdx);
   fs.writeFileSync(indexPath, indexHtml);
   console.log('  index.html (writing section injected)');
+}
+
+// --- Inject availability line (edit site.config.json to change it) ---
+
+const siteConfig = JSON.parse(fs.readFileSync('site.config.json', 'utf8'));
+const availStart = '<!-- AVAILABILITY_START -->';
+const availEnd = '<!-- AVAILABILITY_END -->';
+indexHtml = fs.readFileSync(indexPath, 'utf8');
+
+if (indexHtml.includes(availStart) && indexHtml.includes(availEnd)) {
+  const text = String(siteConfig.availability || '').trim();
+  const inner = !text || text.startsWith('TODO')
+    ? '<span class="todo">TODO: availability</span>'
+    : escapeXml(text);
+  const availHtml = `${availStart}\n        <p class="availability">${inner}</p>\n        ${availEnd}`;
+  const aStart = indexHtml.indexOf(availStart);
+  const aEnd = indexHtml.indexOf(availEnd) + availEnd.length;
+  indexHtml = indexHtml.slice(0, aStart) + availHtml + indexHtml.slice(aEnd);
+  fs.writeFileSync(indexPath, indexHtml);
+  console.log('  index.html (availability injected)');
 }
 
 // --- Optimize images ---
