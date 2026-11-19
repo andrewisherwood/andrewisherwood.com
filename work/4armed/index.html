@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4ARMED — Andrew Isherwood</title>
+<meta name="description" content="A redesign and rebuild for a cyber security consultancy, taking its mobile Lighthouse score from 31 to 100.">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="author" content="Andrew Isherwood">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://andrewisherwood.com/work/4armed/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andrewisherwood.com/work/4armed/">
+<meta property="og:title" content="4ARMED — Andrew Isherwood">
+<meta property="og:description" content="A redesign and rebuild for a cyber security consultancy, taking its mobile Lighthouse score from 31 to 100.">
+<meta property="og:image" content="https://andrewisherwood.com/og-image.png">
+<meta property="og:locale" content="en_GB">
+<meta property="og:site_name" content="Andrew Isherwood">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="4ARMED — Andrew Isherwood">
+<meta name="twitter:description" content="A redesign and rebuild for a cyber security consultancy, taking its mobile Lighthouse score from 31 to 100.">
+<meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "4ARMED",
+  "description": "A redesign and rebuild for a cyber security consultancy, taking its mobile Lighthouse score from 31 to 100.",
+  "author": {
+    "@type": "Person",
+    "name": "Andrew Isherwood",
+    "url": "https://andrewisherwood.com"
+  },
+  "mainEntityOfPage": "https://andrewisherwood.com/work/4armed/"
+}
+</script>
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-serif-display-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/content.css">
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <ul class="nav-links">
+    <li><a href="/#services">services</a></li>
+    <li><a href="/#work" class="nav-active">work</a></li>
+    <li class="nav-hide-sm"><a href="/#about">about</a></li>
+    <li class="nav-hide-sm"><a href="/blog/" class="">writing</a></li>
+    <li><a href="/#contact" class="nav-cta">start a project</a></li>
+  </ul>
+</nav>
+
+<main class="content-page">
+  <div class="container">
+    <a href="/#work" class="back-link">Client work</a>
+
+    <div class="terminal-window" style="max-width: var(--terminal-width);">
+      <div class="terminal-chrome">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <div class="title">cat ~/work/4armed.md</div>
+      </div>
+      <div class="terminal-body" style="padding: 2.5rem 3rem;">
+
+        <div class="post-header">
+          <div class="cs-tagline">Client &middot; Redesign &middot; BugleLab</div>
+          <h1>4ARMED</h1>
+          <p class="cs-description">A redesign and rebuild for a cyber security consultancy, taking its mobile Lighthouse score from 31 to 100.</p>
+          <div class="cs-stack">
+            <span class="stack-tag">Hugo</span>
+            <span class="stack-tag">Sass</span>
+            <span class="stack-tag">JavaScript</span>
+          </div>
+          <div class="cs-metrics">
+            <div class="metric"><span class="metric-value">31</span><span class="metric-label">Lighthouse on mobile before</span></div>
+            <div class="metric"><span class="metric-value">100</span><span class="metric-label">Lighthouse on mobile after</span></div>
+          </div>
+        </div>
+
+        <div class="post-content">
+          <!-- Source: BugleLab case study (buglelab.io/our-work, unpublished draft). Built at BugleLab, Andy's agency; UI design by Ihsan. Andy confirmed the site launched. -->
+<!-- TODO(andy): the year of this project. The date in the front matter is a placeholder and isn't shown on the page. -->
+
+<h2>The client</h2>
+<p>4ARMED is a UK cyber security consultancy that specialises in testing the security of web applications and cloud systems.</p>
+<p>Marc, from 4ARMED, asked us to redesign and rebuild the company&#39;s existing site. This was a BugleLab project, the web agency I ran at the time.</p>
+<h2>The problem</h2>
+<p>Marc felt the site needed a new design, and its services and resources needed reorganising. The site also scored badly on Google&#39;s speed tests, mostly because it loaded large third-party libraries like jQuery and Bootstrap on every page.</p>
+<p>There was a design challenge too. 4ARMED wanted to show the stack of technologies and services it works across, in a way that was clear rather than just a wall of logos.</p>
+<h2>The build</h2>
+<p>Ihsan, our UX and UI designer, created a modern design with a black and white look. It brought 4ARMED&#39;s resources to the front and came with a design system, so new pages stay consistent.</p>
+<p>We built the site with Hugo:</p>
+<ul>
+<li><strong>One stylesheet:</strong> Hugo&#39;s Sass pipeline compiles all the styles into a single small file.</li>
+<li><strong>No jQuery or Bootstrap:</strong> everything interactive is written in plain JavaScript, so there are no heavy libraries to download.</li>
+</ul>
+<div class="screenshot-grid single">
+  <figure><img loading="lazy" src="pages.webp" alt="4ARMED's Application Penetration Testing page on desktop and mobile, with a dark hero, a side menu of sections and an overview of security testing levels"><figcaption>A service page on desktop and mobile</figcaption></figure>
+</div>
+
+<h2>The results</h2>
+<p>The new site scored 100 for performance in Google Lighthouse on mobile, up from 31 on the old site.</p>
+<div class="screenshot-grid single">
+  <figure><img loading="lazy" src="lighthouse.webp" alt="Google Lighthouse lab data for the new 4ARMED site: performance 100, First Contentful Paint 0.9 seconds, Largest Contentful Paint 1.5 seconds, Total Blocking Time 0 ms, Cumulative Layout Shift 0"><figcaption>Lighthouse on mobile, tested on the preview build before launch</figcaption></figure>
+</div>
+
+<p>The custom stack illustration took longer than planned because we built it in plain JavaScript. Looking back, an existing JavaScript library would probably have done the job faster. There&#39;s no prize for reinventing the wheel.</p>
+
+        </div>
+
+        <div class="post-nav">
+          <a href="/#work">← Back to client work</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span>&copy; 2026 Andrew Isherwood</span>
+      <span>&middot;</span>
+      <span>Built with care in Wimbledon</span>
+      <span>&middot;</span>
+      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
+      <span>&middot;</span>
+      <a href="/privacy/">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('click', function(e) {
+  var img = e.target.closest('.screenshot-grid img');
+  if (!img) return;
+  var overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  var fullImg = document.createElement('img');
+  fullImg.src = img.src;
+  fullImg.alt = img.alt;
+  overlay.appendChild(fullImg);
+  document.body.appendChild(overlay);
+  requestAnimationFrame(function() { overlay.classList.add('active'); });
+  overlay.addEventListener('click', function() {
+    overlay.classList.remove('active');
+    setTimeout(function() { overlay.remove(); }, 300);
+  });
+});
+</script>
+</body>
+</html>
