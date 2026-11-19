@@ -963,3 +963,9 @@
   .testimonial { padding: 2rem 1.5rem; }
   .testimonial blockquote p { font-size: 1.3rem; }
 }
+
+/* --- ABOUT (single column) + STACK --- */
+.about-single .about-text { max-width: 720px; }
+
+.stack-section { padding: 4rem 0 5rem; }
+.stack-wrap { max-width: 560px; }
