@@ -295,6 +295,21 @@ nav {
 .nav-cta::before { display: none !important; }
 .nav-cta:hover { opacity: 0.85; color: var(--bg) !important; }
 
+/* Placeholder for content Andy still needs to supply. Deliberately loud. */
+.todo {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+  border: 1px dashed var(--amber);
+  border-radius: 3px;
+  padding: 0.05em 0.45em;
+  text-shadow: none;
+  vertical-align: middle;
+}
+
 .nav-active { color: var(--phosphor) !important; }
 .nav-active::before { color: var(--phosphor) !important; }
 
@@ -435,4 +450,5 @@ footer .footer-row {
   nav { padding: 0.8rem 1.25rem; }
   .nav-links { gap: 1rem; }
   .nav-links a { font-size: 0.65rem; }
+  .nav-hide-sm { display: none; }
 }

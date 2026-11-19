@@ -58,6 +58,18 @@
   color: var(--green);
 }
 
+.hero-output + .hero-lede { margin-top: -1rem; }
+
+.hero-lede {
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 0 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out) 0.58s forwards;
+}
+
 .hero-actions {
   display: flex;
   gap: 1rem;
