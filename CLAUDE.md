@@ -1,39 +1,43 @@
 # CLAUDE.md — andrewisherwood.com
 
-Last Updated: February 13, 2026
-Status: Pre-build — awaiting MAI V3 first deployment
+Last Updated: November 19, 2026
+Status: Live. Repositioning for freelance web design clients (see `~/Downloads/andrewisherwood-site-brief.pdf`).
 
 ## What This Is
 
-Personal portfolio site for Andrew Isherwood — Solutions Architect & Product Engineer. Single-page static site with an AI-powered interactive terminal. No framework, no build step, no dependencies.
-
-This is the first live test of MAI V3. The build process is being logged in BUILD_LOG.md.
+Personal site for Andrew Isherwood — web designer & developer, Wimbledon, London. It wins freelance web design and build clients (small and mid-sized businesses); his own products are shown lower down as proof of depth. Static site, no framework. A small Node build (`build.js`, using `marked` + `sharp`) generates the blog, case study and standalone pages from Markdown.
 
 ## Project Structure
 
 ```
 andrewisherwood.com/
-├── index.html                          ← The entire site (single file)
-├── favicon-c64.svg                     ← C64-style favicon (AI monogram, animated cursor)
-├── suppertime-screenshot.png           ← Suppertime app screenshot (mobile, portrait)
-├── adaptive-coach-screenshot.png       ← AdaptiveCoach dashboard screenshot (desktop, landscape)
-├── netlify/
-│   └── edge-functions/
-│       └── chat.js                     ← Anthropic API proxy
-├── netlify.toml                        ← Deployment config
-├── SCOPING.md    ← Full design & implementation brief
-├── BUILD_LOG.md                        ← MAI V3 build log (written during build)
-├── CLAUDE.md                           ← This file
-└── README.md                           ← Project description
+├── index.html              ← Homepage (hand-written; build.js injects the writing list + availability line)
+├── site.config.json        ← Availability line shown above the contact form ("Taking on new projects for…")
+├── build.js                ← Generates blog/, work/, privacy/, thanks/ from content/ + templates/
+├── content/
+│   ├── blog/*.md           ← Blog posts
+│   ├── work/*.md           ← Case studies (front matter `category: client` → back link to Client work)
+│   └── pages/*.md          ← Standalone pages (privacy, thanks; `noindex: true` supported)
+├── templates/              ← case-study, blog-post, blog-index, page + partials (nav, footer)
+├── styles/                 ← base.css (tokens, @font-face, shared), home.css, content.css
+├── fonts/                  ← Self-hosted woff2 (latin + box-drawing subsets)
+├── images/home/            ← Responsive WebP screenshots for the homepage
+├── docs/og-image.html      ← Source for og-image.png (screenshot at 1200x630)
+├── netlify/edge-functions/chat.js  ← Anthropic API proxy (Ask Me Anything; section currently hidden)
+└── netlify.toml            ← Build command, CSP, cache headers
 ```
+
+Generated output (`blog/`, `work/`, `privacy/`, `thanks/`) is committed. Run `node build.js` after editing content or templates.
 
 ## Architecture
 
-**Frontend:** Single HTML file. All CSS inline in `<style>`. All JS inline in `<script>`. No external dependencies except Google Fonts (IBM Plex Mono, Space Grotesk, DM Serif Display).
+**Frontend:** Static HTML + three CSS files, no framework. Fonts are self-hosted (no Google Fonts); the CSP only allows `'self'`.
 
-**AI Chat:** Interactive terminal calls `/api/chat` which is a Netlify Edge Function that proxies to the Anthropic Messages API. API key stored as Netlify env var `ANTHROPIC_API_KEY`. Model: `claude-sonnet-4-20250514`. Max tokens: 300.
+**Contact:** Netlify Form named `contact` (honeypot field `company-website`), posting to `/thanks/`. Email fallback: build@andrewisherwood.com.
 
-**Hosting:** Netlify. Static files served from root. No build command.
+**AI Chat:** The Ask Me Anything section is hidden (`hidden` attribute) because `/api/chat` returned 502 (model id `claude-sonnet-4-20250514` is likely retired). Re-scope it for clients before re-enabling.
+
+**Hosting:** Netlify. Build command `npm install && node build.js`, publish directory `.`.
 
 ## Design Language
 
@@ -42,22 +46,24 @@ andrewisherwood.com/
 - **Typography:** IBM Plex Mono (UI, labels, terminal), Space Grotesk (body), DM Serif Display (headings).
 - **Components:** Terminal windows with traffic-light chrome, `>` prefixed labels, `├─` tree notation, `//` comment-style section labels, scanline overlay across entire page.
 
-## Key Sections
+## Key Sections (homepage order)
 
-1. **Nav** — Fixed. "AI" logo with blinking cursor. Terminal-style `> links`.
-2. **Hero** — Terminal window. `andrew@isherwood ~` chrome. Title, ROLE/STACK/SINCE key-values.
-3. **Signal bar** — 32 years / 100 beta users / 4 products / AI workflows.
-4. **Case studies** — Suppertime (mobile screenshot), MAI (terminal mockup), Adaptive Coach (desktop screenshot).
-5. **Timeline** — 1994 → NOW horizontal career arc.
-6. **About** — Narrative left, stack.config terminal window right.
-7. **Interactive terminal** — AI chatbot. `visitor@portfolio $` prompt. Anthropic API via edge function.
-8. **Contact** — Terminal window. Email: build@andrewisherwood.com.
+1. **Nav** — services · work · about · writing · [start a project]
+2. **Hero** — "Websites built properly, by someone who's been doing it since 1994". WHAT/FOR/BASED key-values.
+3. **Signal bar** — client-facing stats
+4. **Services** (`#services`) — new site, WordPress → static migration, care plan; hourly line
+5. **Client work** (`#work`) — Nasaco International lead case study, slots for more, testimonial
+6. **How it works** (`#process`) — call → fixed quote → build with previews → launch & care
+7. **Things I've built** (`#built`) — Suppertime, MAI, Adaptive Coach, BirthBuild
+8. **Timeline**, **About** (`#about`), **Writing**
+9. **Contact** (`#contact`) — Netlify form + availability line
+10. **Stack** (`#stack`) — stack.config panel, for the technically curious
 
 ## Content Rules
 
-- All copy is in the reference HTML file (SCOPING.md points to it)
-- Email: build@andrewisherwood.com (confirm with Andy if this is correct)
-- Location: Folkestone, UK
+- Email: build@andrewisherwood.com
+- Location: Wimbledon, London, UK
+- Never invent stats, prices, testimonials or client details. Use `<span class="todo">TODO</span>` plus an `<!-- TODO(andy): … -->` comment; `grep -rn "TODO(andy)"` lists them all.
 - Do not add any content from the old Hugo/PaperMod blog
 - Do not add a CMS, analytics, or cookie banners
 
@@ -91,15 +97,15 @@ git push -u origin main
 
 Then in Netlify:
 1. Connect repo
-2. Build command: (leave blank)
-3. Publish directory: `.`
-4. Set env var: `ANTHROPIC_API_KEY`
-5. Add custom domain: andrewisherwood.com
-6. SSL auto-provisions
+2. Build command and publish directory come from `netlify.toml`
+3. Set env var: `ANTHROPIC_API_KEY`
+4. Add custom domain: andrewisherwood.com
+5. SSL auto-provisions
+6. Forms: enable form detection (Site configuration → Forms) and add an email notification for the `contact` form
 
 ## Development
 
-There is no dev server. Open `index.html` in a browser. Edit. Refresh.
+Run `node build.js`, then serve the root (e.g. `python3 -m http.server`). Pages use absolute paths (`/styles/…`), so opening files directly won't work.
 
 The AI terminal won't work locally (no edge function). To test it locally, temporarily point the fetch at the Anthropic API directly with a hardcoded key, then revert before committing. Or use `netlify dev` if you have the Netlify CLI installed.
 
@@ -117,9 +123,8 @@ Log all agent activity to `BUILD_LOG.md` using the format specified in the brief
 
 ## Do Not
 
-- Add node_modules or package.json
-- Add a build step or framework
-- Use a CSS framework (all styles are hand-written)
+- Commit node_modules
+- Add a framework or a CSS framework (all styles are hand-written)
 - Modify the favicon (it's approved)
 - Remove the scanline overlay
 - Expose the API key in client code
