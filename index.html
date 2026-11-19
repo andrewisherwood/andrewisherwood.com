@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Andrew Isherwood — Solutions Architect & Product Engineer</title>
 <meta name="description" content="I design systems that work and ship products that matter. 32 years building for the web. Solutions architecture, product engineering, and AI-augmented development.">
-<link rel="icon" type="image/svg+xml" href="favicon-c64.svg">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0a0a0a">
 <meta name="author" content="Andrew Isherwood">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://andrewisherwood.com/">
@@ -25,24 +30,54 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Andrew Isherwood",
-  "url": "https://andrewisherwood.com",
-  "jobTitle": "Solutions Architect & Product Engineer",
-  "description": "Solutions architecture, product engineering, and AI-augmented development. 32 years building for the web.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Wimbledon",
-    "addressCountry": "GB"
-  },
-  "sameAs": [
-    "https://github.com/andrewisherwood"
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://andrewisherwood.com/#person",
+      "name": "Andrew Isherwood",
+      "url": "https://andrewisherwood.com/",
+      "jobTitle": "Web Designer & Developer",
+      "description": "Websites, product engineering, and AI-augmented development. 32 years building for the web.",
+      "email": "mailto:build@andrewisherwood.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wimbledon",
+        "addressRegion": "London",
+        "addressCountry": "GB"
+      },
+      "worksFor": { "@id": "https://andrewisherwood.com/#business" },
+      "sameAs": [
+        "https://github.com/andrewisherwood"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://andrewisherwood.com/#business",
+      "name": "Andrew Isherwood",
+      "url": "https://andrewisherwood.com/",
+      "image": "https://andrewisherwood.com/og-image.png",
+      "logo": "https://andrewisherwood.com/icon-512.png",
+      "description": "Website design and build, WordPress to static migrations, and ongoing site care.",
+      "email": "build@andrewisherwood.com",
+      "founder": { "@id": "https://andrewisherwood.com/#person" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Wimbledon",
+        "addressRegion": "London",
+        "addressCountry": "GB"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "London" },
+        { "@type": "Country", "name": "United Kingdom" }
+      ]
+    }
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-grotesk-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/dm-serif-display-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/styles/base.css">
 <link rel="stylesheet" href="/styles/home.css">
 <link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
@@ -51,7 +86,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">AI<span class="cursor-block"></span></a>
+  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
   <ul class="nav-links">
     <li><a href="#work">work</a></li>
     <li><a href="/blog/">writing</a></li>
@@ -106,12 +141,12 @@
         <span class="signal-label">beta users on first product</span>
       </div>
       <div class="signal-item reveal">
-        <span class="signal-number">5</span>
+        <span class="signal-number">4</span>
         <span class="signal-label">products in the pipeline</span>
       </div>
       <div class="signal-item reveal">
         <span class="signal-number">AI</span>
-        <span class="signal-label">augmented dev workflows</span>
+        <span class="signal-label">AI-augmented dev workflows</span>
       </div>
     </div>
   </div>
@@ -125,7 +160,7 @@
     <p class="section-subtitle">Every project here went from concept through architecture to production. Real users, real problems, real solutions.</p>
 
     <!-- SUPPERTIME -->
-    <a href="/work/suppertime/" style="text-decoration:none;color:inherit;display:block;">
+    <a href="/work/suppertime/" aria-label="Suppertime case study" style="text-decoration:none;color:inherit;display:block;">
     <div class="case-study reveal">
       <div class="case-study-inner">
         <div class="case-study-content">
@@ -153,7 +188,7 @@
         </div>
         <div class="case-study-visual visual-suppertime">
           <div class="visual-mockup">
-            <img src="suppertime-screenshot.png" alt="Suppertime app showing weekly meal plan with breakfast, lunch and dinner cards" loading="lazy">
+            <img src="/images/home/suppertime-320.webp" srcset="/images/home/suppertime-320.webp 320w, /images/home/suppertime-640.webp 640w" sizes="(max-width: 400px) 80vw, 320px" width="320" height="693" alt="Suppertime app showing weekly meal plan with breakfast, lunch and dinner cards" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -161,7 +196,7 @@
     </a>
 
     <!-- MAI -->
-    <a href="/work/mai/" style="text-decoration:none;color:inherit;display:block;">
+    <a href="/work/mai/" aria-label="MAI case study" style="text-decoration:none;color:inherit;display:block;">
     <div class="case-study reveal">
       <div class="case-study-inner">
         <div class="case-study-content">
@@ -212,7 +247,7 @@
     </a>
 
     <!-- ADAPTIVE COACH -->
-    <a href="/work/adaptive-coach/" style="text-decoration:none;color:inherit;display:block;">
+    <a href="/work/adaptive-coach/" aria-label="Adaptive Coach case study" style="text-decoration:none;color:inherit;display:block;">
     <div class="case-study reveal">
       <div class="case-study-inner">
         <div class="case-study-content">
@@ -243,7 +278,7 @@
               <div class="dot y"></div>
               <div class="dot g"></div>
             </div>
-            <img src="adaptive-coach-screenshot.png" alt="AdaptiveCoach dashboard showing training snapshot, power zones, and race countdown" loading="lazy">
+            <img src="/images/home/adaptive-coach-420.webp" srcset="/images/home/adaptive-coach-420.webp 420w, /images/home/adaptive-coach-840.webp 840w" sizes="(max-width: 460px) 92vw, 420px" width="420" height="206" alt="AdaptiveCoach dashboard showing training snapshot, power zones, and race countdown" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -251,7 +286,7 @@
     </a>
 
     <!-- BIRTHBUILD -->
-    <a href="/work/birthbuild/" style="text-decoration:none;color:inherit;display:block;">
+    <a href="/work/birthbuild/" aria-label="BirthBuild case study" style="text-decoration:none;color:inherit;display:block;">
     <div class="case-study reveal">
       <div class="case-study-inner">
         <div class="case-study-content">
@@ -284,7 +319,7 @@
               <div class="dot y"></div>
               <div class="dot g"></div>
             </div>
-            <img src="/work/birthbuild/landing.webp" alt="BirthBuild landing page showing AI-powered website builder for birth workers" loading="lazy">
+            <img src="/images/home/birthbuild-420.webp" srcset="/images/home/birthbuild-420.webp 420w, /images/home/birthbuild-840.webp 840w" sizes="(max-width: 460px) 92vw, 420px" width="420" height="239" alt="BirthBuild landing page showing AI-powered website builder for birth workers" loading="lazy" decoding="async">
           </div>
         </div>
       </div>
@@ -412,8 +447,8 @@
 </section>
 <!-- WRITING_SECTION_END -->
 
-<!-- INTERACTIVE TERMINAL -->
-<section id="terminal" style="padding: 5rem 0;">
+<!-- INTERACTIVE TERMINAL — hidden until /api/chat is fixed (returns 502) and re-scoped for client work -->
+<section id="terminal" style="padding: 5rem 0;" hidden>
   <div class="container">
     <div class="section-label">Ask Me Anything</div>
     <h2 class="section-title" style="margin-bottom:0.8rem;">Talk to the work</h2>
