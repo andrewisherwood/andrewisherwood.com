@@ -7,8 +7,8 @@
   "locationShort": "Wimbledon",
   "github": "https://github.com/andrewisherwood",
 
-  "_bookingUrl": "TODO(andy): your Google Calendar appointment schedule link. While empty, every 'Book a free call' button goes to the contact form at /#contact.",
-  "bookingUrl": "",
+  "_bookingUrl": "Google Calendar appointment schedule (booking page). Every Book a free call button uses it.",
+  "bookingUrl": "https://calendar.app.google/Dh7EohHALP4ejjTW7",
 
   "_replyTime": "TODO(andy): e.g. \"one working day\" or \"two working days\". Shown on the contact form and the thanks page.",
   "replyTime": "",
