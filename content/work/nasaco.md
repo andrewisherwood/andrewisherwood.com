@@ -17,9 +17,8 @@ cardResult: "A client since 2002, now on a faster, cheaper build."
 results:
   - { value: "24 years", label: "as a client, from their first website in 2002 to today" }
 hero:
-  src: first-site-2002.png
-  alt: "Nasaco International's first website from 2002: a dark blue page with the company name in grey script, a photo of a tank container, and a bubble graphic describing the business"
-  caption: "Where it started: Nasaco's first site in February 2002, credited “Site design by Andrew Isherwood”. (Internet Archive)"
+  src: homepage.png
+  alt: "Nasaco's homepage today: a navy header with the Nasaco ‘solutions for flotation’ logo, and the headline ‘Solutions for flotation’ over a photo of an open-pit mine in a mountain valley, with View our products and Contact us buttons"
 ---
 
 <!-- TODO(andy): add how the relationship carried on from 2002, anything specific Nasaco asked for, how the migration went (content, redirects, design), and before/after speed and hosting numbers. Before/after screenshots go in content/work/images/nasaco/ and can be added to the body like the other case studies. -->
@@ -38,3 +37,9 @@ I moved the site from WordPress to a static build made with Hugo and hosted on N
 
 - **Security:** no plugins to patch and no database to break into.
 - **Maintenance:** no more WordPress core and plugin updates to keep on top of.
+
+It's come a long way from the first site I built for them.
+
+<div class="screenshot-grid single">
+  <figure><img src="first-site-2002.png" alt="Nasaco International's first website from 2002: a dark blue page with the company name in grey script, a photo of a tank container, and a bubble graphic describing the business"><figcaption>Where it started: Nasaco's first site in February 2002, credited “Site design by Andrew Isherwood”. (Internet Archive)</figcaption></figure>
+</div>
