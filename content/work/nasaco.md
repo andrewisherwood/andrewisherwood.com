@@ -5,8 +5,7 @@ client: "Nasaco International"
 slug: nasaco
 sector: "Chemicals"
 project: "WordPress to static on Netlify"
-# TODO(andy): the year of the migration. Empty values are hidden.
-year: ""
+year: "2026"
 url: "https://www.nasaco.ch/"
 title: "Nasaco International: a client since 2002, now on a faster, cheaper build."
 seoTitle: "Nasaco International case study: from WordPress to a fast static site | Andrew Isherwood"
