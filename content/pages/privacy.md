@@ -16,7 +16,7 @@ This site is run by Andrew Isherwood, a web designer and developer based in Wimb
 
 ## What I collect
 
-If you use the contact form, I collect what you type into it: your name, email address, company (if you give one), the type of project, your budget and timeline, and your message.
+If you use the contact form, I collect what you type into it: your name, email address, company (if you give one), what you need, your budget and your message.
 
 If you email me directly, I receive your email address and whatever you include in the email.
 

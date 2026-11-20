@@ -1,65 +1,42 @@
 <!DOCTYPE html>
 <!--
   Source for /og-image.png (1200x630).
-  To regenerate: serve the repo root locally, open /docs/og-image.html in a
-  browser at exactly 1200x630, and screenshot the viewport to og-image.png.
+  To regenerate: run `node build.js`, serve the repo root locally, open /docs/og-image.html
+  at exactly 1200x630, and screenshot the viewport to og-image.png.
 -->
 <html lang="en-GB">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="robots" content="noindex">
 <title>OG image source</title>
-<link rel="stylesheet" href="/styles/base.css">
+<link rel="stylesheet" href="/styles/tokens.css">
 <style>
-  html, body { width: 1200px; height: 630px; overflow: hidden; margin: 0; }
-  body::before { opacity: 0.6; }
-  .og {
-    position: relative;
-    width: 1200px; height: 630px;
-    background: var(--bg-screen);
-    border: 1px solid rgba(232, 100, 58, 0.55);
-    display: flex; flex-direction: column;
-  }
-  .og .terminal-chrome { height: 46px; padding: 0 18px; gap: 9px; }
-  .og .terminal-chrome .dot { width: 13px; height: 13px; }
-  .og .terminal-chrome .title { font-size: 15px; }
-  .og-body { flex: 1; padding: 46px 60px 0; position: relative; }
-  .og-prompt { font-family: var(--mono); font-size: 19px; color: var(--text-dim); }
-  .og-prompt .path { color: var(--blue); }
-  .og-prompt .branch { color: var(--phosphor); }
-  .og-name { font-family: var(--serif); font-size: 64px; line-height: 1.05; margin: 22px 0 8px; color: var(--text); }
-  .og-role { font-family: var(--serif); font-size: 34px; color: var(--phosphor); }
-  .og-role em { font-style: italic; }
-  .og-kv { font-family: var(--mono); font-size: 19px; line-height: 1.75; color: var(--text-muted); margin-top: 30px; }
-  .og-kv .k { display: inline-block; width: 82px; color: var(--green); }
-  .og-rule { width: 520px; height: 1px; background: rgba(232, 100, 58, 0.25); margin: 30px 0 22px; }
-  .og-foot { font-family: var(--mono); font-size: 19px; color: var(--text-dim); display: flex; gap: 48px; }
-  .og-foot b { color: var(--phosphor); font-weight: 500; }
-  .og-logo { position: absolute; top: 44px; right: 60px; font-family: var(--mono); font-size: 72px; color: var(--phosphor); display: flex; align-items: center; gap: 10px; text-shadow: 0 0 40px var(--phosphor-glow); }
-  .og-logo span { width: 14px; height: 40px; background: var(--phosphor); display: inline-block; }
-  .og-url { position: absolute; right: 40px; bottom: 26px; font-family: var(--mono); font-size: 19px; color: var(--phosphor); }
+  @font-face { font-family: 'Bricolage Grotesque'; font-weight: 500 700; src: url(/fonts/bricolage-grotesque-latin.woff2) format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 400 600; src: url(/fonts/inter-latin.woff2) format('woff2'); }
+  html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+  body { background: var(--color-bg); color: var(--color-ink); font-family: var(--font-text); }
+  .og { box-sizing: border-box; width: 1200px; height: 630px; padding: 72px 80px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 14px solid var(--color-accent); }
+  .eyebrow { font-size: 22px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-accent); margin: 0; }
+  h1 { font-family: var(--font-display); font-weight: 700; font-size: 76px; line-height: 1.04; letter-spacing: -0.025em; margin: 28px 0 0; max-width: 980px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 34px; }
+  .facts { display: flex; gap: 48px; font-size: 20px; color: var(--color-body); }
+  .facts strong { display: block; font-family: var(--font-display); font-size: 32px; font-weight: 600; color: var(--color-ink); }
 </style>
 </head>
 <body>
-  <div class="og">
-    <div class="terminal-chrome">
-      <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-      <div class="title">andrew@isherwood ~ og-image</div>
-    </div>
-    <div class="og-body">
-      <div class="og-logo">AI<span></span></div>
-      <div class="og-prompt"><span class="path">~/websites</span> <span class="branch">(main)</span> $</div>
-      <div class="og-name">Andrew Isherwood</div>
-      <div class="og-role">Websites built <em>properly</em></div>
-      <div class="og-kv">
-        <div><span class="k">WHAT</span>Website design &amp; build · WordPress migrations · Care plans</div>
-        <div><span class="k">FOR</span>Small and mid-sized businesses</div>
-        <div><span class="k">BASED</span>Wimbledon, London</div>
-      </div>
-      <div class="og-rule"></div>
-      <div class="og-foot"><span><b>Since 1994</b> building for the web</span><span><b>Fixed</b> prices</span></div>
-    </div>
-    <div class="og-url">andrewisherwood.com</div>
+<div class="og">
+  <div>
+    <p class="eyebrow">Web design &amp; development · Wimbledon, London</p>
+    <h1>Fast, secure websites for UK small businesses.</h1>
   </div>
+  <div class="foot">
+    <span class="name">Andrew Isherwood</span>
+    <div class="facts">
+      <span><strong>Since 1994</strong>building for the web</span>
+      <span><strong>Fixed prices</strong>agreed before work starts</span>
+    </div>
+  </div>
+</div>
 </body>
 </html>

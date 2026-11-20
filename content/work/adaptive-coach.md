@@ -1,4 +1,6 @@
 ---
+category: product
+order: 3
 title: "Adaptive Coach"
 slug: adaptive-coach
 date: 2026-01-15

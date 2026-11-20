@@ -1,4 +1,6 @@
 ---
+category: product
+order: 1
 title: "Suppertime"
 slug: suppertime
 date: 2026-02-18

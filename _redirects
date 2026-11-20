@@ -1,0 +1,8 @@
+# Netlify redirects. The redesign keeps every existing URL; these catch the routes the brief suggested.
+/writing         /blog/          301
+/writing/*       /blog/:splat    301
+/services        /#services      301
+/services/       /#services      301
+/work            /#work          301
+/work/           /#work          301
+/thanks.html     /thanks/        301
