@@ -1,356 +1,188 @@
+// Static site build. Reads content/, data/ and site.config.json, writes every page as plain HTML.
+//   node build.js
+// Output (committed): index.html, services/, work/, blog/, lab/, privacy/, thanks/, 404.html,
+// sitemap.xml, robots.txt, blog/feed.xml.
 const fs = require('fs');
 const path = require('path');
 const { marked } = require('marked');
 const sharp = require('sharp');
+const yaml = require('js-yaml');
+
+const { createPricing, picture, esc } = require('./templates/helpers');
+const renderHome = require('./templates/home');
+const renderService = require('./templates/service');
+const { renderCaseStudy, renderProduct } = require('./templates/case-study');
+const { renderWritingIndex, renderArticle, renderPage, renderThanks, renderLab } = require('./templates/pages');
 
 const start = Date.now();
+const written = [];
 
-// --- Helpers ---
+// ---------- Helpers ----------
 
-function ensureDir(dir) {
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+const read = (f) => fs.readFileSync(f, 'utf8');
+const ensureDir = (d) => fs.mkdirSync(d, { recursive: true });
+const loadYaml = (f) => yaml.load(read(f), { schema: yaml.CORE_SCHEMA });
+
+function write(file, content) {
+  ensureDir(path.dirname(file) || '.');
+  fs.writeFileSync(file, content);
+  written.push(file);
 }
 
-function readingTime(text) {
-  const words = text.trim().split(/\s+/).length;
-  return Math.ceil(words / 200);
+// Markdown file with YAML front matter. CORE_SCHEMA keeps dates as plain strings.
+function loadMarkdown(file) {
+  const raw = read(file);
+  const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  const data = m ? yaml.load(m[1], { schema: yaml.CORE_SCHEMA }) || {} : {};
+  const body = m ? m[2] : raw;
+  return { ...data, slug: data.slug || path.basename(file, '.md'), body, file };
 }
 
-function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T00:00:00');
-  const day = d.getDate();
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${day} ${months[d.getMonth()]} ${d.getFullYear()}`;
-}
+const loadDir = (dir) => (fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => loadMarkdown(path.join(dir, f))) : []);
 
-function render(template, vars) {
-  let result = template;
-  for (const [key, value] of Object.entries(vars)) {
-    result = result.replaceAll(`{{${key}}}`, value || '');
-  }
-  return result;
-}
+const readingMinutes = (text) => Math.max(1, Math.round(text.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length / 220));
 
-function parseFrontmatter(content) {
-  const lines = content.split('\n');
-  if (lines[0].trim() !== '---') return { data: {}, body: content };
+// ---------- Images: AVIF + WebP at 800 and 1600px wide (or the source width if smaller) ----------
 
-  let endIndex = -1;
-  for (let i = 1; i < lines.length; i++) {
-    if (lines[i].trim() === '---') { endIndex = i; break; }
-  }
-  if (endIndex === -1) return { data: {}, body: content };
-
-  const fmLines = lines.slice(1, endIndex);
-  const data = {};
-  let currentKey = null;
-  let currentArray = null;
-  let currentObj = null;
-
-  for (const line of fmLines) {
-    // Nested array item (starts with "  - " or "    ")
-    if (currentArray !== null && /^\s{2,}-\s/.test(line)) {
-      const itemContent = line.replace(/^\s*-\s*/, '');
-      const colonIdx = itemContent.indexOf(':');
-      if (colonIdx > -1) {
-        // Start a new object in the array
-        if (currentObj) currentArray.push(currentObj);
-        currentObj = {};
-        const k = itemContent.slice(0, colonIdx).trim();
-        const v = itemContent.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
-        currentObj[k] = v;
-      }
-      continue;
-    }
-
-    if (currentArray !== null && /^\s{4,}\w/.test(line)) {
-      const colonIdx = line.indexOf(':');
-      if (colonIdx > -1 && currentObj) {
-        const k = line.slice(0, colonIdx).trim();
-        const v = line.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
-        currentObj[k] = v;
-      }
-      continue;
-    }
-
-    // Close any pending array object
-    if (currentObj) { currentArray.push(currentObj); currentObj = null; }
-    if (currentArray !== null) { data[currentKey] = currentArray; currentArray = null; }
-
-    // Top-level key: value
-    const colonIdx = line.indexOf(':');
-    if (colonIdx === -1) continue;
-
-    const key = line.slice(0, colonIdx).trim();
-    let value = line.slice(colonIdx + 1).trim();
-
-    // Inline array: [a, b, c]
-    if (value.startsWith('[') && value.endsWith(']')) {
-      data[key] = value.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, ''));
-      currentKey = key;
-      continue;
-    }
-
-    // Start of nested array
-    if (value === '') {
-      currentKey = key;
-      currentArray = [];
-      continue;
-    }
-
-    // String value
-    data[key] = value.replace(/^["']|["']$/g, '');
-    currentKey = key;
-  }
-
-  // Close any pending
-  if (currentObj && currentArray) currentArray.push(currentObj);
-  if (currentArray !== null && currentKey) data[currentKey] = currentArray;
-
-  const body = lines.slice(endIndex + 1).join('\n');
-  return { data, body };
-}
-
-async function optimizeImages(srcDir, destDir) {
-  if (!fs.existsSync(srcDir)) return;
-  ensureDir(destDir);
-  const files = fs.readdirSync(srcDir);
-  const tasks = [];
-  for (const file of files) {
-    const ext = path.extname(file).toLowerCase();
-    if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) {
-      const outName = file.replace(/\.(png|jpe?g|gif)$/i, '.webp');
-      tasks.push(
-        sharp(path.join(srcDir, file))
-          .resize({ width: 1200, withoutEnlargement: true })
-          .webp({ quality: 80 })
-          .toFile(path.join(destDir, outName))
-          .then(info => console.log(`    ${file} → ${outName} (${Math.round(info.size / 1024)}KB)`))
-      );
-    } else if (ext === '.svg') {
-      fs.copyFileSync(path.join(srcDir, file), path.join(destDir, file));
+async function processImage(src, outDir, publicDir) {
+  const name = path.basename(src).replace(/\.[^.]+$/, '');
+  const meta = await sharp(src).metadata();
+  const widths = [800, 1600].filter((w) => w <= meta.width);
+  if (!widths.length) widths.push(meta.width);
+  const srcTime = fs.statSync(src).mtimeMs;
+  for (const w of widths) {
+    for (const ext of ['avif', 'webp']) {
+      const out = path.join(outDir, `${name}-${w}.${ext}`);
+      written.push(out);
+      if (fs.existsSync(out) && fs.statSync(out).mtimeMs >= srcTime) continue; // cached
+      const pipe = sharp(src).resize({ width: w, withoutEnlargement: true });
+      await (ext === 'avif' ? pipe.avif({ quality: 55, effort: 4 }) : pipe.webp({ quality: 80 })).toFile(out);
+      console.log(`    ${path.relative('.', out)}`);
     }
   }
-  await Promise.all(tasks);
+  return { base: `${publicDir}/${name}`, width: meta.width, height: meta.height, widths };
+}
+
+// Remove files a previous build wrote that this build no longer produces.
+function prune(dir, keepExt = /\.(html|xml|webp|avif)$/) {
+  if (!fs.existsSync(dir)) return;
+  const keep = new Set(written.map((f) => path.resolve(f)));
+  const walk = (d) => {
+    for (const entry of fs.readdirSync(d, { withFileTypes: true })) {
+      const p = path.join(d, entry.name);
+      if (entry.isDirectory()) { walk(p); if (!fs.readdirSync(p).length) fs.rmdirSync(p); }
+      else if (keepExt.test(entry.name) && !keep.has(path.resolve(p))) { fs.unlinkSync(p); console.log(`  removed ${p}`); }
+    }
+  };
+  walk(dir);
 }
 
 (async () => {
-// --- Load templates ---
+  // ---------- Load content ----------
 
-const navTemplate = fs.readFileSync('templates/partials/nav.html', 'utf8');
-const footerTemplate = fs.readFileSync('templates/partials/footer.html', 'utf8');
-const blogPostTemplate = fs.readFileSync('templates/blog-post.html', 'utf8');
-const caseStudyTemplate = fs.readFileSync('templates/case-study.html', 'utf8');
-const blogIndexTemplate = fs.readFileSync('templates/blog-index.html', 'utf8');
+  const site = JSON.parse(read('site.config.json'));
+  for (const k of Object.keys(site)) if (k.startsWith('_')) delete site[k];
+  const pricing = JSON.parse(read('data/pricing.json'));
+  const home = loadYaml('content/home.yml');
+  const shared = loadYaml('content/shared.yml');
 
-// --- Generate blog posts ---
+  const work = loadDir('content/work');
+  const caseStudies = work.filter((w) => w.category === 'client').sort((a, b) => a.order - b.order);
+  const products = work.filter((w) => w.category === 'product').sort((a, b) => a.order - b.order);
+  const services = loadDir('content/services').sort((a, b) => a.order - b.order);
+  const pages = loadDir('content/pages');
+  const posts = loadDir('content/blog')
+    .filter((p) => !p.draft)
+    .map((p) => ({ ...p, minutes: readingMinutes(p.body) }))
+    .sort((a, b) => b.date.localeCompare(a.date));
 
-const blogDir = 'content/blog';
-const blogFiles = fs.existsSync(blogDir) ? fs.readdirSync(blogDir).filter(f => f.endsWith('.md')) : [];
-const blogPosts = [];
+  // ---------- Images ----------
 
-for (const file of blogFiles) {
-  const raw = fs.readFileSync(path.join(blogDir, file), 'utf8');
-  const { data, body } = parseFrontmatter(raw);
-  const htmlContent = marked(body);
-  blogPosts.push({ ...data, htmlContent, bodyText: body, file });
-}
-
-// Sort by date descending
-blogPosts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-
-for (let i = 0; i < blogPosts.length; i++) {
-  const post = blogPosts[i];
-  const slug = post.slug || post.file.replace('.md', '');
-  const outDir = path.join('blog', slug);
-  ensureDir(outDir);
-
-  const nav = render(navTemplate, { navActiveWriting: 'nav-active', navActiveWork: '' });
-  const prevPost = blogPosts[i + 1];
-  const nextPost = blogPosts[i - 1];
-  const prevLink = prevPost ? `<a href="/blog/${prevPost.slug || prevPost.file.replace('.md','')}/">&larr; ${prevPost.title}</a>` : '<span></span>';
-  const nextLink = nextPost ? `<a href="/blog/${nextPost.slug || nextPost.file.replace('.md','')}/"> ${nextPost.title} &rarr;</a>` : '<span></span>';
-
-  const html = render(blogPostTemplate, {
-    title: post.title || '',
-    description: post.description || '',
-    slug,
-    isoDate: post.date || '',
-    formattedDate: formatDate(post.date),
-    readingTime: String(readingTime(post.bodyText)),
-    content: post.htmlContent,
-    nav,
-    footer: footerTemplate,
-    prevLink,
-    nextLink,
-  });
-
-  fs.writeFileSync(path.join(outDir, 'index.html'), html);
-  console.log(`  blog/${slug}/index.html`);
-}
-
-// --- Generate case studies ---
-
-const workDir = 'content/work';
-const workFiles = fs.existsSync(workDir) ? fs.readdirSync(workDir).filter(f => f.endsWith('.md')) : [];
-let caseStudyCount = 0;
-const imageJobs = [];
-
-for (const file of workFiles) {
-  const raw = fs.readFileSync(path.join(workDir, file), 'utf8');
-  const { data, body } = parseFrontmatter(raw);
-  const slug = data.slug || file.replace('.md', '');
-  const outDir = path.join('work', slug);
-  ensureDir(outDir);
-
-  let htmlContent = marked(body);
-  // Rewrite image refs from .png/.jpg to .webp and add lazy loading
-  htmlContent = htmlContent.replace(/src="([^"]+)\.(png|jpe?g|gif)"/gi, 'src="$1.webp"');
-  htmlContent = htmlContent.replace(/<img(?![^>]*loading=)/gi, '<img loading="lazy"');
-
-  const nav = render(navTemplate, { navActiveWriting: '', navActiveWork: 'nav-active' });
-
-  // Stack tags HTML
-  const stack = data.stack || [];
-  const stackTags = stack.map(s => `<span class="stack-tag">${s}</span>`).join('\n            ');
-
-  // Metrics HTML
-  const metrics = data.metrics || [];
-  const metricsHtml = metrics.map(m =>
-    `<div class="metric"><span class="metric-value">${m.value}</span><span class="metric-label">${m.label}</span></div>`
-  ).join('\n            ');
-
-  // Tags
-  const tags = Array.isArray(data.tags) ? data.tags.join(' &middot; ') : (data.tags || '');
-
-  const html = render(caseStudyTemplate, {
-    title: data.title || '',
-    description: data.description || '',
-    slug,
-    tags,
-    stackTags,
-    metricsHtml,
-    content: htmlContent,
-    nav,
-    footer: footerTemplate,
-  });
-
-  fs.writeFileSync(path.join(outDir, 'index.html'), html);
-
-  // Optimize and copy images
-  const imgSrcDir = path.join('content/work/images', slug);
-  if (fs.existsSync(imgSrcDir)) {
-    imageJobs.push(optimizeImages(imgSrcDir, outDir));
+  const images = {};
+  for (const w of work) {
+    const dir = path.join('content/work/images', w.slug);
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir).filter((x) => /\.(png|jpe?g|webp)$/i.test(x))) {
+      images[`${w.slug}/${f}`] = await processImage(path.join(dir, f), path.join('work', w.slug), `/work/${w.slug}`);
+    }
   }
 
-  console.log(`  work/${slug}/index.html`);
-  caseStudyCount++;
-}
+  // ---------- Context shared by every template ----------
 
-// --- Generate blog index ---
+  const css = (read('styles/tokens.css') + '\n' + read('styles/site.css'))
+    .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '\n').replace(/\n+/g, '\n').trim();
 
-const postListItems = blogPosts.map(post => {
-  const slug = post.slug || post.file.replace('.md', '');
-  return `<li class="post-list-item">
-        <a href="/blog/${slug}/">
-          <div class="post-list-date">${formatDate(post.date)}</div>
-          <div class="post-list-title">${post.title}</div>
-          <div class="post-list-desc">${post.description || ''}</div>
-        </a>
-      </li>`;
-}).join('\n      ');
+  const ctx = { site, pricing, price: createPricing(pricing), home, shared, caseStudies, products, services, posts, images, css };
 
-const blogIndexNav = render(navTemplate, { navActiveWriting: 'nav-active', navActiveWork: '' });
-const blogIndexHtml = render(blogIndexTemplate, {
-  postListItems,
-  nav: blogIndexNav,
-  footer: footerTemplate,
-});
+  // Markdown → HTML. Images inside a work item become responsive <picture>s; links to other sites get rel=noopener.
+  ctx.renderBody = (item, mode) => {
+    let html = marked(item.body);
+    html = html.replace(/<!--[\s\S]*?-->/g, '');
+    html = html.replace(/<img src="([^"/]+)" alt="([^"]*)"[^>]*>/g, (tag, src, alt) => {
+      const key = `${item.slug}/${src}`;
+      if (!images[key]) throw new Error(`${item.file}: image ${src} not found in content/work/images/${item.slug}/`);
+      const sizes = mode === 'story' ? '(min-width: 1024px) 960px, calc(100vw - 40px)' : '(min-width: 744px) 680px, calc(100vw - 40px)';
+      return picture(images, key, alt.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&'), { sizes });
+    });
+    html = html.replace(/<a href="(https?:\/\/[^"]+)"/g, '<a href="$1" rel="noopener"');
+    return html;
+  };
 
-ensureDir('blog');
-fs.writeFileSync('blog/index.html', blogIndexHtml);
-console.log('  blog/index.html');
+  // ---------- Pages ----------
 
-// --- Generate RSS feed ---
+  write('index.html', renderHome(ctx));
 
-const rssItems = blogPosts.map(post => {
-  const slug = post.slug || post.file.replace('.md', '');
-  return `    <item>
-      <title>${escapeXml(post.title || '')}</title>
-      <link>https://andrewisherwood.com/blog/${slug}/</link>
-      <guid>https://andrewisherwood.com/blog/${slug}/</guid>
-      <pubDate>${new Date(post.date + 'T00:00:00Z').toUTCString()}</pubDate>
-      <description>${escapeXml(post.description || '')}</description>
-    </item>`;
-}).join('\n');
+  for (const svc of services) write(`services/${svc.slug}/index.html`, renderService(ctx, svc));
 
-const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+  caseStudies.forEach((cs, i) => write(`work/${cs.slug}/index.html`, renderCaseStudy(ctx, cs, caseStudies[(i + 1) % caseStudies.length])));
+  for (const p of products) write(`work/${p.slug}/index.html`, renderProduct(ctx, p));
+  write('lab/index.html', renderLab(ctx));
+
+  write('blog/index.html', renderWritingIndex(ctx));
+  for (const post of posts) write(`blog/${post.slug}/index.html`, renderArticle(ctx, post));
+
+  for (const page of pages) {
+    const out = page.output || `${page.slug}/index.html`;
+    write(out, page.layout === 'thanks' ? renderThanks(ctx, page) : renderPage(ctx, page));
+  }
+
+  // ---------- RSS ----------
+
+  const x = (s) => esc(s);
+  write('blog/feed.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Andrew Isherwood — Writing</title>
-    <link>https://andrewisherwood.com/blog/</link>
-    <description>Writing about product engineering, AI-augmented development, and building things that matter.</description>
-    <language>en-gb</language>
-    <atom:link href="https://andrewisherwood.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
-${rssItems}
-  </channel>
-</rss>`;
+<channel>
+<title>${x(site.name)}: writing</title>
+<link>${site.siteUrl}/blog/</link>
+<description>${x(shared.writing.description)}</description>
+<language>en-gb</language>
+<atom:link href="${site.siteUrl}/blog/feed.xml" rel="self" type="application/rss+xml"/>
+${posts.map((p) => `<item>
+<title>${x(p.title)}</title>
+<link>${site.siteUrl}/blog/${p.slug}/</link>
+<guid>${site.siteUrl}/blog/${p.slug}/</guid>
+<pubDate>${new Date(p.date + 'T00:00:00Z').toUTCString()}</pubDate>
+<description>${x(p.description)}</description>
+</item>`).join('\n')}
+</channel>
+</rss>
+`);
 
-fs.writeFileSync('blog/feed.xml', rssFeed);
-console.log('  blog/feed.xml');
+  // ---------- Sitemap and robots ----------
 
-function escapeXml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
+  const urls = ['/', ...services.map((s) => `/services/${s.slug}/`), ...caseStudies.map((c) => `/work/${c.slug}/`),
+    '/blog/', ...posts.map((p) => `/blog/${p.slug}/`), '/lab/', ...products.map((p) => `/work/${p.slug}/`),
+    ...pages.filter((p) => !p.noindex).map((p) => `/${p.slug}/`)];
+  write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls.map((u) => `<url><loc>${site.siteUrl}${u}</loc></url>`).join('\n')}
+</urlset>
+`);
+  write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.siteUrl}/sitemap.xml\n`);
 
-// --- Inject homepage writing section ---
+  // ---------- Tidy stale output ----------
 
-const indexPath = 'index.html';
-let indexHtml = fs.readFileSync(indexPath, 'utf8');
+  for (const dir of ['work', 'blog', 'services', 'lab']) prune(dir);
 
-const writingStart = '<!-- WRITING_SECTION_START -->';
-const writingEnd = '<!-- WRITING_SECTION_END -->';
-
-if (indexHtml.includes(writingStart) && indexHtml.includes(writingEnd)) {
-  const latest = blogPosts.slice(0, 3);
-  const writingItems = latest.map(post => {
-    const slug = post.slug || post.file.replace('.md', '');
-    return `      <li>
-        <a href="/blog/${slug}/">
-          <span class="writing-title">${post.title}</span>
-          <span class="writing-date">${formatDate(post.date)}</span>
-        </a>
-      </li>`;
-  }).join('\n');
-
-  const writingSection = `<!-- WRITING_SECTION_START -->
-<section id="writing" style="padding: 5rem 0;">
-  <div class="container">
-    <div class="section-label">Writing</div>
-    <h2 class="section-title" style="margin-bottom: 2rem;">Latest writing</h2>
-    <ul class="writing-list">
-${writingItems}
-    </ul>
-    <div style="margin-top: 2rem;">
-      <a href="/blog/" class="btn-secondary">All writing &rarr;</a>
-    </div>
-  </div>
-</section>
-<!-- WRITING_SECTION_END -->`;
-
-  const startIdx = indexHtml.indexOf(writingStart);
-  const endIdx = indexHtml.indexOf(writingEnd) + writingEnd.length;
-  indexHtml = indexHtml.slice(0, startIdx) + writingSection + indexHtml.slice(endIdx);
-  fs.writeFileSync(indexPath, indexHtml);
-  console.log('  index.html (writing section injected)');
-}
-
-// --- Optimize images ---
-
-await Promise.all(imageJobs);
-
-// --- Summary ---
-
-const elapsed = Date.now() - start;
-console.log(`\nBuild complete: ${blogPosts.length} blog posts, ${caseStudyCount} case studies, ${elapsed}ms`);
-})();
+  console.log(`\nBuilt ${written.filter((f) => f.endsWith('.html')).length} pages (${services.length} services, ${caseStudies.length} case studies, ${products.length} products, ${posts.length} posts) in ${Date.now() - start}ms`);
+})().catch((err) => { console.error(err); process.exit(1); });

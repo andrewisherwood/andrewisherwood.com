@@ -1,0 +1,36 @@
+{
+  "_readme": "The only place prices live. The homepage pricing block, the homepage service cards ('from £…') and the service pages all read this file. price is in pounds; set \"from\": true for 'from £…'; set \"period\": \"month\" for monthly prices.",
+  "services": [
+    {
+      "id": "new-website",
+      "name": "New site or redesign",
+      "tagline": "Design, build, launch.",
+      "tiers": [
+        { "name": "Essentials", "price": 2950, "summary": "Up to 5 pages", "detail": "Up to 5 pages, a clean design from my own design system, a contact form and basic SEO." },
+        { "name": "Business", "price": 5950, "summary": "Up to 12 pages, custom design, full SEO", "detail": "Up to 12 pages, a custom design, content you can edit yourself and a full SEO setup." },
+        { "name": "Custom", "price": 9500, "from": true, "summary": "Booking, e-commerce, integrations, web apps", "detail": "Booking, e-commerce, integrations and web apps. Quoted per project." }
+      ]
+    },
+    {
+      "id": "wordpress-migration",
+      "name": "WordPress to static",
+      "tagline": "Faster, safer, cheaper to host.",
+      "tiers": [
+        { "name": "Starter", "price": 1950, "summary": "5 pages, 20 posts", "detail": "Up to 5 pages and 20 posts, redirects from your old addresses, and Netlify hosting set up." },
+        { "name": "Standard", "price": 3500, "summary": "12 pages, 100 posts, speed pass", "detail": "Up to 12 pages and 100 posts, a contact form, plus an SEO and speed pass." },
+        { "name": "Large", "price": 4500, "from": true, "summary": "More pages and posts", "detail": "More than 12 pages or 100 posts, quoted after the audit." }
+      ]
+    },
+    {
+      "id": "care-plans",
+      "name": "Care plan",
+      "tagline": "Updates, security and changes, monthly.",
+      "tiers": [
+        { "name": "Essential", "price": 75, "period": "month", "summary": "Hosting, backups, monitoring, 30 min of changes", "detail": "Hosting, SSL, backups, uptime monitoring and 30 minutes of changes a month." },
+        { "name": "Standard", "price": 150, "period": "month", "summary": "2 hours of changes, quarterly report", "detail": "Everything in Essential, plus 2 hours of changes a month and a quarterly speed and SEO report." },
+        { "name": "Growth", "price": 300, "period": "month", "summary": "4 hours, monthly SEO and content work", "detail": "Everything in Standard, plus 4 hours a month and monthly SEO and content work." }
+      ]
+    }
+  ],
+  "notes": "Care plans have a 3-month minimum, and paying annually gets you two months free. Small one-off jobs are £100 an hour (1-hour minimum) or £650 a day."
+}

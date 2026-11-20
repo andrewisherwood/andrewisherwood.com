@@ -1,4 +1,6 @@
 ---
+category: product
+order: 4
 title: "BirthBuild"
 slug: birthbuild
 date: 2026-02-16

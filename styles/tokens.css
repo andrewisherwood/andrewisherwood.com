@@ -1,0 +1,69 @@
+/* andrewisherwood.com design tokens. Values match designs/ exactly. */
+:root {
+  /* Colour */
+  --color-accent: #8A3B12;        /* Rust: buttons, labels, links, focus ring */
+  --color-accent-hover: #6E2F0E;  /* Hover and pressed */
+  --color-ink: #211A15;           /* Headings, primary text, dark sections */
+  --color-body: #4E443C;          /* Body copy */
+  --color-muted: #5C5148;         /* Captions, dates, small labels */
+  --color-article: #2E2620;       /* Long-form article body text */
+  --color-bg: #F7F2EA;            /* Cream page background */
+  --color-surface: #FFFFFF;       /* Cards, forms, panels */
+  --color-sand: #F0E6D8;          /* Tinted bands, inline code */
+  --color-line: #E5DCCF;          /* Borders */
+  --color-divider: #EEE6DA;       /* Dividers inside cards */
+  --color-field-border: #9C8F82;  /* Input outlines (3:1 on white) */
+  --color-on-dark: #F7F2EA;       /* Text on ink */
+  --color-on-dark-2: #D8CEC3;     /* Lead text on ink */
+  --color-on-dark-3: #C9BEB2;     /* Secondary text on ink */
+  --color-dark-line: #3A3029;     /* Borders on ink */
+  --color-quote-mark: #E8A57C;    /* Quote icon on ink */
+  --color-error: #A1261B;         /* Always paired with icon + message */
+  --color-success: #2F6A3E;
+  --color-success-bg: #EDF4EE;
+  --placeholder-a: #F3EDE4;       /* Striped image placeholders (dev only) */
+  --placeholder-b: #EBE2D6;
+
+  /* Type */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-text: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --text-h1: clamp(40px, 5.4vw, 66px);      /* 700, lh 1.04, ls -0.025em */
+  --text-h1-sub: clamp(38px, 5vw, 62px);    /* sub-page H1, lh 1.05 */
+  --text-h2: clamp(32px, 3.6vw, 46px);      /* 700, lh 1.1, ls -0.02em */
+  --text-h3: 25px;                          /* 600, lh 1.2 */
+  --text-lead: 20px;                        /* lh 1.55, color body */
+  --text-section-lead: 19px;
+  --text-article: 19px;                     /* lh 1.7, 680px column */
+  --text-body: 17px;                        /* lh 1.6 */
+  --text-small: 15px;
+  --text-caption: 14px;
+  --text-label: 15px;                       /* 600, uppercase, ls 0.04em, accent */
+
+  /* Layout */
+  --container: 1200px;
+  --gutter: 32px;            /* 20px below 600px */
+  --article-column: 680px;
+  --section-y: 104px;        /* 64px on phone */
+  --section-gap: 48px;       /* heading block to content */
+  --card-gap: 24px;
+  --card-padding: 32px;
+
+  /* Radius */
+  --radius-control: 8px;     /* buttons, inputs */
+  --radius-image: 12px;
+  --radius-card: 16px;
+
+  /* Size */
+  --button-height: 52px;     /* primary/secondary; nav button 44px */
+  --field-height: 48px;
+  --min-target: 44px;
+
+  /* Elevation: used on the hero results card and service "at a glance" card only */
+  --shadow-feature: 0 24px 48px -28px rgba(33, 26, 21, 0.22);
+
+  /* Breakpoints (reference, use in media queries) */
+  /* --bp-menu: 860px  nav collapses to Menu button below this */
+  /* --bp-phone: 600px */
+}

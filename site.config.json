@@ -1,0 +1,25 @@
+{
+  "_readme": "Shared settings used on every page. Leave a value as \"\" to hide the line that uses it (nothing is shown as a placeholder).",
+  "siteUrl": "https://andrewisherwood.com",
+  "name": "Andrew Isherwood",
+  "email": "build@andrewisherwood.com",
+  "location": "Wimbledon, London",
+  "locationShort": "Wimbledon",
+  "github": "https://github.com/andrewisherwood",
+
+  "_bookingUrl": "TODO(andy): your Google Calendar appointment schedule link. While empty, every 'Book a free call' button goes to the contact form at /#contact.",
+  "bookingUrl": "",
+
+  "_replyTime": "TODO(andy): e.g. \"one working day\" or \"two working days\". Shown on the contact form and the thanks page.",
+  "replyTime": "",
+
+  "_availability": "TODO(andy): e.g. \"January 2027\". Shown beside the contact form as 'Next availability'.",
+  "availability": "",
+
+  "_projectLength": "TODO(andy): e.g. \"4–6 weeks\". Shown under 'Four steps, no surprises'.",
+  "projectLength": "",
+
+  "_photo": "TODO(andy): path to a photo of you, e.g. /images/andrew.jpg (portrait, at least 900x1125). While empty, About shows text only.",
+  "photo": "",
+  "photoAlt": ""
+}

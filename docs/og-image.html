@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+  Source for /og-image.png (1200x630).
+  To regenerate: run `node build.js`, serve the repo root locally, open /docs/og-image.html
+  at exactly 1200x630, and screenshot the viewport to og-image.png.
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>OG image source</title>
+<link rel="stylesheet" href="/styles/tokens.css">
+<style>
+  @font-face { font-family: 'Bricolage Grotesque'; font-weight: 500 700; src: url(/fonts/bricolage-grotesque-latin.woff2) format('woff2'); }
+  @font-face { font-family: 'Inter'; font-weight: 400 600; src: url(/fonts/inter-latin.woff2) format('woff2'); }
+  html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+  body { background: var(--color-bg); color: var(--color-ink); font-family: var(--font-text); }
+  .og { box-sizing: border-box; width: 1200px; height: 630px; padding: 72px 80px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 14px solid var(--color-accent); }
+  .eyebrow { font-size: 22px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-accent); margin: 0; }
+  h1 { font-family: var(--font-display); font-weight: 700; font-size: 76px; line-height: 1.04; letter-spacing: -0.025em; margin: 28px 0 0; max-width: 980px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; }
+  .name { font-family: var(--font-display); font-weight: 700; font-size: 34px; }
+  .facts { display: flex; gap: 48px; font-size: 20px; color: var(--color-body); }
+  .facts strong { display: block; font-family: var(--font-display); font-size: 32px; font-weight: 600; color: var(--color-ink); }
+</style>
+</head>
+<body>
+<div class="og">
+  <div>
+    <p class="eyebrow">Web design &amp; development · Wimbledon, London</p>
+    <h1>Fast, secure websites for UK small businesses.</h1>
+  </div>
+  <div class="foot">
+    <span class="name">Andrew Isherwood</span>
+    <div class="facts">
+      <span><strong>Since 1994</strong>building for the web</span>
+      <span><strong>Fixed prices</strong>agreed before work starts</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

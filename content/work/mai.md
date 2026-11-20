@@ -1,4 +1,6 @@
 ---
+category: product
+order: 2
 title: "Multi-Agent Infrastructure"
 slug: mai
 date: 2026-02-01

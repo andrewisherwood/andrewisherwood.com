@@ -1,126 +1,78 @@
 # CLAUDE.md — andrewisherwood.com
 
-Last Updated: February 13, 2026
-Status: Pre-build — awaiting MAI V3 first deployment
+Last Updated: November 20, 2026
+Status: Warm redesign (Claude Design handoff, `~/Downloads/andrewisherwood-redesign-handoff.zip`) on branch `feat/redesign-warm`. Replaces the retro-terminal look.
 
 ## What This Is
 
-Personal portfolio site for Andrew Isherwood — Solutions Architect & Product Engineer. Single-page static site with an AI-powered interactive terminal. No framework, no build step, no dependencies.
+Personal site for Andrew Isherwood — web designer & developer, Wimbledon, London. One goal: get UK small and mid-sized businesses to **book a free discovery call**. His own products live on `/lab/`, linked from About only — never on the homepage.
 
-This is the first live test of MAI V3. The build process is being logged in BUILD_LOG.md.
+Static site, no framework. `node build.js` (using `marked`, `js-yaml`, `sharp`) generates **every** page, including the homepage, from content and data files. Generated output is committed.
 
-## Project Structure
+## Where content lives (never hard-code copy in templates)
 
 ```
-andrewisherwood.com/
-├── index.html                          ← The entire site (single file)
-├── favicon-c64.svg                     ← C64-style favicon (AI monogram, animated cursor)
-├── suppertime-screenshot.png           ← Suppertime app screenshot (mobile, portrait)
-├── adaptive-coach-screenshot.png       ← AdaptiveCoach dashboard screenshot (desktop, landscape)
-├── netlify/
-│   └── edge-functions/
-│       └── chat.js                     ← Anthropic API proxy
-├── netlify.toml                        ← Deployment config
-├── SCOPING.md    ← Full design & implementation brief
-├── BUILD_LOG.md                        ← MAI V3 build log (written during build)
-├── CLAUDE.md                           ← This file
-└── README.md                           ← Project description
+site.config.json           ← Shared settings: bookingUrl, email, replyTime, availability, projectLength, location, photo
+data/pricing.json          ← The ONLY place prices live (homepage pricing, service cards, service pages)
+content/home.yml           ← Homepage copy (hero, problems, process, about, contact)
+content/shared.yml         ← Closing CTA bands, writing intro, author box, lab page
+content/services/*.md      ← Service pages (YAML front matter only) → /services/<slug>/
+content/work/*.md          ← category: client → case study /work/<slug>/ (ordered by `order`, shown on homepage)
+                             category: product → /work/<slug>/, listed on /lab/
+content/work/images/<slug>/← Source screenshots; build makes AVIF + WebP at 800/1600px
+content/blog/*.md          ← Posts → /blog/<slug>/ (reading time is computed)
+content/pages/*.md         ← privacy, thanks (layout: thanks), 404 (output: 404.html)
 ```
 
-## Architecture
+Templates are JS modules in `templates/` (`layout.js` = head/header/footer/CTA band, `home.js`, `service.js`, `case-study.js`, `pages.js`, `helpers.js`). Styles: `styles/tokens.css` (from the handoff, don't change values) + `styles/site.css`; the build inlines both into each page. The only JS is `scripts/site.js` (phone menu, enquiry form, thanks-page name).
 
-**Frontend:** Single HTML file. All CSS inline in `<style>`. All JS inline in `<script>`. No external dependencies except Google Fonts (IBM Plex Mono, Space Grotesk, DM Serif Display).
+Copy tokens: `{from:<service id>}`, `{price:<service id>:<Tier>}` and `{lowest}` in YAML/Markdown are filled from `data/pricing.json`.
 
-**AI Chat:** Interactive terminal calls `/api/chat` which is a Netlify Edge Function that proxies to the Anthropic Messages API. API key stored as Netlify env var `ANTHROPIC_API_KEY`. Model: `claude-sonnet-4-20250514`. Max tokens: 300.
+A value left as `""` in `site.config.json` hides the line that uses it — nothing is ever shown as a placeholder.
 
-**Hosting:** Netlify. Static files served from root. No build command.
+## Behaviour
+
+- **Book a free call**: every button uses `site.config.json → bookingUrl` (Google Calendar appointment page), same tab, `data-cta="book-call"`. While empty, buttons go to `/#contact`.
+- **Enquiry form**: Netlify Form `contact`, honeypot `company-website`, 3-second timing check, validates on submit then on change, posts with fetch and falls back to a native POST to `/thanks/` (works without JS). Netlify email notification sets Reply-To from the `email` field.
+- **Phone menu** below 860px; without JS the nav links wrap instead.
+- **FAQ**: `<details>`, first open; `FAQPage` JSON-LD from the same content. Empty answers are skipped.
 
 ## Design Language
 
-- **Aesthetic:** C64/retro-terminal meets modern portfolio. Scanlines, phosphor glow, terminal chrome, blinking cursors.
-- **Colour palette:** Dark (#0a0a0a) background, phosphor orange (#e8643a) accent, green (#3ae87a) for metrics/success, blue (#6aadff) for paths, amber (#ffbd2e) for warnings.
-- **Typography:** IBM Plex Mono (UI, labels, terminal), Space Grotesk (body), DM Serif Display (headings).
-- **Components:** Terminal windows with traffic-light chrome, `>` prefixed labels, `├─` tree notation, `//` comment-style section labels, scanline overlay across entire page.
+Warm, plain-spoken. Cream `#F7F2EA` background, ink `#211A15`, rust `#8A3B12` as the single accent (see `styles/tokens.css`). Bricolage Grotesque (headings), Inter (text), JetBrains Mono (article code only), self-hosted latin woff2 in `fonts/`.
 
-## Key Sections
+- "Book a free call" is the only primary (rust) button in any section; everything else is secondary (outline) or a text link.
+- Dark (ink) sections: testimonial, contact, closing CTAs, footer. Buttons on dark are cream.
+- **No** terminal prompts, monospace headings, scanlines, emoji, gradients, or AI-product sections on the homepage.
+- Quality bar: Lighthouse 100 mobile, WCAG 2.2 AA, 44px targets, visible focus ring.
 
-1. **Nav** — Fixed. "AI" logo with blinking cursor. Terminal-style `> links`.
-2. **Hero** — Terminal window. `andrew@isherwood ~` chrome. Title, ROLE/STACK/SINCE key-values.
-3. **Signal bar** — 32 years / 100 beta users / 4 products / AI workflows.
-4. **Case studies** — Suppertime (mobile screenshot), MAI (terminal mockup), Adaptive Coach (desktop screenshot).
-5. **Timeline** — 1994 → NOW horizontal career arc.
-6. **About** — Narrative left, stack.config terminal window right.
-7. **Interactive terminal** — AI chatbot. `visitor@portfolio $` prompt. Anthropic API via edge function.
-8. **Contact** — Terminal window. Email: build@andrewisherwood.com.
+## Homepage order
+
+Hero + results card → Trusted by → Services (3 problems) → Pricing → Client work → Testimonial → How it works → About → Contact.
 
 ## Content Rules
 
-- All copy is in the reference HTML file (SCOPING.md points to it)
-- Email: build@andrewisherwood.com (confirm with Andy if this is correct)
-- Location: Folkestone, UK
-- Do not add any content from the old Hugo/PaperMod blog
-- Do not add a CMS, analytics, or cookie banners
+- Email: build@andrewisherwood.com. Location: Wimbledon, London, UK.
+- Never invent stats, prices, testimonials or client details. Unknown facts go in an HTML/YAML comment `TODO(andy): …` and the field is left empty so nothing shows. `grep -rn "TODO(andy)"` lists them all.
+- Do not add any content from the old Hugo/PaperMod blog.
+- No CMS, no cookie banners. No analytics unless Andy approves a cookieless one (the privacy notice currently says there is none).
 
-## Interactive Terminal — System Prompt
+## Hosting
 
-The AI chat agent has a system prompt baked into the JS containing all portfolio context. If case study details change, update the system prompt in the `<script>` block AND the corresponding section in the HTML. Keep them in sync.
+Netlify. Build `npm install && node build.js`, publish `.`. `_redirects` maps `/writing` → `/blog/` etc. CSP in `netlify.toml` allows only `'self'`.
 
-The system prompt instructs the agent to:
-- Keep responses to 2-5 sentences
-- Use plain text (no markdown)
-- Direct hire/contact queries to build@andrewisherwood.com
-- Be honest when it doesn't know something
+`netlify/edge-functions/chat.js` (the old Ask Me Anything proxy at `/api/chat`) is no longer used by any page. The API key must never appear in client-side code.
 
-## Edge Function
-
-`/netlify/edge-functions/chat.js` proxies POST requests from the client to `https://api.anthropic.com/v1/messages`. It injects the API key from `Deno.env.get('ANTHROPIC_API_KEY')` and sets `anthropic-version: 2023-06-01`.
-
-**Critical:** The client JS must POST to `/api/chat`, never directly to the Anthropic API. The API key must never appear in client-side code.
-
-## Deployment
-
-```bash
-# Fresh repo
-git init
-git remote add origin git@github.com:andrewisherwood/andrewisherwood.com.git
-git add .
-git commit -m "feat: initial site build via MAI V3"
-git branch -M main
-git push -u origin main
-```
-
-Then in Netlify:
-1. Connect repo
-2. Build command: (leave blank)
-3. Publish directory: `.`
-4. Set env var: `ANTHROPIC_API_KEY`
-5. Add custom domain: andrewisherwood.com
-6. SSL auto-provisions
+Netlify setup: Forms → enable detection and add an email notification for `contact` to Andy's Google Workspace inbox.
 
 ## Development
 
-There is no dev server. Open `index.html` in a browser. Edit. Refresh.
-
-The AI terminal won't work locally (no edge function). To test it locally, temporarily point the fetch at the Anthropic API directly with a hardcoded key, then revert before committing. Or use `netlify dev` if you have the Netlify CLI installed.
-
-## MAI V3 Build Instructions
-
-Read `SCOPING.md` for the full implementation brief. It contains:
-- Design reference (the HTML prototype)
-- Asset list (screenshots, favicon)
-- Section-by-section structure
-- Edge function code
-- netlify.toml config
-- Build logging requirements
-
-Log all agent activity to `BUILD_LOG.md` using the format specified in the brief.
+`node build.js`, then serve the root (e.g. `python3 -m http.server`). Pages use absolute paths. Check at 360, 390, 768, 1024, 1280 and 1440px.
 
 ## Do Not
 
-- Add node_modules or package.json
-- Add a build step or framework
-- Use a CSS framework (all styles are hand-written)
-- Modify the favicon (it's approved)
-- Remove the scanline overlay
+- Commit node_modules
+- Add a framework or CSS framework
+- Modify the favicon (approved)
+- Put copy or prices in templates
 - Expose the API key in client code
-- Add content the brief doesn't specify

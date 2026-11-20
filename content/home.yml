@@ -1,0 +1,95 @@
+# Homepage copy. Prices come from data/pricing.json, client cards from content/work/*.md
+# (ordered by `order`), contact details from site.config.json.
+
+seo:
+  title: "Andrew Isherwood: web designer & developer, Wimbledon, London"
+  description: "Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after in Wimbledon, London, at a fixed price agreed before any work starts."
+
+hero:
+  eyebrow: "Web design & development · Wimbledon, London"
+  title: "Your website should be winning you work. I’ll make sure it does."
+  lead: "Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after by one senior developer, at a fixed price agreed before any work starts."
+  secondary: { label: "See client results", href: "#work" }
+  # value "lowest-price" becomes "From £…" using the cheapest one-off price in data/pricing.json.
+  facts:
+    - { value: "Since 1994", label: "building for the web" }
+    - { value: "24 years", label: "with my longest client" }
+    - { value: "lowest-price", label: "fixed, written quote" }
+
+# The "Recent client results" card beside the hero.
+results:
+  title: "Recent client results"
+  bar:
+    client: "4ARMED"
+    label: "Mobile speed score"
+    before: 31
+    after: 100
+  rows:
+    - { client: "Eflow Global", sector: "Compliance software", from: "15.4s", to: "96 score" }
+    - { client: "Nasaco International", sector: "Chemicals", value: "Client since 2002" }
+
+trusted:
+  label: "Trusted by"
+  names: ["Nasaco International", "Eflow Global", "Oasis Clinics", "Jumping Rivers", "4ARMED"]
+
+problems:
+  title: "Most business websites have one of three problems."
+  lead: "Here’s how I fix each one."
+  items:
+    - icon: clock
+      title: "It’s slow, so people leave."
+      text: "A slow site costs you enquiries and search rankings. I design and rebuild sites to load fast on a phone, where most of your visitors are."
+      service: new-website
+      link: "New site or redesign"
+    - icon: shield
+      title: "WordPress is a constant worry."
+      text: "Plugin updates, security patches, rising hosting bills. I move WordPress sites to fast static hosting that costs less to run and has far less to go wrong."
+      service: wordpress-migration
+      link: "WordPress migration"
+    - icon: wrench
+      title: "Nobody’s looking after it."
+      text: "Small changes sit on the to-do list for months. A care plan gives you one person who keeps your site updated, secure and improving."
+      service: care-plans
+      link: "Care plans"
+
+pricing:
+  eyebrow: "Pricing"
+  title: "Fixed prices, agreed before any work starts."
+  lead: "No hourly surprises. After a free call you get a written quote. Pay 50% to book and the rest at launch."
+  cta: "Get a fixed quote"
+
+work:
+  eyebrow: "Client work"
+  title: "Results for businesses like yours."
+
+# Case study whose `quote` is shown in the dark testimonial band.
+testimonial: oasis-clinics
+
+process:
+  eyebrow: "How it works"
+  title: "Four steps, no surprises."
+  # The lead line uses projectLength from site.config.json and is hidden while that is empty.
+  lead: "A typical project takes {projectLength} from quote to launch."
+  steps:
+    - { title: "Free discovery call", text: "We talk about your business and what the site needs to do. Already have a site? I’ll audit it for free." }
+    - { title: "Fixed written quote", text: "A clear price and scope in writing. 50% to book, the rest when you launch." }
+    - { title: "Build", text: "Watch it take shape on a private preview link and give feedback as we go." }
+    - { title: "Launch and care", text: "We go live together. An optional care plan keeps it secure and improving." }
+
+about:
+  eyebrow: "About"
+  title: "Hi, I’m Andrew."
+  paragraphs:
+    - "I’ve been building websites since 1994, with 18 years as a classically trained chef along the way. The kitchen still shapes how I work: prepare properly, keep the standards high, and get every plate out on time."
+    - "When you work with me, you deal with me. No account managers, no juniors. I use modern AI-assisted tools to work quickly, and every decision is made by someone with three decades of experience."
+  links:
+    - { label: "Read my writing", href: "/blog/" }
+    - { label: "See the products I build", href: "/lab/" }
+
+contact:
+  title: "Tell me what your website needs to do."
+  # {replyTime} comes from site.config.json. While it is empty, leadNoTime is used.
+  lead: "I’ll reply within {replyTime} with next steps and, if we’re a fit, a fixed quote."
+  leadNoTime: "I’ll reply personally with next steps and, if we’re a fit, a fixed quote."
+  needs: ["New site or redesign", "WordPress migration", "Care plan", "Not sure yet"]
+  budgets: ["Not sure", "Under £2,000", "£2,000–£5,000", "£5,000+"]

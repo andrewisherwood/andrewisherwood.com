@@ -1,657 +1,748 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrew Isherwood — Solutions Architect & Product Engineer</title>
-<meta name="description" content="I design systems that work and ship products that matter. 32 years building for the web. Solutions architecture, product engineering, and AI-augmented development.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Andrew Isherwood: web designer &amp; developer, Wimbledon, London</title>
+<meta name="description" content="Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after in Wimbledon, London, at a fixed price agreed before any work starts.">
+<link rel="canonical" href="https://andrewisherwood.com/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Andrew Isherwood">
+<meta name="theme-color" content="#F7F2EA">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/svg+xml" href="/favicon-c64.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#0a0a0a">
-<meta name="author" content="Andrew Isherwood">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://andrewisherwood.com/">
+<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood: writing" href="/blog/feed.xml">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://andrewisherwood.com/">
-<meta property="og:title" content="Andrew Isherwood — Solutions Architect & Product Engineer">
-<meta property="og:description" content="I design systems that work and ship products that matter. 32 years building for the web. Solutions architecture, product engineering, and AI-augmented development.">
+<meta property="og:title" content="Andrew Isherwood: web designer &amp; developer, Wimbledon, London">
+<meta property="og:description" content="Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after in Wimbledon, London, at a fixed price agreed before any work starts.">
 <meta property="og:image" content="https://andrewisherwood.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Andrew Isherwood: websites for small businesses, Wimbledon, London">
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="Andrew Isherwood">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Andrew Isherwood — Solutions Architect & Product Engineer">
-<meta name="twitter:description" content="I design systems that work and ship products that matter. 32 years building for the web.">
+<meta name="twitter:title" content="Andrew Isherwood: web designer &amp; developer, Wimbledon, London">
+<meta name="twitter:description" content="Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after in Wimbledon, London, at a fixed price agreed before any work starts.">
 <meta name="twitter:image" content="https://andrewisherwood.com/og-image.png">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://andrewisherwood.com/#person",
-      "name": "Andrew Isherwood",
-      "url": "https://andrewisherwood.com/",
-      "jobTitle": "Web Designer & Developer",
-      "description": "Websites, product engineering, and AI-augmented development. 32 years building for the web.",
-      "email": "mailto:build@andrewisherwood.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Wimbledon",
-        "addressRegion": "London",
-        "addressCountry": "GB"
-      },
-      "worksFor": { "@id": "https://andrewisherwood.com/#business" },
-      "sameAs": [
-        "https://github.com/andrewisherwood"
-      ]
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": "https://andrewisherwood.com/#business",
-      "name": "Andrew Isherwood",
-      "url": "https://andrewisherwood.com/",
-      "image": "https://andrewisherwood.com/og-image.png",
-      "logo": "https://andrewisherwood.com/icon-512.png",
-      "description": "Website design and build, WordPress to static migrations, and ongoing site care.",
-      "email": "build@andrewisherwood.com",
-      "founder": { "@id": "https://andrewisherwood.com/#person" },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Wimbledon",
-        "addressRegion": "London",
-        "addressCountry": "GB"
-      },
-      "areaServed": [
-        { "@type": "City", "name": "London" },
-        { "@type": "Country", "name": "United Kingdom" }
-      ]
-    }
-  ]
+<link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>:root {
+--color-accent: #8A3B12;
+--color-accent-hover: #6E2F0E;
+--color-ink: #211A15;
+--color-body: #4E443C;
+--color-muted: #5C5148;
+--color-article: #2E2620;
+--color-bg: #F7F2EA;
+--color-surface: #FFFFFF;
+--color-sand: #F0E6D8;
+--color-line: #E5DCCF;
+--color-divider: #EEE6DA;
+--color-field-border: #9C8F82;
+--color-on-dark: #F7F2EA;
+--color-on-dark-2: #D8CEC3;
+--color-on-dark-3: #C9BEB2;
+--color-dark-line: #3A3029;
+--color-quote-mark: #E8A57C;
+--color-error: #A1261B;
+--color-success: #2F6A3E;
+--color-success-bg: #EDF4EE;
+--placeholder-a: #F3EDE4;
+--placeholder-b: #EBE2D6;
+--font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+--font-text: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+--font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+--text-h1: clamp(40px, 5.4vw, 66px);
+--text-h1-sub: clamp(38px, 5vw, 62px);
+--text-h2: clamp(32px, 3.6vw, 46px);
+--text-h3: 25px;
+--text-lead: 20px;
+--text-section-lead: 19px;
+--text-article: 19px;
+--text-body: 17px;
+--text-small: 15px;
+--text-caption: 14px;
+--text-label: 15px;
+--container: 1200px;
+--gutter: 32px;
+--article-column: 680px;
+--section-y: 104px;
+--section-gap: 48px;
+--card-gap: 24px;
+--card-padding: 32px;
+--radius-control: 8px;
+--radius-image: 12px;
+--radius-card: 16px;
+--button-height: 52px;
+--field-height: 48px;
+--min-target: 44px;
+--shadow-feature: 0 24px 48px -28px rgba(33, 26, 21, 0.22);
 }
-</script>
-
-<link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/space-grotesk-variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/fonts/dm-serif-display-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles/base.css">
-<link rel="stylesheet" href="/styles/home.css">
-<link rel="alternate" type="application/rss+xml" title="Andrew Isherwood — Writing" href="/blog/feed.xml">
+@font-face {
+font-family: 'Bricolage Grotesque';
+font-style: normal;
+font-weight: 500 700;
+font-display: swap;
+src: url(/fonts/bricolage-grotesque-latin.woff2) format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400 600;
+font-display: swap;
+src: url(/fonts/inter-latin.woff2) format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+font-family: 'JetBrains Mono';
+font-style: normal;
+font-weight: 400;
+font-display: swap;
+src: url(/fonts/jetbrains-mono-400-latin.woff2) format('woff2');
+unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 16px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+margin: 0;
+font-family: var(--font-text);
+font-size: var(--text-body);
+line-height: 1.6;
+color: var(--color-ink);
+background: var(--color-bg);
+-webkit-font-smoothing: antialiased;
+}
+body.menu-open { overflow: hidden; }
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+input, select, textarea, button { font: inherit; }
+a { color: var(--color-accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-hover); text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 2px; }
+.on-dark :focus-visible, .band-ink :focus-visible, .site-footer :focus-visible { outline-color: var(--color-on-dark); }
+.form-card :focus-visible { outline-color: var(--color-accent); }
+.skip-link {
+position: absolute; left: 16px; top: -100px; z-index: 100;
+padding: 12px 18px; border-radius: var(--radius-control);
+background: var(--color-ink); color: var(--color-on-dark); font-weight: 600; text-decoration: none;
+}
+.skip-link:focus { top: 16px; color: var(--color-on-dark); outline-color: var(--color-accent); }
+.visually-hidden {
+position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.todo { background: #FFF1BF; color: #5C4300; padding: 0 6px; border-radius: 4px; font-weight: 600; font-size: 0.85em; }
+.container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.container-narrow { max-width: 880px; }
+.container-quote { max-width: 960px; }
+.section { padding-block: var(--section-y); }
+.section-head { display: flex; flex-direction: column; gap: 16px; max-width: 720px; }
+.section-body { display: flex; flex-direction: column; gap: var(--section-gap); }
+.grid { display: grid; gap: var(--card-gap); grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 320px), 100%), 1fr)); }
+.band-sand { background: var(--color-sand); }
+.band-white { background: var(--color-surface); border-block: 1px solid var(--color-line); }
+.band-ink { background: var(--color-ink); color: var(--color-on-dark); }
+.rule-block { border-block: 1px solid var(--color-line); }
+.h1, .h2, .h3, .display { font-family: var(--font-display); color: inherit; }
+.h1 { font-weight: 700; font-size: var(--text-h1); line-height: 1.04; letter-spacing: -0.025em; text-wrap: balance; }
+.h1-sub { font-weight: 700; font-size: var(--text-h1-sub); line-height: 1.05; letter-spacing: -0.025em; text-wrap: balance; font-family: var(--font-display); }
+.h2 { font-weight: 700; font-size: var(--text-h2); line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; }
+.h2-sm { font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; }
+.h3 { font-weight: 600; font-size: clamp(22px, 2vw, var(--text-h3)); line-height: 1.2; }
+.lead { font-size: var(--text-lead); line-height: 1.55; color: var(--color-body); max-width: 560px; text-wrap: pretty; }
+.section-lead { font-size: var(--text-section-lead); color: var(--color-body); }
+.band-ink .section-lead, .band-ink .lead { color: var(--color-on-dark-2); }
+.eyebrow { font-size: var(--text-label); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-accent); }
+.eyebrow-muted { font-size: var(--text-caption); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-muted); }
+.muted { color: var(--color-muted); }
+.body-text { color: var(--color-body); }
+.small { font-size: var(--text-small); }
+.caption { font-size: var(--text-caption); color: var(--color-muted); }
+.text-link { font-weight: 600; color: var(--color-accent); }
+.btn {
+display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+min-height: var(--button-height); padding: 0 26px;
+border-radius: var(--radius-control); border: 1.5px solid transparent;
+font-weight: 600; font-size: 17px; line-height: 1.2; text-decoration: none; cursor: pointer;
+transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn-primary { background: var(--color-accent); border-color: var(--color-accent); color: #FFFFFF; }
+.btn-primary:hover, .btn-primary:active { background: var(--color-accent-hover); border-color: var(--color-accent-hover); color: #FFFFFF; }
+.btn-secondary { background: transparent; border-color: var(--color-ink); color: var(--color-ink); padding: 0 24px; }
+.btn-secondary:hover { background: var(--color-ink); color: var(--color-on-dark); }
+.btn-on-dark { background: var(--color-on-dark); border-color: var(--color-on-dark); color: var(--color-ink); }
+.btn-on-dark:hover { background: #FFFFFF; border-color: #FFFFFF; color: var(--color-ink); }
+.btn-block { display: flex; width: 100%; }
+.btn-sm { min-height: 48px; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); padding: var(--card-padding); }
+.card-flat { border-color: transparent; }
+.card-feature { box-shadow: var(--shadow-feature); }
+.card-stack { display: flex; flex-direction: column; gap: 16px; }
+.card-link { color: var(--color-ink); text-decoration: none; transition: border-color .15s ease; }
+.card-link:hover { color: var(--color-ink); border-color: var(--color-field-border); }
+.card-link:hover .text-link { color: var(--color-accent-hover); text-decoration: underline; text-decoration-thickness: 2px; }
+.site-header { background: var(--color-bg); border-bottom: 1px solid var(--color-line); position: relative; z-index: 50; }
+.header-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding-block: 18px; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; color: var(--color-ink); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
+.brand:hover { color: var(--color-ink); }
+.site-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 16px; font-weight: 500; }
+.nav-links { display: flex; flex-wrap: wrap; gap: 0 28px; list-style: none; padding: 0; }
+.nav-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-ink); text-decoration: none; }
+.nav-links a:hover { color: var(--color-accent); }
+.nav-links a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: var(--color-accent); }
+.btn-nav { min-height: 44px; padding: 0 20px; font-size: 16px; }
+.nav-email { display: none; }
+.menu-toggle {
+display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+border: 1.5px solid var(--color-ink); border-radius: var(--radius-control);
+background: transparent; color: var(--color-ink); font-weight: 600; font-size: 15px; cursor: pointer;
+}
+.menu-toggle[aria-expanded="true"] { background: var(--color-ink); color: var(--color-on-dark); }
+.menu-toggle .icon-close, .menu-toggle[aria-expanded="true"] .icon-menu { display: none; }
+.menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+@media (max-width: 859.98px) {
+.header-inner { padding-block: 12px; }
+.brand { font-size: 20px; }
+.js .menu-toggle { display: inline-flex; }
+.js .site-nav { display: none; }
+.js .site-header.is-open .site-nav {
+display: flex; flex-direction: column; align-items: stretch; flex-wrap: nowrap; gap: 0;
+position: fixed; left: 0; right: 0; top: var(--menu-top, 69px); bottom: 0;
+background: var(--color-bg); overflow-y: auto; padding: 8px var(--gutter) 20px;
+}
+.js .site-header.is-open .nav-links { flex-direction: column; flex: 1; gap: 0; }
+.js .site-header.is-open .nav-links a {
+display: flex; min-height: 60px; border-bottom: 1px solid var(--color-line);
+font-family: var(--font-display); font-size: 24px; font-weight: 600;
+}
+.js .site-header.is-open .btn-nav { min-height: var(--button-height); margin-top: 20px; font-size: 17px; }
+.js .site-header.is-open .nav-email { display: block; text-align: center; margin-top: 12px; font-size: 15px; color: var(--color-muted); }
+}
+.site-footer { background: var(--color-ink); color: var(--color-on-dark-3); border-top: 1px solid var(--color-dark-line); }
+.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 32px; padding-block: 28px; font-size: var(--text-small); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 0 24px; list-style: none; padding: 0; }
+.footer-links a { color: #EDE6DC; display: inline-flex; align-items: center; min-height: 44px; }
+.footer-links a:hover { color: #FFFFFF; }
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; font-size: var(--text-small); color: var(--color-muted); }
+.breadcrumb li + li::before { content: "/"; margin-right: 8px; }
+.check-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.check-list li { display: flex; gap: 12px; align-items: flex-start; }
+.check-list svg { flex: 0 0 auto; margin-top: 2px; }
+.icon-accent { color: var(--color-accent); }
+.steps { list-style: none; padding: 0; --min: 240px; }
+.step { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 2px solid var(--color-ink); }
+.step-num { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--color-accent); }
+.step h3 { font-family: var(--font-display); font-size: 23px; font-weight: 600; line-height: 1.2; }
+.step p { color: var(--color-body); }
+.cta-band { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 28px 48px; padding-block: 88px; }
+.cta-band-text { display: flex; flex-direction: column; gap: 12px; max-width: 680px; }
+.cta-band-text p { font-size: var(--text-section-lead); color: var(--color-on-dark-2); }
+.quote-icon { width: 44px; height: 44px; }
+.quote-text { font-family: var(--font-display); font-size: clamp(26px, 3vw, 36px); font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; text-wrap: pretty; }
+.quote-text p + p { margin-top: 0.6em; }
+.quote-cite { display: flex; flex-direction: column; font-style: normal; }
+.quote-cite strong { font-weight: 600; }
+.shot { background: var(--color-sand); overflow: hidden; }
+.shot picture { display: block; height: 100%; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 64px; align-items: center; padding-block: 88px 80px; }
+.hero-copy { display: flex; flex-direction: column; gap: 28px; }
+.hero-facts { display: flex; flex-wrap: wrap; gap: 12px 32px; padding-top: 8px; font-size: var(--text-small); color: var(--color-body); list-style: none; padding-left: 0; }
+.hero-facts li { display: flex; flex-direction: column; }
+.hero-facts strong { font-family: var(--font-display); font-size: 28px; font-weight: 600; color: var(--color-ink); line-height: 1.2; }
+.results-card { display: flex; flex-direction: column; gap: 28px; }
+.result-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.result-bars { display: flex; flex-direction: column; gap: 12px; }
+.result-bar { display: flex; align-items: center; gap: 12px; }
+.result-bar > span:first-child { width: 52px; font-size: var(--text-caption); color: var(--color-muted); }
+.result-bar > span:last-child { width: 36px; text-align: right; font-weight: 600; }
+.bar { flex: 1; height: 12px; border-radius: 6px; background: #F1EBE2; }
+.bar > span { display: block; height: 12px; border-radius: 6px; width: var(--w); background: #B3A89C; }
+.bar-after > span { background: var(--color-accent); }
+.result-divider { height: 1px; background: var(--color-divider); border: 0; margin: 0; }
+.result-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 16px; }
+.result-row-name { display: flex; flex-direction: column; }
+.result-row-name strong { font-weight: 600; }
+.result-value { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 24px; font-weight: 600; }
+.result-was { color: #7A6E64; text-decoration: line-through; text-decoration-thickness: 2px; }
+.trusted { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 40px; padding-block: 28px; list-style: none; }
+.trusted li { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--color-body); }
+.trusted .trusted-label { font-family: var(--font-text); font-size: var(--text-small); font-weight: 400; color: var(--color-muted); }
+.problem-card p { color: var(--color-body); flex: 1; }
+.problem-card svg { color: var(--color-accent); }
+.price-card { display: flex; flex-direction: column; gap: 20px; }
+.price-card-head { display: flex; flex-direction: column; gap: 6px; }
+.price-card-head p { font-size: 16px; color: var(--color-muted); }
+.tier-rows { list-style: none; padding: 0; }
+.tier-row { display: flex; justify-content: space-between; gap: 16px; padding-block: 16px; border-top: 1px solid var(--color-divider); }
+.tier-row > div { display: flex; flex-direction: column; }
+.tier-row strong { font-weight: 600; }
+.tier-row > div > span { font-size: var(--text-small); color: var(--color-muted); }
+.tier-price { font-family: var(--font-display); font-size: 22px; font-weight: 600; white-space: nowrap; }
+.pricing-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 32px; }
+.pricing-foot p { font-size: var(--text-small); color: var(--color-body); max-width: 760px; }
+.work-card { overflow: hidden; display: flex; flex-direction: column; padding: 0; }
+.work-card .shot { height: 200px; border-bottom: 1px solid var(--color-line); }
+.work-card-body { padding: 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.work-card-body h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.2; }
+.work-card-result { font-weight: 500; flex: 1; }
+.about { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 64px; align-items: center; }
+.about.no-photo { grid-template-columns: minmax(0, 760px); }
+.about-photo { border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 4 / 5; max-height: 560px; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; }
+.about-copy { display: flex; flex-direction: column; gap: 22px; }
+.about-copy p { font-size: var(--text-section-lead); color: var(--color-body); text-wrap: pretty; }
+.link-row { display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: 16px; }
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 64px; }
+.contact-copy { display: flex; flex-direction: column; gap: 22px; }
+.contact-copy h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 4vw, 52px); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+.contact-copy > p { font-size: var(--text-section-lead); color: var(--color-on-dark-2); }
+.contact-facts { display: flex; flex-direction: column; gap: 14px; padding-top: 12px; }
+.contact-facts div { display: flex; flex-direction: column; }
+.contact-facts dt { font-size: var(--text-caption); color: var(--color-on-dark-3); }
+.contact-facts dd { font-weight: 600; }
+.contact-facts a { color: #FFFFFF; }
+.form-card { background: var(--color-surface); color: var(--color-ink); border-radius: var(--radius-card); padding: var(--card-padding); display: flex; flex-direction: column; gap: 18px; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: var(--text-small); font-weight: 600; }
+.field .optional { font-weight: 400; color: var(--color-muted); }
+.field input, .field select, .field textarea {
+min-height: var(--field-height); padding: 0 14px; width: 100%;
+border: 1px solid var(--color-field-border); border-radius: var(--radius-control);
+background: var(--color-surface); color: var(--color-ink); font-weight: 400;
+}
+.field select { padding: 0 12px; }
+.field textarea { padding: 12px 14px; resize: vertical; min-height: 120px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--color-accent); outline-offset: 2px; border-color: var(--color-accent); }
+.field [aria-invalid="true"] { border: 2px solid var(--color-error); }
+.field-error { display: flex; align-items: center; gap: 6px; font-size: var(--text-caption); font-weight: 500; color: var(--color-error); }
+.field-error[hidden] { display: none; }
+.field-error svg { flex: 0 0 auto; }
+.form-note { font-size: var(--text-caption); color: var(--color-muted); }
+.form-status { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: var(--radius-control); background: var(--color-success-bg); color: var(--color-success); font-weight: 600; }
+.form-status[hidden] { display: none; }
+.form-status.is-error { background: #FBEDEB; color: var(--color-error); }
+.hp-field { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-card button[type="submit"] { width: 100%; }
+.form-card button[disabled] { opacity: .7; cursor: progress; }
+.page-hero { display: flex; flex-direction: column; gap: 26px; padding-block: 56px 64px; }
+.service-hero { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 56px; align-items: center; padding-block: 56px 88px; }
+.service-hero-copy { display: flex; flex-direction: column; gap: 26px; }
+.glance { display: flex; flex-direction: column; gap: 20px; }
+.glance-price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.glance-price strong { font-family: var(--font-display); font-size: 48px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.glance-price span { color: var(--color-body); }
+.benefits { --min: 250px; gap: 40px 32px; }
+.benefit { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 2px solid var(--color-ink); }
+.benefit h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.2; }
+.benefit p { color: var(--color-body); }
+.fit-card { padding: 36px; display: flex; flex-direction: column; gap: 18px; }
+.fit-card h2 { font-family: var(--font-display); font-weight: 700; font-size: 30px; letter-spacing: -0.015em; line-height: 1.15; }
+.fit-card.is-sand { background: var(--color-sand); border-color: transparent; }
+.fit-card.is-sand p { color: var(--color-body); }
+.tier-card { display: flex; flex-direction: column; gap: 14px; }
+.tier-card h3 { font-family: var(--font-display); font-size: 24px; font-weight: 600; }
+.tier-card-price { font-family: var(--font-display); font-size: 44px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+.tier-card-price small { font-size: 20px; font-weight: 600; letter-spacing: 0; }
+.tier-card p { color: var(--color-body); flex: 1; }
+.faq-list { border-top: 1px solid var(--color-line); }
+.faq { border-bottom: 1px solid var(--color-line); padding-block: 4px; }
+.faq summary {
+display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px;
+font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.3; cursor: pointer; list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary svg { flex: 0 0 auto; color: var(--color-accent); }
+.faq .icon-minus, .faq[open] .icon-plus { display: none; }
+.faq[open] .icon-minus { display: block; }
+.faq-answer { margin: 0 0 24px; max-width: 680px; color: var(--color-body); }
+.facts-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 20px 32px; padding-top: 12px; border-top: 1px solid var(--color-line); }
+.facts-list div { display: flex; flex-direction: column; gap: 2px; padding-top: 16px; }
+.facts-list dt { font-size: var(--text-caption); color: var(--color-muted); }
+.facts-list dd { font-weight: 600; }
+.cs-hero-shot { border-radius: var(--radius-card); border: 1px solid var(--color-line); overflow: hidden; background: var(--color-surface); }
+.cs-hero-shot img { width: 100%; }
+.cs-hero figcaption, .story-figures figcaption { font-size: var(--text-small); color: var(--color-muted); margin-top: 10px; }
+.result-card { display: flex; flex-direction: column; gap: 8px; }
+.result-card .result-big { font-family: var(--font-display); font-size: clamp(40px, 4.4vw, 52px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+.result-card.is-accent .result-big { color: var(--color-accent); }
+.result-card p { color: var(--color-body); }
+.story { display: flex; flex-direction: column; gap: 64px; }
+.story-row { display: flex; flex-wrap: wrap; gap: 24px 64px; }
+.story-row > h2 { flex: 1 1 260px; font-family: var(--font-display); font-weight: 700; font-size: 32px; line-height: 1.15; letter-spacing: -0.015em; }
+.story-body { flex: 2 1 480px; min-width: 0; max-width: 720px; display: flex; flex-direction: column; gap: 18px; font-size: var(--text-article); line-height: 1.7; color: var(--color-body); }
+.story-body ul, .story-body ol { padding-left: 22px; display: flex; flex-direction: column; gap: 8px; }
+.story-body strong { color: var(--color-ink); }
+.story-figures { display: grid; gap: var(--card-gap); grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); }
+.story-figures figure img { border-radius: var(--radius-image); border: 1px solid var(--color-line); width: 100%; background: var(--color-surface); }
+.story-figures .single { grid-column: 1 / -1; max-width: 960px; }
+.next-link { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+.next-link > span { display: flex; flex-direction: column; gap: 6px; }
+.next-link .display { font-size: 28px; font-weight: 600; line-height: 1.2; }
+.next-link svg { color: var(--color-accent); }
+.quote-band { display: flex; flex-direction: column; gap: 24px; padding-block: 88px; }
+.quote-band .quote-icon { color: var(--color-accent); width: 40px; height: 40px; }
+.quote-band .quote-text { font-size: clamp(24px, 2.8vw, 34px); }
+.quote-band .quote-cite span { color: var(--color-muted); }
+.post-list { list-style: none; padding: 0; border-top: 1px solid var(--color-line); }
+.post-list li { border-bottom: 1px solid var(--color-line); }
+.post-list a { display: flex; flex-wrap: wrap; gap: 8px 48px; padding-block: 32px; color: var(--color-ink); text-decoration: none; }
+.post-list-date { flex: 0 0 180px; font-size: var(--text-small); color: var(--color-muted); padding-top: 6px; }
+.post-list-main { flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.post-list-title { font-family: var(--font-display); font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; text-wrap: balance; }
+.post-list-summary { color: var(--color-body); max-width: 680px; }
+.post-list-more { font-size: var(--text-small); font-weight: 600; color: var(--color-accent); }
+.post-list a:hover .post-list-title { color: var(--color-accent); }
+.post-list a:hover .post-list-more { text-decoration: underline; }
+.article { max-width: calc(var(--article-column) + 2 * var(--gutter)); margin-inline: auto; padding: 64px var(--gutter) 80px; display: flex; flex-direction: column; gap: 48px; }
+.article-head { display: flex; flex-direction: column; gap: 22px; }
+.back-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: var(--text-small); font-weight: 600; text-decoration: none; align-self: flex-start; }
+.article-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(36px, 4.4vw, 52px); line-height: 1.08; letter-spacing: -0.025em; text-wrap: balance; }
+.standfirst { font-size: 22px; line-height: 1.5; color: var(--color-body); text-wrap: pretty; }
+.byline { display: flex; align-items: center; gap: 12px; padding-top: 4px; line-height: 1.3; }
+.byline > span { display: flex; flex-direction: column; }
+.byline strong { font-weight: 600; }
+.avatar { border-radius: 50%; border: 1px solid var(--color-line); object-fit: cover; flex: 0 0 auto; }
+.prose { display: flex; flex-direction: column; gap: 26px; font-size: var(--text-article); line-height: 1.7; color: var(--color-article); }
+.prose > * { margin: 0; }
+.prose h2 { margin-top: 16px; font-family: var(--font-display); font-weight: 700; font-size: 32px; line-height: 1.2; letter-spacing: -0.015em; color: var(--color-ink); }
+.prose h3 { margin-top: 8px; font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.25; color: var(--color-ink); }
+.prose ul, .prose ol { padding-left: 24px; display: flex; flex-direction: column; gap: 10px; }
+.prose li > p { margin: 0; }
+.prose blockquote { margin: 16px 0; padding: 8px 0; font-family: var(--font-display); font-size: 30px; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; color: var(--color-accent); text-wrap: balance; }
+.prose blockquote p + p { margin-top: .5em; }
+.prose code { font-family: var(--font-mono); font-size: 0.85em; background: var(--color-sand); padding: 2px 6px; border-radius: 4px; }
+.prose pre { padding: 24px 28px; border-radius: var(--radius-image); background: var(--color-ink); color: #F3EDE4; font-size: 15px; line-height: 1.7; overflow-x: auto; white-space: pre; }
+.prose pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
+.prose figure { margin: 8px 0; display: flex; flex-direction: column; gap: 12px; }
+.prose img { border-radius: var(--radius-image); border: 1px solid var(--color-line); }
+.prose figcaption { font-size: var(--text-small); line-height: 1.5; color: var(--color-muted); }
+.prose hr { border: 0; border-top: 1px solid var(--color-line); }
+.prose table { border-collapse: collapse; font-size: var(--text-small); width: 100%; display: block; overflow-x: auto; }
+.prose th, .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--color-line); }
+.prose .screenshot-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); }
+.prose .screenshot-grid.single { grid-template-columns: 1fr; }
+.prose .screenshot-grid figure { margin: 0; }
+.author-box { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 24px; padding: 28px; }
+.author-box > div { flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.author-box strong { font-weight: 600; }
+.author-box p { color: var(--color-body); }
+.cta-panel { background: var(--color-sand); border-radius: var(--radius-card); padding: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 48px; }
+.cta-panel > div { display: flex; flex-direction: column; gap: 10px; max-width: 640px; }
+.cta-panel h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(28px, 3vw, 38px); line-height: 1.12; letter-spacing: -0.02em; text-wrap: balance; }
+.cta-panel p { font-size: 18px; color: var(--color-body); }
+.more-card { display: flex; flex-direction: column; gap: 8px; padding: 28px; }
+.more-card .display { font-size: 24px; font-weight: 600; line-height: 1.25; }
+.thanks-mark { width: 64px; height: 64px; border-radius: 50%; background: var(--color-accent); color: #FFFFFF; display: flex; align-items: center; justify-content: center; }
+.next-steps { list-style: none; padding: 0; background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-card); }
+.next-steps li { display: flex; gap: 24px; padding: 28px 32px; }
+.next-steps li + li { border-top: 1px solid var(--color-divider); }
+.next-steps .num { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--color-accent); color: var(--color-accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 600; }
+.next-steps h2 { font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height: 1.3; }
+.next-steps p { color: var(--color-body); }
+.tile-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 28px; border-radius: var(--radius-card); background: var(--color-sand); color: var(--color-ink); text-decoration: none; }
+.tile-link:hover { color: var(--color-ink); background: #EADCC9; }
+.tile-link > span { display: flex; flex-direction: column; }
+.tile-link .display { font-size: 22px; font-weight: 600; }
+.tile-link small { font-size: var(--text-small); color: var(--color-body); }
+.tile-link svg { color: var(--color-accent); flex: 0 0 auto; }
+.section.s96 { padding-block: 96px; }
+@media (max-width: 599.98px) {
+:root { --gutter: 20px; --section-y: 64px; --card-padding: 24px; }
+.section.s96 { padding-block: var(--section-y); }
+.hero { padding-block: 48px 64px; gap: 48px; }
+.page-hero, .service-hero { padding-block: 32px 56px; }
+.lead { font-size: 18px; }
+.prose { font-size: 18px; }
+.standfirst { font-size: 20px; }
+.story-body { font-size: 18px; }
+.story { gap: 48px; }
+.cta-band { padding-block: 64px; }
+.cta-band .btn, .cta-panel .btn { width: 100%; }
+.cta-panel { padding: 28px 24px; }
+.quote-band { padding-block: 64px; }
+.fit-card { padding: 28px 24px; }
+.next-steps li { padding: 24px 20px; gap: 16px; }
+.article { padding-block: 40px 64px; }
+.trusted { justify-content: flex-start; gap: 8px 24px; }
+.trusted .trusted-label { width: 100%; }
+.post-list-date { flex-basis: 100%; padding-top: 0; }
+}
+.card-title-link { color: inherit; text-decoration: none; }
+.card-title-link:hover { color: var(--color-accent); text-decoration: underline; }
+.band-ink .quote-band .quote-cite span { color: var(--color-on-dark-3); }
+.band-ink .quote-band .quote-icon { color: var(--color-quote-mark); width: 44px; height: 44px; }
+.band-ink .quote-band .quote-text { font-size: clamp(26px, 3vw, 36px); }
+.quote-band .quote-text.quote-long { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.4; }
+.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }
+.story-figures.pair { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+@media (max-width: 759.98px) {
+.story-figures.pair { grid-template-columns: minmax(0, 1fr); }
+.story-figures.pair figure:last-child { max-width: 300px; }
+}</style>
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://andrewisherwood.com/#business","name":"Andrew Isherwood","url":"https://andrewisherwood.com/","description":"Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after in Wimbledon, London, at a fixed price agreed before any work starts.","email":"build@andrewisherwood.com","image":"https://andrewisherwood.com/og-image.png","logo":"https://andrewisherwood.com/icon-512.png","priceRange":"£1,950+","address":{"@type":"PostalAddress","addressLocality":"Wimbledon","addressRegion":"London","addressCountry":"GB"},"areaServed":[{"@type":"City","name":"London"},{"@type":"Country","name":"United Kingdom"}],"founder":{"@id":"https://andrewisherwood.com/#person"},"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"New site or redesign","url":"https://andrewisherwood.com/services/new-website/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WordPress to static","url":"https://andrewisherwood.com/services/wordpress-migration/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Care plan","url":"https://andrewisherwood.com/services/care-plans/"}}]},{"@type":"Person","@id":"https://andrewisherwood.com/#person","name":"Andrew Isherwood","url":"https://andrewisherwood.com/","jobTitle":"Web Designer & Developer","email":"mailto:build@andrewisherwood.com","address":{"@type":"PostalAddress","addressLocality":"Wimbledon","addressRegion":"London","addressCountry":"GB"},"worksFor":{"@id":"https://andrewisherwood.com/#business"},"sameAs":["https://github.com/andrewisherwood"]}]}</script>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">AI<span class="cursor-block"></span></a>
-  <ul class="nav-links">
-    <li><a href="#work">work</a></li>
-    <li><a href="/blog/">writing</a></li>
-    <li><a href="#about">about</a></li>
-    <li><a href="#contact" class="nav-cta">get in touch</a></li>
-  </ul>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header" data-header>
+<div class="container header-inner">
+<a class="brand" href="/">Andrew Isherwood</a>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle><svg class="icon-menu" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg><svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg><span data-menu-label>Menu</span></button>
+<nav class="site-nav" id="site-menu" aria-label="Main">
+<ul class="nav-links"><li><a href="/#services">Services</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="/#work">Work</a></li><li><a href="/#about">About</a></li><li><a href="/blog/">Writing</a></li></ul>
+<a class="btn btn-primary btn-nav" href="/#contact" data-cta="book-call">Book a free call</a>
+<p class="nav-email">build@andrewisherwood.com</p>
 </nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-terminal terminal-window">
-      <div class="terminal-chrome">
-        <div class="dot r"></div>
-        <div class="dot y"></div>
-        <div class="dot g"></div>
-        <div class="title">andrew@isherwood ~ </div>
-      </div>
-      <div class="terminal-body">
-        <div class="hero-prompt" style="opacity:0; animation: fadeUp 0.6s var(--ease-out) 0.1s forwards;">
-          <span class="path">~/portfolio</span> <span class="branch">(main)</span> $
-        </div>
-        <h1>I design systems that work and ship products that <em>matter</em></h1>
-        <div class="hero-output">
-          <span class="label">ROLE</span>&nbsp;&nbsp;&nbsp;Solutions Architect · Product Engineer<br>
-          <span class="label">STACK</span>&nbsp;&nbsp;Next.js · TypeScript · Supabase · AI Agents<br>
-          <span class="label">SINCE</span>&nbsp;&nbsp;1994
-        </div>
-        <div class="hero-actions">
-          <a href="#contact" class="btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg>
-            Let's talk
-          </a>
-          <a href="#work" class="btn-secondary">See the work ↓</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-grid"></div>
-</section>
-
-<!-- SIGNAL BAR -->
-<div class="signal-bar">
-  <div class="container">
-    <div class="signal-grid">
-      <div class="signal-item reveal">
-        <span class="signal-number">32</span>
-        <span class="signal-label">years building for the web</span>
-      </div>
-      <div class="signal-item reveal">
-        <span class="signal-number">100</span>
-        <span class="signal-label">beta users on first product</span>
-      </div>
-      <div class="signal-item reveal">
-        <span class="signal-number">4</span>
-        <span class="signal-label">products in the pipeline</span>
-      </div>
-      <div class="signal-item reveal">
-        <span class="signal-number">AI</span>
-        <span class="signal-label">AI-augmented dev workflows</span>
-      </div>
-    </div>
-  </div>
 </div>
-
-<!-- WORK -->
-<section id="work">
-  <div class="container">
-    <div class="section-label">Selected Work</div>
-    <h2 class="section-title">Products I've designed,<br>built, and shipped</h2>
-    <p class="section-subtitle">Every project here went from concept through architecture to production. Real users, real problems, real solutions.</p>
-
-    <!-- SUPPERTIME -->
-    <a href="/work/suppertime/" aria-label="Suppertime case study" style="text-decoration:none;color:inherit;display:block;">
-    <div class="case-study reveal">
-      <div class="case-study-inner">
-        <div class="case-study-content">
-          <div class="case-study-tag">Product · Full-Stack · Shipped</div>
-          <h3>Suppertime</h3>
-          <p>A family meal planning app that closes the daily "what's for dinner" decision. Weekly planning, smart shopping lists, calendar sync, and leftover tracking — built for parents who need one less thing to think about.</p>
-          <div class="case-study-stack">
-            <span class="stack-tag">Next.js</span>
-            <span class="stack-tag">TypeScript</span>
-            <span class="stack-tag">Supabase</span>
-            <span class="stack-tag">Tailwind</span>
-            <span class="stack-tag">shadcn/ui</span>
-            <span class="stack-tag">Netlify</span>
-          </div>
-          <div class="case-study-metrics">
-            <div class="metric">
-              <span class="metric-value">100</span>
-              <span class="metric-label">Beta users via TestFlight</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">V1</span>
-              <span class="metric-label">Shipped & iterated</span>
-            </div>
-          </div>
-        </div>
-        <div class="case-study-visual visual-suppertime">
-          <div class="visual-mockup">
-            <img src="/images/home/suppertime-320.webp" srcset="/images/home/suppertime-320.webp 320w, /images/home/suppertime-640.webp 640w" sizes="(max-width: 400px) 80vw, 320px" width="320" height="693" alt="Suppertime app showing weekly meal plan with breakfast, lunch and dinner cards" loading="lazy" decoding="async">
-          </div>
-        </div>
-      </div>
-    </div>
-    </a>
-
-    <!-- MAI -->
-    <a href="/work/mai/" aria-label="MAI case study" style="text-decoration:none;color:inherit;display:block;">
-    <div class="case-study reveal">
-      <div class="case-study-inner">
-        <div class="case-study-content">
-          <div class="case-study-tag">AI Engineering · Architecture · Automation</div>
-          <h3>Multi-Agent Infrastructure</h3>
-          <p>A coordinated multi-agent development system built on Claude Code. Autonomous specialised agents — development, QA, security audit, documentation — working in parallel across git worktrees with built-in gates, timeout controls, and automated security review.</p>
-          <div class="case-study-stack">
-            <span class="stack-tag">Claude Code</span>
-            <span class="stack-tag">Multi-Agent</span>
-            <span class="stack-tag">Git Worktrees</span>
-            <span class="stack-tag">Bash</span>
-            <span class="stack-tag">Node.js</span>
-          </div>
-          <div class="case-study-metrics">
-            <div class="metric">
-              <span class="metric-value">9</span>
-              <span class="metric-label">Specialised agents</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">73.7%</span>
-              <span class="metric-label">Token reduction</span>
-            </div>
-          </div>
-        </div>
-        <div class="case-study-visual visual-mai">
-          <div class="visual-terminal">
-            <div class="t-bar">
-              <div class="dot r"></div>
-              <div class="dot y"></div>
-              <div class="dot g"></div>
-            </div>
-            <div class="t-body">
-              <span class="cmd">$</span> mai <span class="flag">--orchestrate</span><br>
-              <span class="agent">▸ Coordinator</span> <span class="output">initialising agents...</span><br>
-              <span class="agent">▸ Dev Agent</span> <span class="output">worktree: feature/auth</span><br>
-              <span class="agent">▸ QA Agent</span> <span class="output">watching for commits...</span><br>
-              <span class="agent">▸ Security</span> <span class="output">audit hook active</span><br>
-              <span class="output">──────────────────────</span><br>
-              <span class="cmd">✓</span> <span class="output">All agents nominal</span><br>
-              <span class="cmd">✓</span> <span class="output">SECURITY.md updated</span><br>
-              <span class="agent">▸ Deploy</span> <span class="output">staging ready</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </a>
-
-    <!-- ADAPTIVE COACH -->
-    <a href="/work/adaptive-coach/" aria-label="Adaptive Coach case study" style="text-decoration:none;color:inherit;display:block;">
-    <div class="case-study reveal">
-      <div class="case-study-inner">
-        <div class="case-study-content">
-          <div class="case-study-tag">Product · AI · Sports Tech</div>
-          <h3>Adaptive Coach</h3>
-          <p>An AI-powered personal cycling coach that generates periodised training plans adapted to individual physiology, race goals, and recovery patterns. Built to solve the problem of generic training plans that don't account for real life.</p>
-          <div class="case-study-stack">
-            <span class="stack-tag">Next.js</span>
-            <span class="stack-tag">Supabase</span>
-            <span class="stack-tag">AI/ML</span>
-            <span class="stack-tag">Sports Science</span>
-          </div>
-          <div class="case-study-metrics">
-            <div class="metric">
-              <span class="metric-value">86</span>
-              <span class="metric-label">Activities tracked</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">2383km</span>
-              <span class="metric-label">Distance logged</span>
-            </div>
-          </div>
-        </div>
-        <div class="case-study-visual visual-adaptive">
-          <div class="visual-desktop">
-            <div class="desktop-bar">
-              <div class="dot r"></div>
-              <div class="dot y"></div>
-              <div class="dot g"></div>
-            </div>
-            <img src="/images/home/adaptive-coach-420.webp" srcset="/images/home/adaptive-coach-420.webp 420w, /images/home/adaptive-coach-840.webp 840w" sizes="(max-width: 460px) 92vw, 420px" width="420" height="206" alt="AdaptiveCoach dashboard showing training snapshot, power zones, and race countdown" loading="lazy" decoding="async">
-          </div>
-        </div>
-      </div>
-    </div>
-    </a>
-
-    <!-- BIRTHBUILD -->
-    <a href="/work/birthbuild/" aria-label="BirthBuild case study" style="text-decoration:none;color:inherit;display:block;">
-    <div class="case-study reveal">
-      <div class="case-study-inner">
-        <div class="case-study-content">
-          <div class="case-study-tag">Product · AI · SaaS</div>
-          <h3>BirthBuild</h3>
-          <p>An AI-powered website builder for birth workers. Chatbot onboarding guides practitioners through a conversation, generates tailored content, and deploys a polished site to a custom subdomain — no code, no design decisions.</p>
-          <div class="case-study-stack">
-            <span class="stack-tag">React</span>
-            <span class="stack-tag">Vite</span>
-            <span class="stack-tag">TypeScript</span>
-            <span class="stack-tag">Supabase</span>
-            <span class="stack-tag">Claude API</span>
-            <span class="stack-tag">Netlify</span>
-          </div>
-          <div class="case-study-metrics">
-            <div class="metric">
-              <span class="metric-value">22,096</span>
-              <span class="metric-label">Lines of code</span>
-            </div>
-            <div class="metric">
-              <span class="metric-value">5hrs</span>
-              <span class="metric-label">Build time</span>
-            </div>
-          </div>
-        </div>
-        <div class="case-study-visual visual-birthbuild">
-          <div class="visual-desktop">
-            <div class="desktop-bar">
-              <div class="dot r"></div>
-              <div class="dot y"></div>
-              <div class="dot g"></div>
-            </div>
-            <img src="/images/home/birthbuild-420.webp" srcset="/images/home/birthbuild-420.webp 420w, /images/home/birthbuild-840.webp 840w" sizes="(max-width: 460px) 92vw, 420px" width="420" height="239" alt="BirthBuild landing page showing AI-powered website builder for birth workers" loading="lazy" decoding="async">
-          </div>
-        </div>
-      </div>
-    </div>
-    </a>
-  </div>
-</section>
-
-<!-- TIMELINE -->
-<div class="timeline-section">
-  <div class="container">
-    <div class="section-label">The Long Game</div>
-    <div class="timeline reveal">
-      <div class="timeline-node">
-        <div class="timeline-event">First website</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">1994</div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-event">Professional kitchens</div>
-        <div class="timeline-dot dim"></div>
-        <div class="timeline-year dim">2000</div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-event">Web agency</div>
-        <div class="timeline-dot dim"></div>
-        <div class="timeline-year dim">2010</div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-event">Full-stack dev</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2018</div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-event">AI-augmented</div>
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2024</div>
-      </div>
-      <div class="timeline-node">
-        <div class="timeline-event">Shipping products</div>
-        <div class="timeline-dot" style="box-shadow: 0 0 20px var(--phosphor-glow), 0 0 40px var(--phosphor-faint);"></div>
-        <div class="timeline-year" style="font-weight:600;">NOW</div>
-      </div>
-    </div>
-  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="container hero" aria-labelledby="hero-title">
+<div class="hero-copy">
+<p class="eyebrow">Web design &amp; development · Wimbledon, London</p>
+<h1 class="h1" id="hero-title">Your website should be winning you work. I’ll make sure it does.</h1>
+<p class="lead">Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after by one senior developer, at a fixed price agreed before any work starts.</p>
+<div class="btn-row">
+<a class="btn btn-primary" href="/#contact" data-cta="book-call">Book a free discovery call</a>
+<a class="btn btn-secondary" href="#work">See client results</a>
 </div>
-
-<!-- ABOUT -->
-<section id="about" class="about-section">
-  <div class="container">
-    <div class="section-label">About</div>
-    <h2 class="section-title" style="margin-bottom: 3rem;">The unusual path</h2>
-
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <p><strong>I spent 18 years as a classically trained chef</strong> before moving into tech full-time. But I've been building for the web for 32 years — since before CSS existed. That dual background gave me something most developers don't have: an obsessive eye for process, an understanding of systems under pressure, and the ability to think about how things actually get used — not just how they get built.</p>
-        <p>I ran a web agency. I've shipped products, managed infrastructure, and designed architectures from database schema to deployment pipeline.</p>
-        <p>Now I work at the intersection of <strong>product thinking, systems architecture, and AI-augmented engineering</strong>. I use tools like Claude Code not as a novelty but as a core part of my development workflow — building multi-agent systems, automating security reviews, and shipping faster than teams three times my size.</p>
-        <p>I think in systems. I build things that work. And I care deeply about the craft.</p>
-      </div>
-
-      <div class="about-aside reveal">
-        <div class="about-aside-chrome">
-          <div class="dot r"></div>
-          <div class="dot y"></div>
-          <div class="dot g"></div>
-          <div class="title">stack.config</div>
-        </div>
-        <div class="about-aside-body">
-          <ul class="stack-list">
-            <li>
-              <span class="stack-name">Frontend</span>
-              <span class="stack-detail">Next.js · React · TypeScript</span>
-            </li>
-            <li>
-              <span class="stack-name">Styling</span>
-              <span class="stack-detail">Tailwind · shadcn/ui</span>
-            </li>
-            <li>
-              <span class="stack-name">Backend</span>
-              <span class="stack-detail">Supabase · Node.js · PostgreSQL</span>
-            </li>
-            <li>
-              <span class="stack-name">AI / Agents</span>
-              <span class="stack-detail">Claude Code · Multi-agent</span>
-            </li>
-            <li>
-              <span class="stack-name">Infra</span>
-              <span class="stack-detail">Netlify · VPS · Git Worktrees</span>
-            </li>
-            <li>
-              <span class="stack-name">Process</span>
-              <span class="stack-detail">Phased roadmaps · CI/CD</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+<ul class="hero-facts"><li><strong>Since 1994</strong><span>building for the web</span></li>
+<li><strong>24 years</strong><span>with my longest client</span></li>
+<li><strong>From £1,950</strong><span>fixed, written quote</span></li></ul>
+</div>
+<div class="card card-feature results-card">
+<h2 class="eyebrow-muted">Recent client results</h2>
+<div class="result-bars">
+<div class="result-head"><strong>4ARMED</strong><span class="caption">Mobile speed score</span></div>
+<div class="result-bar"><span>Before</span><span class="bar" aria-hidden="true"><span style="--w:31%"></span></span><span>31</span></div>
+<div class="result-bar"><span>After</span><span class="bar bar-after" aria-hidden="true"><span style="--w:100%"></span></span><span>100</span></div>
+</div>
+<hr class="result-divider">
+<div class="result-row">
+<div class="result-row-name"><strong>Eflow Global</strong><span class="caption">Compliance software</span></div>
+<span class="result-value"><s class="result-was"><span class="visually-hidden">From </span>15.4s</s><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg><span><span class="visually-hidden">to </span>96 score</span></span>
+</div>
+<hr class="result-divider">
+<div class="result-row">
+<div class="result-row-name"><strong>Nasaco International</strong><span class="caption">Chemicals</span></div>
+<span class="result-value">Client since 2002</span>
+</div>
+</div>
 </section>
 
-<!-- WRITING_SECTION_START -->
-<section id="writing" style="padding: 5rem 0;">
-  <div class="container">
-    <div class="section-label">Writing</div>
-    <h2 class="section-title" style="margin-bottom: 2rem;">Latest writing</h2>
-    <ul class="writing-list">
-      <li>
-        <a href="/blog/the-spec-is-the-prompt/">
-          <span class="writing-title">The Spec Is the Prompt</span>
-          <span class="writing-date">18 Feb 2026</span>
-        </a>
-      </li>
-      <li>
-        <a href="/blog/birthbuild-build-log/">
-          <span class="writing-title">Beyond 10x: How I Built a SaaS Product in 5 Hours</span>
-          <span class="writing-date">16 Feb 2026</span>
-        </a>
-      </li>
-    </ul>
-    <div style="margin-top: 2rem;">
-      <a href="/blog/" class="btn-secondary">All writing &rarr;</a>
-    </div>
-  </div>
-</section>
-<!-- WRITING_SECTION_END -->
-
-<!-- INTERACTIVE TERMINAL — hidden until /api/chat is fixed (returns 502) and re-scoped for client work -->
-<section id="terminal" style="padding: 5rem 0;" hidden>
-  <div class="container">
-    <div class="section-label">Ask Me Anything</div>
-    <h2 class="section-title" style="margin-bottom:0.8rem;">Talk to the work</h2>
-    <p class="section-subtitle">An AI that knows my products, my stack, and my process. Go on, ask it something.</p>
-
-    <div class="terminal-window interactive-terminal" style="max-width:750px;">
-      <div class="terminal-chrome">
-        <div class="dot r"></div>
-        <div class="dot y"></div>
-        <div class="dot g"></div>
-        <div class="title">ai@isherwood — portfolio-agent</div>
-      </div>
-      <div id="terminal-output" class="terminal-body" style="min-height:300px; max-height:500px; overflow-y:auto; padding:1.5rem 2rem;">
-        <div class="t-line"><span style="color:var(--green);">✓</span> <span style="color:var(--text-muted);">Portfolio agent initialised</span></div>
-        <div class="t-line"><span style="color:var(--text-dim);">──────────────────────────────────</span></div>
-        <div class="t-line" style="margin-top:0.5rem;"><span style="color:var(--text-muted);">Welcome. I know everything about Andrew's work,</span></div>
-        <div class="t-line"><span style="color:var(--text-muted);">stack, and process. Try asking me something like:</span></div>
-        <div class="t-line" style="margin-top:0.8rem;"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">tell me about suppertime</span></div>
-        <div class="t-line"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">what's your tech stack?</span></div>
-        <div class="t-line"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">how do you use AI in your workflow?</span></div>
-        <div class="t-line"><span style="color:var(--phosphor);">  &gt;</span> <span style="color:var(--text-dim);">why should I hire you?</span></div>
-        <div class="t-line" style="margin-top:0.8rem;"><span style="color:var(--text-dim);">──────────────────────────────────</span></div>
-      </div>
-      <div class="terminal-input-row">
-        <span class="input-prompt">visitor@portfolio <span style="color:var(--phosphor);">$</span></span>
-        <input type="text" id="terminal-input" placeholder="ask me anything..." autocomplete="off" spellcheck="false">
-      </div>
-    </div>
-  </div>
+<section class="rule-block" aria-label="Clients">
+<ul class="container trusted">
+<li class="trusted-label">Trusted by</li>
+<li>Nasaco International</li>
+<li>Eflow Global</li>
+<li>Oasis Clinics</li>
+<li>Jumping Rivers</li>
+<li>4ARMED</li>
+</ul>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <div class="container">
-    <div class="contact-terminal terminal-window" style="max-width:650px; margin:0 auto;">
-      <div class="terminal-chrome">
-        <div class="dot r"></div>
-        <div class="dot y"></div>
-        <div class="dot g"></div>
-        <div class="title">mail — 80x24</div>
-      </div>
-      <div class="terminal-body" style="text-align:center; padding:3.5rem 3rem;">
-        <div class="section-label" style="margin-bottom:1.5rem;">Get in touch</div>
-        <h2 class="contact-title reveal">Let's build something<br><em>together</em></h2>
-        <p class="contact-text reveal">Whether you need a solutions architect, a product engineer, or someone who can do both — I'd love to hear what you're working on.</p>
-        <div class="reveal">
-          <a href="mailto:build@andrewisherwood.com" class="contact-email">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg>
-            build@andrewisherwood.com
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+<section id="services" class="container section section-body" aria-labelledby="services-title">
+<div class="section-head">
+<h2 class="h2" id="services-title">Most business websites have one of three problems.</h2>
+<p class="section-lead">Here’s how I fix each one.</p>
+</div>
+<div class="grid" style="--min:320px"><div class="card card-stack problem-card">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 13l3.5-3.5"/><path d="M10 2h4"/></svg>
+<h3 class="h3">It’s slow, so people leave.</h3>
+<p>A slow site costs you enquiries and search rankings. I design and rebuild sites to load fast on a phone, where most of your visitors are.</p>
+<a class="text-link" href="/services/new-website/">New site or redesign, from £2,950</a>
+</div>
+<div class="card card-stack problem-card">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+<h3 class="h3">WordPress is a constant worry.</h3>
+<p>Plugin updates, security patches, rising hosting bills. I move WordPress sites to fast static hosting that costs less to run and has far less to go wrong.</p>
+<a class="text-link" href="/services/wordpress-migration/">WordPress migration, from £1,950</a>
+</div>
+<div class="card card-stack problem-card">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5z"/></svg>
+<h3 class="h3">Nobody’s looking after it.</h3>
+<p>Small changes sit on the to-do list for months. A care plan gives you one person who keeps your site updated, secure and improving.</p>
+<a class="text-link" href="/services/care-plans/">Care plans, from £75 a month</a>
+</div></div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-row">
-      <span>&copy; 2026 Andrew Isherwood</span>
-      <span>·</span>
-      <span>Built with care in Wimbledon</span>
-      <span>·</span>
-      <a href="https://github.com/andrewisherwood" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </div>
+<section id="pricing" class="band-sand" aria-labelledby="pricing-title">
+<div class="container section section-body">
+<div class="section-head">
+<p class="eyebrow">Pricing</p>
+<h2 class="h2" id="pricing-title">Fixed prices, agreed before any work starts.</h2>
+<p class="section-lead">No hourly surprises. After a free call you get a written quote. Pay 50% to book and the rest at launch.</p>
+</div>
+<div class="grid" style="--min:330px"><div class="card card-flat price-card">
+<div class="price-card-head"><h3 class="h3"><a href="/services/new-website/" class="card-title-link">New site or redesign</a></h3><p>Design, build, launch.</p></div>
+<ul class="tier-rows">
+<li class="tier-row"><div><strong>Essentials</strong><span>Up to 5 pages</span></div><span class="tier-price">£2,950</span></li>
+<li class="tier-row"><div><strong>Business</strong><span>Up to 12 pages, custom design, full SEO</span></div><span class="tier-price">£5,950</span></li>
+<li class="tier-row"><div><strong>Custom</strong><span>Booking, e-commerce, integrations, web apps</span></div><span class="tier-price">from £9,500</span></li>
+</ul>
+</div>
+<div class="card card-flat price-card">
+<div class="price-card-head"><h3 class="h3"><a href="/services/wordpress-migration/" class="card-title-link">WordPress to static</a></h3><p>Faster, safer, cheaper to host.</p></div>
+<ul class="tier-rows">
+<li class="tier-row"><div><strong>Starter</strong><span>5 pages, 20 posts</span></div><span class="tier-price">£1,950</span></li>
+<li class="tier-row"><div><strong>Standard</strong><span>12 pages, 100 posts, speed pass</span></div><span class="tier-price">£3,500</span></li>
+<li class="tier-row"><div><strong>Large</strong><span>More pages and posts</span></div><span class="tier-price">from £4,500</span></li>
+</ul>
+</div>
+<div class="card card-flat price-card">
+<div class="price-card-head"><h3 class="h3"><a href="/services/care-plans/" class="card-title-link">Care plan</a></h3><p>Updates, security and changes, monthly.</p></div>
+<ul class="tier-rows">
+<li class="tier-row"><div><strong>Essential</strong><span>Hosting, backups, monitoring, 30 min of changes</span></div><span class="tier-price">£75/mo</span></li>
+<li class="tier-row"><div><strong>Standard</strong><span>2 hours of changes, quarterly report</span></div><span class="tier-price">£150/mo</span></li>
+<li class="tier-row"><div><strong>Growth</strong><span>4 hours, monthly SEO and content work</span></div><span class="tier-price">£300/mo</span></li>
+</ul>
+</div></div>
+<div class="pricing-foot">
+<p>Care plans have a 3-month minimum, and paying annually gets you two months free. Small one-off jobs are £100 an hour (1-hour minimum) or £650 a day.</p>
+<a class="btn btn-secondary" href="/#contact">Get a fixed quote</a>
+</div>
+</div>
+</section>
+
+<section id="work" class="container section section-body" aria-labelledby="work-title">
+<div class="section-head">
+<p class="eyebrow">Client work</p>
+<h2 class="h2" id="work-title">Results for businesses like yours.</h2>
+</div>
+<div class="grid" style="--min:340px"><a class="card card-link work-card" href="/work/4armed/">
+<div class="shot"><picture><source type="image/avif" srcset="/work/4armed/pages-800.avif 800w, /work/4armed/pages-1600.avif 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw"><img src="/work/4armed/pages-800.webp" srcset="/work/4armed/pages-800.webp 800w, /work/4armed/pages-1600.webp 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw" width="1600" height="960" alt="4ARMED&#39;s Application Penetration Testing page on desktop and mobile, with a dark hero, a side menu of sections and an overview of security testing levels" loading="lazy" decoding="async"></picture></div>
+<div class="work-card-body">
+<p class="caption">Cyber security · Redesign and rebuild</p>
+<h3>4ARMED</h3>
+<p class="work-card-result">Mobile speed score up from 31 to 100.</p>
+<span class="text-link">Read the case study</span>
+</div>
+</a>
+<a class="card card-link work-card" href="/work/eflow/">
+<div class="shot"><picture><source type="image/avif" srcset="/work/eflow/pages-786.avif 786w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw"><img src="/work/eflow/pages-786.webp" srcset="/work/eflow/pages-786.webp 786w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw" width="786" height="490" alt="Pages from the redesigned Eflow Global site: the TZ Regulatory Compliance product page with feature cards, and MiFID II and RTS 27/28 reporting sections" loading="lazy" decoding="async"></picture></div>
+<div class="work-card-body">
+<p class="caption">Compliance software · Redesign, WordPress.com to static</p>
+<h3>Eflow Global</h3>
+<p class="work-card-result">A 15.4-second site rebuilt to score 96 on Lighthouse.</p>
+<span class="text-link">Read the case study</span>
+</div>
+</a>
+<a class="card card-link work-card" href="/work/nasaco/">
+<div class="shot"><picture><source type="image/avif" srcset="/work/nasaco/homepage-800.avif 800w, /work/nasaco/homepage-1600.avif 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw"><img src="/work/nasaco/homepage-800.webp" srcset="/work/nasaco/homepage-800.webp 800w, /work/nasaco/homepage-1600.webp 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw" width="1600" height="812" alt="Nasaco&#39;s homepage today: a navy header with the Nasaco ‘solutions for flotation’ logo, and the headline ‘Solutions for flotation’ over a photo of an open-pit mine in a mountain valley, with View our products and Contact us buttons" loading="lazy" decoding="async"></picture></div>
+<div class="work-card-body">
+<p class="caption">Chemicals · WordPress to static on Netlify</p>
+<h3>Nasaco International</h3>
+<p class="work-card-result">A client since 2002, now on a faster, cheaper build.</p>
+<span class="text-link">Read the case study</span>
+</div>
+</a>
+<a class="card card-link work-card" href="/work/oasis-clinics/">
+<div class="shot"><picture><source type="image/avif" srcset="/work/oasis-clinics/overview-800.avif 800w, /work/oasis-clinics/overview-1600.avif 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw"><img src="/work/oasis-clinics/overview-800.webp" srcset="/work/oasis-clinics/overview-800.webp 800w, /work/oasis-clinics/overview-1600.webp 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw" width="1600" height="736" alt="Oasis Clinics website pages: a branch homepage with clinic services, a mobile doctors directory filtered by clinic, a contact form and a clinics map" loading="lazy" decoding="async"></picture></div>
+<div class="work-card-body">
+<p class="caption">Healthcare · Redesign and online booking</p>
+<h3>Oasis Clinics</h3>
+<p class="work-card-result">A failing WordPress site replaced with fast pages and booking.</p>
+<span class="text-link">Read the case study</span>
+</div>
+</a>
+<a class="card card-link work-card" href="/work/jumping-rivers/">
+<div class="shot"><picture><source type="image/avif" srcset="/work/jumping-rivers/pages-800.avif 800w, /work/jumping-rivers/pages-1600.avif 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw"><img src="/work/jumping-rivers/pages-800.webp" srcset="/work/jumping-rivers/pages-800.webp 800w, /work/jumping-rivers/pages-1600.webp 1600w" sizes="(min-width: 1200px) 380px, (min-width: 760px) 50vw, 100vw" width="1600" height="948" alt="Pages from the Jumping Rivers site: the homepage hero, a Scottish Government case study, a contact form and a pricing table" loading="lazy" decoding="async"></picture></div>
+<div class="work-card-body">
+<p class="caption">Data science consultancy · WordPress to static</p>
+<h3>Jumping Rivers</h3>
+<p class="work-card-result">The team now edits its own site straight from GitLab.</p>
+<span class="text-link">Read the case study</span>
+</div>
+</a></div>
+</section>
+
+<section class="band-ink" aria-label="Testimonial">
+<figure class="container container-quote section quote-band" style="gap:28px">
+<svg class="quote-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 18v-5a6 6 0 0 1 6-6"/><path d="M4 13h5v5H4z"/><path d="M14 18v-5a6 6 0 0 1 6-6"/><path d="M14 13h5v5h-5z"/></svg>
+<blockquote class="quote-text"><p>Andrew and his team have been the best freelancers I’ve ever worked with. They were very accommodating to some changes in the project plan mid-stream. You hardly find professionals like that.</p></blockquote>
+<figcaption class="quote-cite"><strong>Mai Azbak</strong><span>Marketing Director, Oasis Clinics</span></figcaption>
+</figure>
+</section>
+
+<section id="process" class="container section section-body" aria-labelledby="process-title">
+<div class="section-head">
+<p class="eyebrow">How it works</p>
+<h2 class="h2" id="process-title">Four steps, no surprises.</h2>
+
+</div>
+<ol class="grid steps">
+<li class="step"><span class="step-num" aria-hidden="true">01</span><h3>Free discovery call</h3><p>We talk about your business and what the site needs to do. Already have a site? I’ll audit it for free.</p></li>
+<li class="step"><span class="step-num" aria-hidden="true">02</span><h3>Fixed written quote</h3><p>A clear price and scope in writing. 50% to book, the rest when you launch.</p></li>
+<li class="step"><span class="step-num" aria-hidden="true">03</span><h3>Build</h3><p>Watch it take shape on a private preview link and give feedback as we go.</p></li>
+<li class="step"><span class="step-num" aria-hidden="true">04</span><h3>Launch and care</h3><p>We go live together. An optional care plan keeps it secure and improving.</p></li>
+</ol>
+</section>
+
+<section id="about" class="band-white" aria-labelledby="about-title">
+<div class="container section about no-photo">
+
+<div class="about-copy">
+<p class="eyebrow">About</p>
+<h2 class="h2" id="about-title">Hi, I’m Andrew.</h2>
+<p>I’ve been building websites since 1994, with 18 years as a classically trained chef along the way. The kitchen still shapes how I work: prepare properly, keep the standards high, and get every plate out on time.</p>
+<p>When you work with me, you deal with me. No account managers, no juniors. I use modern AI-assisted tools to work quickly, and every decision is made by someone with three decades of experience.</p>
+<div class="link-row"><a class="text-link" href="/blog/">Read my writing</a>
+<a class="text-link" href="/lab/">See the products I build</a></div>
+</div>
+</div>
+</section>
+
+<section id="contact" class="band-ink" aria-labelledby="contact-title">
+<div class="container section contact">
+<div class="contact-copy">
+<h2 id="contact-title">Tell me what your website needs to do.</h2>
+<p>I’ll reply personally with next steps and, if we’re a fit, a fixed quote.</p>
+<dl class="contact-facts">
+<div><dt>Prefer email?</dt><dd><a href="mailto:build@andrewisherwood.com">build@andrewisherwood.com</a></dd></div>
+
+<div><dt>Based in</dt><dd>Wimbledon, London</dd></div>
+</dl>
+</div>
+<form class="form-card" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company-website" data-enquiry-form>
+<input type="hidden" name="form-name" value="contact">
+<p class="hp-field" aria-hidden="true"><label>Leave this empty <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+<div class="form-row">
+<div class="field"><label for="f-name">Name</label><input id="f-name" type="text" name="name" autocomplete="name" required data-error="Please tell me your name."><p class="field-error" id="f-name-error" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><path d="M12 16h.01"/></svg><span></span></p></div>
+<div class="field"><label for="f-email">Email</label><input id="f-email" type="email" name="email" autocomplete="email" required data-error="Please enter your email address so I can reply." data-error-type="Please enter a full email address so I can reply."><p class="field-error" id="f-email-error" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><path d="M12 16h.01"/></svg><span></span></p></div>
+</div>
+<div class="field"><label for="f-company">Company <span class="optional">(optional)</span></label><input id="f-company" type="text" name="company" autocomplete="organization"></div>
+<div class="form-row">
+<div class="field"><label for="f-need">What do you need?</label><select id="f-need" name="need"><option>New site or redesign</option><option>WordPress migration</option><option>Care plan</option><option>Not sure yet</option></select></div>
+<div class="field"><label for="f-budget">Budget</label><select id="f-budget" name="budget"><option>Not sure</option><option>Under £2,000</option><option>£2,000–£5,000</option><option>£5,000+</option></select></div>
+</div>
+<div class="field"><label for="f-message">About your project</label><textarea id="f-message" name="message" rows="4" required data-error="Please tell me a little about your project."></textarea><p class="field-error" id="f-message-error" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><path d="M12 16h.01"/></svg><span></span></p></div>
+<p class="form-status" role="status" hidden data-form-status></p>
+<button class="btn btn-primary" type="submit">Send enquiry</button>
+<p class="form-note">I’ll only use your details to reply. <a href="/privacy/">Privacy notice</a></p>
+</form>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<p>&copy; 2026 Andrew Isherwood · Built with care in Wimbledon</p>
+<ul class="footer-links">
+<li><a href="/blog/">Writing</a></li>
+<li><a href="https://github.com/andrewisherwood" rel="me">GitHub</a></li>
+<li><a href="/privacy/">Privacy</a></li>
+</ul>
+</div>
 </footer>
-
-<script>
-  // Scroll reveal with stagger
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  // --- INTERACTIVE TERMINAL ---
-  const output = document.getElementById('terminal-output');
-  const input = document.getElementById('terminal-input');
-  let conversationHistory = [];
-  let isProcessing = false;
-
-  function addLine(text, className = '') {
-    const line = document.createElement('div');
-    line.className = 't-line ' + className;
-    line.textContent = text;
-    output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
-    return line;
-  }
-
-  function addHTMLLine(html, className = '') {
-    const line = document.createElement('div');
-    line.className = 't-line ' + className;
-    line.innerHTML = html;
-    output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
-    return line;
-  }
-
-  async function sendMessage(userText) {
-    if (isProcessing) return;
-    isProcessing = true;
-
-    // Show user message
-    addLine(userText, 'user-msg');
-
-    // Add to history
-    conversationHistory.push({ role: 'user', content: userText });
-
-    // Show thinking indicator
-    const thinkingLine = addHTMLLine(
-      '<span style="color:var(--phosphor);">▸</span> <span class="dots" style="color:var(--text-dim);">thinking</span>',
-      'ai-thinking'
-    );
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: conversationHistory.slice(-10)
-        })
-      });
-
-      const data = await response.json();
-
-      // Remove thinking indicator
-      thinkingLine.remove();
-
-      // Extract response text
-      const aiText = data.content
-        .filter(block => block.type === 'text')
-        .map(block => block.text)
-        .join('\n');
-
-      // Add AI response
-      conversationHistory.push({ role: 'assistant', content: aiText });
-
-      // Display response line by line with slight delay for effect
-      const lines = aiText.split('\n').filter(l => l.trim());
-      for (let i = 0; i < lines.length; i++) {
-        await new Promise(r => setTimeout(r, 60));
-        addHTMLLine(
-          '<span style="color:var(--phosphor);">▸</span> ' + escapeHtml(lines[i]),
-          'ai-msg'
-        );
-      }
-
-      // Add separator
-      await new Promise(r => setTimeout(r, 100));
-      addHTMLLine('<span style="color:var(--text-dim);">──────────────────────────────────</span>');
-
-    } catch (err) {
-      thinkingLine.remove();
-      addHTMLLine(
-        '<span style="color:#ff5f56;">✗</span> <span style="color:var(--text-dim);">Connection failed. Try emailing build@andrewisherwood.com instead.</span>',
-        'ai-msg'
-      );
-    }
-
-    isProcessing = false;
-    input.focus();
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  // Handle input
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && input.value.trim()) {
-      const text = input.value.trim();
-      input.value = '';
-      sendMessage(text);
-    }
-  });
-
-  // Focus input when clicking terminal
-  document.querySelector('.interactive-terminal').addEventListener('click', () => {
-    input.focus();
-  });
-</script>
-
+<script src="/scripts/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+# Copy shared across several page types. Prices in {from:<service id>} come from data/pricing.json.
+
+footer:
+  tagline: "Built with care in Wimbledon"
+
+# Dark call-to-action band at the end of a page.
+ctas:
+  caseStudy:
+    title: "Is your website slowing your business down?"
+    text: "Book a free discovery call, and I’ll audit your current site for free."
+    button: "Book a free discovery call"
+  writing:
+    title: "Need help with your own website?"
+    text: "Fixed prices from {lowest}, and a free discovery call to start."
+    button: "Book a free discovery call"
+  article:
+    title: "Want a website built this carefully?"
+    text: "Fixed prices, a written quote before any work starts, and a free call to begin."
+    button: "Book a free discovery call"
+  lab:
+    title: "Want this kind of care on your own website?"
+    text: "Fixed prices from {lowest}, and a free discovery call to start."
+    button: "Book a free discovery call"
+
+writing:
+  title: "Writing"
+  seoTitle: "Writing | Andrew Isherwood"
+  description: "Notes on building websites properly, and on the tools and habits that let one developer do the work of a small team."
+  lead: "Notes on building websites properly, and on the tools and habits that let one developer do the work of a small team."
+
+author:
+  name: "Andrew Isherwood"
+  role: "Web developer, Wimbledon"
+  bio: "I design, build and look after websites for small and mid-sized businesses, and have done since 1994."
+  link: { label: "Work with me", href: "/#contact" }
+
+lab:
+  title: "Things I’ve built"
+  seoTitle: "Products I’ve built | Andrew Isherwood"
+  description: "Products Andrew Isherwood designs, builds and runs alongside client work: Suppertime, MAI, Adaptive Coach and BirthBuild."
+  lead: "Alongside client work, I design, build and ship my own products."
