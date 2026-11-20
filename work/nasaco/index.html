@@ -484,7 +484,12 @@ font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height
 .band-ink .quote-band .quote-icon { color: var(--color-quote-mark); width: 44px; height: 44px; }
 .band-ink .quote-band .quote-text { font-size: clamp(26px, 3vw, 36px); }
 .quote-band .quote-text.quote-long { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.4; }
-.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }</style>
+.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }
+.story-figures.pair { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+@media (max-width: 759.98px) {
+.story-figures.pair { grid-template-columns: minmax(0, 1fr); }
+.story-figures.pair figure:last-child { max-width: 300px; }
+}</style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://andrewisherwood.com/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://andrewisherwood.com/#work"},{"@type":"ListItem","position":3,"name":"Nasaco International","item":"https://andrewisherwood.com/work/nasaco/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Nasaco International: a client since 2002, now on a faster, cheaper build.","description":"I built Nasaco's first website when I was 18. They're still a client. Their latest site moved off WordPress onto a fast, static build on Netlify.","url":"https://andrewisherwood.com/work/nasaco/","author":{"@id":"https://andrewisherwood.com/#person"},"about":{"@type":"Organization","name":"Nasaco International"}}</script>
@@ -509,7 +514,7 @@ font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height
 <p class="eyebrow">Case study · Chemicals</p>
 <h1 class="h1-sub" id="page-title" style="max-width:900px">Nasaco International: a client since 2002, now on a faster, cheaper build.</h1>
 <p class="lead" style="max-width:720px">Nasaco International designs, formulates, produces and markets chemicals for froth flotation and other mineral processing. I built their first website in 2002, when I was 18. Twenty-four years later, they’re still a client.</p>
-<dl class="facts-list"><div><dt>Client</dt><dd>Nasaco International</dd></div><div><dt>Sector</dt><dd>Chemicals</dd></div><div><dt>Project</dt><dd>WordPress to static on Netlify</dd></div></dl>
+<dl class="facts-list"><div><dt>Client</dt><dd>Nasaco International</dd></div><div><dt>Sector</dt><dd>Chemicals</dd></div><div><dt>Project</dt><dd>WordPress to static on Netlify</dd></div><div><dt>Live site</dt><dd><a href="https://www.nasaco.ch/">nasaco.ch</a></dd></div></dl>
 </section>
 <figure class="container cs-hero">
 <div class="cs-hero-shot"><picture><source type="image/avif" srcset="/work/nasaco/homepage-800.avif 800w, /work/nasaco/homepage-1600.avif 1600w" sizes="(min-width: 1264px) 1136px, calc(100vw - 40px)"><img src="/work/nasaco/homepage-800.webp" srcset="/work/nasaco/homepage-800.webp 800w, /work/nasaco/homepage-1600.webp 1600w" sizes="(min-width: 1264px) 1136px, calc(100vw - 40px)" width="1600" height="812" alt="Nasaco&#39;s homepage today: a navy header with the Nasaco ‘solutions for flotation’ logo, and the headline ‘Solutions for flotation’ over a photo of an open-pit mine in a mountain valley, with View our products and Contact us buttons" fetchpriority="high" decoding="async"></picture></div>
@@ -524,6 +529,8 @@ font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height
 <div class="story-row"><h2>The problem</h2><div class="story-body"><p>Nasaco&#39;s site ran on WordPress. That meant regular plugin and core updates to keep it secure, and hosting built to run a database.</p>
 <p>The brief was simple: keep the content, lose the maintenance.</p></div></div>
 <div class="story-row"><h2>What I did</h2><div class="story-body"><p>I moved the site from WordPress to a static build made with Hugo and hosted on Netlify. Every page is built ahead of time and served from a global CDN, so there&#39;s no database, no plugins and no admin login to attack.</p></div></div>
+<div class="story-figures pair"><figure><picture><source type="image/avif" srcset="/work/nasaco/products-800.avif 800w" sizes="(min-width: 1024px) 960px, calc(100vw - 40px)"><img src="/work/nasaco/products-800.webp" srcset="/work/nasaco/products-800.webp 800w" sizes="(min-width: 1024px) 960px, calc(100vw - 40px)" width="800" height="500" alt="Nasaco&#39;s Products page on desktop: a navy header, a close-up photo of flotation froth bubbles, and an introduction to the NASCOL, NASFROTH, NASMIN and NASFLOC product ranges" loading="lazy" decoding="async"></picture><figcaption>The Products page on desktop</figcaption></figure>
+<figure><picture><source type="image/avif" srcset="/work/nasaco/homepage-mobile-390.avif 390w" sizes="(min-width: 1024px) 960px, calc(100vw - 40px)"><img src="/work/nasaco/homepage-mobile-390.webp" srcset="/work/nasaco/homepage-mobile-390.webp 390w" sizes="(min-width: 1024px) 960px, calc(100vw - 40px)" width="390" height="844" alt="Nasaco&#39;s homepage on a phone: the Nasaco logo and a Menu button, the headline ‘Solutions for flotation’ over a mountain mine photo, and full-width View our products and Contact us buttons" loading="lazy" decoding="async"></picture><figcaption>The homepage on a phone</figcaption></figure></div>
 <div class="story-row"><h2>The result</h2><div class="story-body"><ul>
 <li><strong>Security:</strong> no plugins to patch and no database to break into.</li>
 <li><strong>Maintenance:</strong> no more WordPress core and plugin updates to keep on top of.</li>

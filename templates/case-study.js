@@ -11,13 +11,15 @@ function story(html) {
     const m = part.match(/^<h2[^>]*>([\s\S]*?)<\/h2>/);
     let rest = part.slice(m[0].length);
     const figures = [];
+    let pair = false;
     rest = rest.replace(FIGURE_GRID, (_, mod, inner) => {
       const single = /\bsingle\b/.test(mod);
-      inner.replace(/<figure>[\s\S]*?<\/figure>/g, (fig) => { figures.push(single ? fig.replace('<figure>', '<figure class="single">') : fig); return ''; });
+      if (/\bpair\b/.test(mod)) pair = true;
+      inner.replace(/<figure[^>]*>[\s\S]*?<\/figure>/g, (fig) => { figures.push(single ? fig.replace('<figure>', '<figure class="single">') : fig); return ''; });
       return '';
     });
     const row = `<div class="story-row"><h2>${m[1]}</h2><div class="story-body">${rest.trim()}</div></div>`;
-    return figures.length ? `${row}\n<div class="story-figures">${figures.join('\n')}</div>` : row;
+    return figures.length ? `${row}\n<div class="story-figures${pair ? ' pair' : ''}">${figures.join('\n')}</div>` : row;
   }).join('\n');
 }
 

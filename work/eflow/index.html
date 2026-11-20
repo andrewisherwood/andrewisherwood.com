@@ -484,7 +484,12 @@ font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height
 .band-ink .quote-band .quote-icon { color: var(--color-quote-mark); width: 44px; height: 44px; }
 .band-ink .quote-band .quote-text { font-size: clamp(26px, 3vw, 36px); }
 .quote-band .quote-text.quote-long { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.4; }
-.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }</style>
+.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }
+.story-figures.pair { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+@media (max-width: 759.98px) {
+.story-figures.pair { grid-template-columns: minmax(0, 1fr); }
+.story-figures.pair figure:last-child { max-width: 300px; }
+}</style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://andrewisherwood.com/"},{"@type":"ListItem","position":2,"name":"Work","item":"https://andrewisherwood.com/#work"},{"@type":"ListItem","position":3,"name":"Eflow Global","item":"https://andrewisherwood.com/work/eflow/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Eflow Global: a 15.4-second site rebuilt to score 96 on Lighthouse.","description":"A slow WordPress.com site rebuilt as a fast static site with an editable CMS, for a regulatory compliance software firm.","url":"https://andrewisherwood.com/work/eflow/","author":{"@id":"https://andrewisherwood.com/#person"},"about":{"@type":"Organization","name":"Eflow Global"}}</script>

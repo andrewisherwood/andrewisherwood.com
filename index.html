@@ -484,7 +484,12 @@ font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height
 .band-ink .quote-band .quote-icon { color: var(--color-quote-mark); width: 44px; height: 44px; }
 .band-ink .quote-band .quote-text { font-size: clamp(26px, 3vw, 36px); }
 .quote-band .quote-text.quote-long { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.4; }
-.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }</style>
+.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }
+.story-figures.pair { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+@media (max-width: 759.98px) {
+.story-figures.pair { grid-template-columns: minmax(0, 1fr); }
+.story-figures.pair figure:last-child { max-width: 300px; }
+}</style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://andrewisherwood.com/#business","name":"Andrew Isherwood","url":"https://andrewisherwood.com/","description":"Fast, secure websites for UK small and mid-sized businesses. Designed, built and looked after in Wimbledon, London, at a fixed price agreed before any work starts.","email":"build@andrewisherwood.com","image":"https://andrewisherwood.com/og-image.png","logo":"https://andrewisherwood.com/icon-512.png","priceRange":"£1,950+","address":{"@type":"PostalAddress","addressLocality":"Wimbledon","addressRegion":"London","addressCountry":"GB"},"areaServed":[{"@type":"City","name":"London"},{"@type":"Country","name":"United Kingdom"}],"founder":{"@id":"https://andrewisherwood.com/#person"},"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"New site or redesign","url":"https://andrewisherwood.com/services/new-website/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"WordPress to static","url":"https://andrewisherwood.com/services/wordpress-migration/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Care plan","url":"https://andrewisherwood.com/services/care-plans/"}}]},{"@type":"Person","@id":"https://andrewisherwood.com/#person","name":"Andrew Isherwood","url":"https://andrewisherwood.com/","jobTitle":"Web Designer & Developer","email":"mailto:build@andrewisherwood.com","address":{"@type":"PostalAddress","addressLocality":"Wimbledon","addressRegion":"London","addressCountry":"GB"},"worksFor":{"@id":"https://andrewisherwood.com/#business"},"sameAs":["https://github.com/andrewisherwood"]}]}</script>
 </head>

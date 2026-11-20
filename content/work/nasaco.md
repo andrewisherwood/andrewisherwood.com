@@ -5,9 +5,9 @@ client: "Nasaco International"
 slug: nasaco
 sector: "Chemicals"
 project: "WordPress to static on Netlify"
-# TODO(andy): the year of the migration, and the live URL. Empty values are hidden.
+# TODO(andy): the year of the migration. Empty values are hidden.
 year: ""
-url: ""
+url: "https://www.nasaco.ch/"
 title: "Nasaco International: a client since 2002, now on a faster, cheaper build."
 seoTitle: "Nasaco International case study: from WordPress to a fast static site | Andrew Isherwood"
 description: "I built Nasaco's first website when I was 18. They're still a client. Their latest site moved off WordPress onto a fast, static build on Netlify."
@@ -32,6 +32,11 @@ The brief was simple: keep the content, lose the maintenance.
 ## What I did
 
 I moved the site from WordPress to a static build made with Hugo and hosted on Netlify. Every page is built ahead of time and served from a global CDN, so there's no database, no plugins and no admin login to attack.
+
+<div class="screenshot-grid pair">
+  <figure><img src="products.png" alt="Nasaco's Products page on desktop: a navy header, a close-up photo of flotation froth bubbles, and an introduction to the NASCOL, NASFROTH, NASMIN and NASFLOC product ranges"><figcaption>The Products page on desktop</figcaption></figure>
+  <figure><img src="homepage-mobile.png" alt="Nasaco's homepage on a phone: the Nasaco logo and a Menu button, the headline ‘Solutions for flotation’ over a mountain mine photo, and full-width View our products and Contact us buttons"><figcaption>The homepage on a phone</figcaption></figure>
+</div>
 
 ## The result
 

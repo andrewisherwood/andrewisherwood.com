@@ -484,7 +484,12 @@ font-family: var(--font-display); font-size: 22px; font-weight: 600; line-height
 .band-ink .quote-band .quote-icon { color: var(--color-quote-mark); width: 44px; height: 44px; }
 .band-ink .quote-band .quote-text { font-size: clamp(26px, 3vw, 36px); }
 .quote-band .quote-text.quote-long { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.4; }
-.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }</style>
+.contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }
+.story-figures.pair { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+@media (max-width: 759.98px) {
+.story-figures.pair { grid-template-columns: minmax(0, 1fr); }
+.story-figures.pair figure:last-child { max-width: 300px; }
+}</style>
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://andrewisherwood.com/"},{"@type":"ListItem","position":2,"name":"Services","item":"https://andrewisherwood.com/#services"},{"@type":"ListItem","position":3,"name":"WordPress to static","item":"https://andrewisherwood.com/services/wordpress-migration/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"WordPress to static","description":"Move your WordPress site to fast, secure static hosting. Pages and posts migrated for you, at a fixed price agreed before any work starts. Wimbledon, London.","url":"https://andrewisherwood.com/services/wordpress-migration/","areaServed":"GB","provider":{"@id":"https://andrewisherwood.com/#business"},"offers":[{"@type":"Offer","name":"Starter","price":"1950","priceCurrency":"GBP","description":"Up to 5 pages and 20 posts, redirects from your old addresses, and Netlify hosting set up."},{"@type":"Offer","name":"Standard","price":"3500","priceCurrency":"GBP","description":"Up to 12 pages and 100 posts, a contact form, plus an SEO and speed pass."},{"@type":"Offer","name":"Large","price":"4500","priceCurrency":"GBP","description":"More than 12 pages or 100 posts, quoted after the audit."}]}</script>

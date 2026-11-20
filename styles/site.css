@@ -484,3 +484,8 @@ a:hover { color: var(--color-accent-hover); text-decoration-thickness: 2px; }
 .band-ink .quote-band .quote-text { font-size: clamp(26px, 3vw, 36px); }
 .quote-band .quote-text.quote-long { font-size: clamp(20px, 2.1vw, 26px); line-height: 1.4; }
 .contact-facts dd a { display: inline-flex; align-items: center; min-height: 44px; margin-block: -10px; }
+.story-figures.pair { grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+@media (max-width: 759.98px) {
+  .story-figures.pair { grid-template-columns: minmax(0, 1fr); }
+  .story-figures.pair figure:last-child { max-width: 300px; }
+}
